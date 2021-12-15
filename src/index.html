@@ -5,11 +5,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+    <link rel="stylesheet" href="./style.css">
     <title>Pishgam Negar</title>
 </head>
 
 <body>
-    <p>Hello World!</p>
+    <!-- backdrop -->
+    <div class="backdrop">
+        <img src="../assets/Img/backdrop.png" alt="cosmetic">
+    </div>
+    <!-- /backdrop -->
+
+    <!-- container -->
+    <div class="wrapper mx-auto">
+        <!-- logo -->
+        <img src="../assets/Img/logo.svg" alt="Pishgam Negar" class="logo">
+
+        <!-- title -->
+        <h1 class="title font-black">سامانه گزارش گیری فروشگاه آنلاین پیشگام نگار</h1>
+
+        <!-- form container -->
+        <div class="main-box flex flex-col items-center">
+            <!-- form descibtion -->
+            <p class="form-des font-normal text-2xl">
+                امکان گزارش گیری در دو حالت گزارش فروش و تجمیعی وجود دارد. لطفا نوع
+                گزارش خود را انتخاب کنید.
+            </p>
+
+            <ul class="report-button-container grid grid-cols-2 divide-x-2 divide-gray-300 text-2xl font-bold">
+                <li class="divide-box">
+                    <button class="report-btn" data-button="Aggregate">گزارش تجمیعی</button>
+                </li>
+                <li class="divide-box">
+                    <button class="report-btn active" data-button="sales">گزارش فروش</button>
+                </li>
+            </ul>
+
+            <section class="form-contents text-2xl">
+                <div class="sales-report" id="sales">
+                    گزارش فروش
+                </div>
+                <div class="Aggregate-report hidden" id="Aggregate">
+                    گزارش تجمیعی
+                </div>
+            </section>
+
+        </div>
+        <!-- form container -->
+
+    </div>
+    <!-- /container -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <img src="../assets/Img/logo.svg" alt="Pishgam Negar" class="logo">
+    </footer>
+    <!-- /Footer -->
+    <script src="./index.js"></script>
 </body>
 
 </html>
