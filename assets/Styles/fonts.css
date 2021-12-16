@@ -1,0 +1,18 @@
+@font-face {
+  font-family: yekan bakh;
+  font-style: normal;
+  font-weight: 400;
+  src: url("../Fonts/YEKANBAKH-REQULAR.TTF") format("truetype");
+}
+@font-face {
+  font-family: yekan bakh;
+  font-style: normal;
+  font-weight: 700;
+  src: url("../Fonts/YEKANBAKH-BOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: yekan bakh;
+  font-style: normal;
+  font-weight: 900;
+  src: url("../Fonts/YEKANBAKH-FAT.TTF") format("truetype");
+}
