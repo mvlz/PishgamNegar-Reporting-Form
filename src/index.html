@@ -26,31 +26,75 @@
         <h1 class="title font-black">سامانه گزارش گیری فروشگاه آنلاین پیشگام نگار</h1>
 
         <!-- form container -->
-        <div class="main-box flex flex-col items-center">
-            <!-- form descibtion -->
-            <p class="form-des font-normal text-2xl">
-                امکان گزارش گیری در دو حالت گزارش فروش و تجمیعی وجود دارد. لطفا نوع
-                گزارش خود را انتخاب کنید.
-            </p>
+        <div class="main-box ">
+            <form class="form flex flex-col items-center" method="post" action="">
+                <!-- form descibtion -->
+                <p class="form-des font-normal text-2xl mb-8">
+                    امکان گزارش گیری در دو حالت گزارش فروش و تجمیعی وجود دارد. لطفا نوع
+                    گزارش خود را انتخاب کنید.
+                </p>
+                <!-- report type container -->
+                <section
+                    class="report-button-container grid grid-cols-2 divide-x-2 divide-gray-300 text-2xl font-bold mb-12">
+                    <div class="divide-box" id="group1">
+                        <label for="myyCheck" class="active">گزارش تجمیعی
+                            <input type="radio" name="report" id="myyCheck" onclick="myFunction()" value="Aggregate"
+                                class="report-input " checked>
+                        </label>
+                    </div>
+                    <div class="divide-box">
+                        <label for="myCheck">گزارش فروش
+                            <input type="radio" name="report" id="myCheck" onclick="myFunction()" value="sales"
+                                class="report-input">
+                        </label>
+                    </div>
+                </section>
+                <!-- /report type container -->
 
-            <ul class="report-button-container grid grid-cols-2 divide-x-2 divide-gray-300 text-2xl font-bold">
-                <li class="divide-box">
-                    <button class="report-btn" data-button="Aggregate">گزارش تجمیعی</button>
-                </li>
-                <li class="divide-box">
-                    <button class="report-btn active" data-button="sales">گزارش فروش</button>
-                </li>
-            </ul>
 
-            <section class="form-contents text-2xl">
-                <div class="sales-report" id="sales">
+                <!-- form descibtion -->
+                <p class="text-2xl mt-10 mb-8">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
+
+                <!-- report type container -->
+                <section class="report-type-container flex justify-between w-full" id="group2">
+                    <div class="report-type date-type report-type-checked">
+                        <div class="report-type-header">
+                            <label for="date" class="text-2xl">
+                                <input type="radio" name="type" id="date" checked onclick="checkedReportType()">
+                                <span class=" radio-circle radio-checked"></span>زمان و تاریخ
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="report-type order-type ">
+                        <div class="report-type-header">
+                            <label for="order" class="text-2xl">
+                                <input type="radio" name="type" id="order" onclick="checkedReportType()">
+                                <span class="radio-circle"></span>شماره سفارش
+                            </label>
+                        </div>
+                        <div class="report-type-body">
+                            <p class="title">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- /report type container -->
+
+                <p id="text" style="display:none">Checkbox is CHECKED!</p>
+
+                <!--
+            <section class="form-contents text-2xl w-full">
+                <div class="sales-report hidden" id="sales">
                     گزارش فروش
                 </div>
-                <div class="Aggregate-report hidden" id="Aggregate">
-                    گزارش تجمیعی
+                <div class="Aggregate-report" id="Aggregate">
+                    <form action="" method="post" class="form aggregate-form w-full">
+                        
+                    </form>
                 </div>
-            </section>
+            </section> -->
 
+            </form>
         </div>
         <!-- form container -->
 
