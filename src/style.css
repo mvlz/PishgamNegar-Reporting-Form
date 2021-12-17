@@ -53,7 +53,7 @@ button:focus {
   padding: 4rem 0;
   margin: auto;
 }
-.title {
+h1.title {
   font-size: 3rem;
   line-height: 4.3rem;
   margin-bottom: 36px;
@@ -64,7 +64,7 @@ button:focus {
   background-color: #fff;
   border-radius: 3.5rem;
   box-shadow: 0 4px 32px 0 #00000012;
-  padding: 60px 4rem;
+  padding: 3.75rem 4rem;
 }
 .form-des {
   line-height: 3.1rem;
@@ -134,16 +134,25 @@ button:focus {
   font-weight: 700;
 }
 
-.report-type input[type="radio"] {
+.report-type input[type="radio"],
+input[type="checkbox"] {
   color: var(--primary);
   opacity: 0;
+  position: absolute;
+  z-index: -1;
 }
 .report-input {
   visibility: hidden;
 }
-.report-type-header label {
+.report-type-header label,
+.date-radios label {
   display: flex;
   align-items: center;
+}
+.date-radios label {
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: #5e5e5e;
 }
 .radio-circle {
   position: relative;
@@ -152,12 +161,12 @@ button:focus {
   border: 1px solid #2f2f2f;
   margin-left: 0.5rem;
   border-radius: 50%;
-}
-.radio-checked {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 4px solid var(--primary);
+}
+.radio-checked {
+  border: 0.2rem solid var(--primary);
 }
 .radio-checked::before {
   position: absolute;
@@ -168,6 +177,165 @@ button:focus {
   background-color: var(--primary);
   cursor: pointer;
 }
-.report-type-body .title {
+.report-type-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.report-type-body .title,
+.more-inf-sales .title,
+.paymentWay-container .title {
   font-size: 1.25rem;
+  text-align: center;
+}
+.report-type-body .date-radios {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2.5rem;
+}
+.report-type-body .date-radios .radio-circle {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.date-checked::after {
+  content: "";
+  position: absolute;
+  color: #fff;
+  width: 12px;
+  height: 7px;
+  border-bottom: solid 3px currentColor;
+  border-left: solid 3px currentColor;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.divide-line {
+  width: 100%;
+  border-top: 1px solid #e6e6e6;
+}
+.notice-box {
+  width: 569px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #ebf7ff;
+  color: #168fdf;
+  border-radius: 1rem;
+  font-size: 1.25rem;
+  line-height: 41.9px;
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+.more-inf-sales,
+.paymentWay-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 12rem;
+}
+.more-inf-sales {
+  display: none;
+}
+.info-boxes {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.info-box,
+.locked-box {
+  height: 4.5rem;
+  border-radius: 1.5rem;
+  padding: 0 1.5rem;
+  border: 1px solid #cbcbcb;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 0px 4px #f7f7f7;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #2f2f2f;
+}
+.info-box label,
+.locked-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+}
+.info-box {
+  width: calc((100% - 2rem) / 2);
+}
+.locked-box-container,
+.button-box {
+  width: calc((100% - 4rem) / 3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.locked-box {
+  width: 100%;
+  cursor: not-allowed;
+}
+.checkBox {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #2f2f2f;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checkBox.date-checked::after {
+  width: 0.9rem;
+  height: 0.6rem;
+  margin-bottom: 3px;
+}
+.info-box-checked {
+  border: 1px solid #f81e74;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 0px 4px #feedf4;
+}
+
+.date-checked {
+  background-color: var(--primary);
+  border-color: transparent;
+}
+.disable {
+  opacity: 0.5;
+  box-shadow: none;
+}
+.soon-notice {
+  font-size: 1.25rem;
+  color: #168fdf;
+}
+
+.button-box button {
+  width: 100%;
+  height: 4.5rem;
+  border-radius: 9999px;
+  background-color: var(--primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.button-box .disable {
+  opacity: 0.3;
+  font-weight: normal;
+}
+.output-progress {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  color: var(--primary);
+  line-height: 41.9px;
 }

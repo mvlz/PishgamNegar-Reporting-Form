@@ -20,7 +20,7 @@
     <!-- container -->
     <div class="wrapper mx-auto">
         <!-- logo -->
-        <img src="../assets/Img/logo.svg" alt="Pishgam Negar" class="logo">
+        <img src="../assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
 
         <!-- title -->
         <h1 class="title font-black">سامانه گزارش گیری فروشگاه آنلاین پیشگام نگار</h1>
@@ -33,7 +33,7 @@
                     امکان گزارش گیری در دو حالت گزارش فروش و تجمیعی وجود دارد. لطفا نوع
                     گزارش خود را انتخاب کنید.
                 </p>
-                <!-- report type container -->
+                <!-- report state container -->
                 <section
                     class="report-button-container grid grid-cols-2 divide-x-2 divide-gray-300 text-2xl font-bold mb-12">
                     <div class="divide-box" id="group1">
@@ -49,7 +49,7 @@
                         </label>
                     </div>
                 </section>
-                <!-- /report type container -->
+                <!-- /report state container -->
 
 
                 <!-- form descibtion -->
@@ -57,43 +57,315 @@
 
                 <!-- report type container -->
                 <section class="report-type-container flex justify-between w-full" id="group2">
+                    <!-- date type -->
                     <div class="report-type date-type report-type-checked">
+                        <!-- date type header -->
                         <div class="report-type-header">
                             <label for="date" class="text-2xl">
                                 <input type="radio" name="type" id="date" checked onclick="checkedReportType()">
                                 <span class=" radio-circle radio-checked"></span>زمان و تاریخ
                             </label>
                         </div>
+                        <!-- date type body -->
+                        <div class="report-type-body mt-8">
+                            <fieldset class="date-radios mb-4">
+                                <label for="today">
+                                    <input type="radio" name="date" id="today" value="today">
+                                    <span class="radio-circle">
+                                    </span>
+                                    امروز
+                                </label>
+                                <label for="yesterday">
+                                    <input type="radio" name="date" id="yesterday" value="yesterday">
+                                    <span class="radio-circle"></span>
+                                    دیروز
+                                </label>
+                                <label for="lastSevenDay">
+                                    <input type="radio" name="date" id="lastSevenDay" value="lastSevenDay">
+                                    <span class="radio-circle"></span>
+                                    7روز گذشته
+                                </label>
+                                <label for="lastMonth">
+                                    <input type="radio" name="date" id="lastMonth" value="lastMonth">
+                                    <span class="radio-circle"></span>
+                                    30روز گذشته
+                                </label>
+                            </fieldset>
+                        </div>
                     </div>
 
+                    <!-- order type -->
                     <div class="report-type order-type ">
+                        <!-- order type header -->
                         <div class="report-type-header">
                             <label for="order" class="text-2xl">
                                 <input type="radio" name="type" id="order" onclick="checkedReportType()">
                                 <span class="radio-circle"></span>شماره سفارش
                             </label>
                         </div>
+                        <!-- order type body -->
                         <div class="report-type-body">
                             <p class="title">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
+                            <i class="iconly-Add-User icli"></i>
                         </div>
                     </div>
                 </section>
                 <!-- /report type container -->
 
-                <p id="text" style="display:none">Checkbox is CHECKED!</p>
+                <hr class="divide-line my-16"><!-- divide line -->
 
-                <!--
-            <section class="form-contents text-2xl w-full">
-                <div class="sales-report hidden" id="sales">
-                    گزارش فروش
-                </div>
-                <div class="Aggregate-report" id="Aggregate">
-                    <form action="" method="post" class="form aggregate-form w-full">
-                        
-                    </form>
-                </div>
-            </section> -->
 
+                <!-- More informations in sales report form -->
+                <section class="more-inf-sales" id="sales-more-inf">
+                    <p class="title">تمایل دارید چه اطلاعات دیگری در گزارش شما وجود داشته باشد؟</p>
+                    <!-- notice box -->
+                    <div class="notice-box">
+                        <span>
+                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M21.7795 2.66699H10.2208C5.69071 2.66699 2.66748 5.91046 2.66748 10.555V21.4457C2.66748 26.0946 5.68264 29.3337 10.2208 29.3337H21.7781C26.3176 29.3337 29.3341 26.0946 29.3341 21.4457V10.555C29.3341 5.90633 26.3178 2.66699 21.7795 2.66699ZM10.2208 4.66699H21.7795C25.1801 4.66699 27.3341 6.98028 27.3341 10.555V21.4457C27.3341 25.0206 25.18 27.3337 21.7781 27.3337H10.2208C6.82049 27.3337 4.66748 25.0208 4.66748 21.4457V10.555C4.66748 6.98482 6.82793 4.66699 10.2208 4.66699ZM15.9999 9.93913C16.5522 9.93913 16.9999 10.3868 16.9999 10.9391C16.9999 11.4454 16.6237 11.8638 16.1356 11.93L15.9866 11.9391C15.4343 11.9391 14.9866 11.4914 14.9866 10.9391C14.9866 10.4329 15.3628 10.0145 15.8509 9.94826L15.9999 9.93913ZM15.9866 14.1696C16.4928 14.1696 16.9112 14.5458 16.9774 15.0339L16.9866 15.1696V21.0616C16.9866 21.6139 16.5388 22.0616 15.9866 22.0616C15.4803 22.0616 15.0619 21.6854 14.9957 21.1973L14.9866 21.0616V15.1696C14.9866 14.6173 15.4343 14.1696 15.9866 14.1696Z"
+                                    fill="#168FDF" />
+                            </svg>
+                        </span>
+                        انتخاب این موارد اختیاری است.
+                    </div>
+
+                    <!-- information boxes container -->
+                    <div class="info-boxes-container w-full mt-14 flex flex-col gap-y-8">
+                        <!-- information boxes row -->
+                        <div class="info-boxes">
+                            <!-- information box -->
+                            <div class="info-box">
+                                <label for="customer-name">
+                                    <input type="checkbox" name="inf" id="customer-name">
+                                    <span class="checkBox"></span>
+                                    نام مشتری
+                                </label>
+                            </div>
+
+                            <!-- information box -->
+                            <div class="info-box">
+                                <label for="order-status">
+                                    <input type="checkbox" name="inf" id="order-status">
+                                    <span class="checkBox"></span>
+                                    وضعیت سفارش
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- information boxes row -->
+                        <div class="info-boxes">
+                            <!-- locked boxes container of future features -->
+                            <div class="locked-box-container">
+                                <!-- locked box -->
+                                <div class="locked-box disable">
+                                    <span>
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M21.8979 12.597V9.73438C21.8979 6.38371 19.1806 3.66638 15.8299 3.66638C12.4792 3.65171 9.75124 6.35571 9.73657 9.70771V9.73438V12.597"
+                                                stroke="#2F2F2F" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M20.911 28.3328H10.723C7.93099 28.3328 5.66699 26.0701 5.66699 23.2768V17.5581C5.66699 14.7648 7.93099 12.5021 10.723 12.5021H20.911C23.703 12.5021 25.967 14.7648 25.967 17.5581V23.2768C25.967 26.0701 23.703 28.3328 20.911 28.3328Z"
+                                                stroke="#2F2F2F" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M15.8173 18.9369V21.8982" stroke="#2F2F2F" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <p>تعداد محصولات</p>
+                                </div>
+                                <p class="soon-notice">بزودی ...</p>
+                            </div>
+
+                            <!-- locked boxes container of future features -->
+                            <div class="locked-box-container">
+                                <!-- locked box -->
+                                <div class="locked-box disable">
+                                    <span>
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M21.8979 12.597V9.73438C21.8979 6.38371 19.1806 3.66638 15.8299 3.66638C12.4792 3.65171 9.75124 6.35571 9.73657 9.70771V9.73438V12.597"
+                                                stroke="#2F2F2F" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M20.911 28.3328H10.723C7.93099 28.3328 5.66699 26.0701 5.66699 23.2768V17.5581C5.66699 14.7648 7.93099 12.5021 10.723 12.5021H20.911C23.703 12.5021 25.967 14.7648 25.967 17.5581V23.2768C25.967 26.0701 23.703 28.3328 20.911 28.3328Z"
+                                                stroke="#2F2F2F" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M15.8173 18.9369V21.8982" stroke="#2F2F2F" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <p>فقط مشتری اولی ها</p>
+                                </div>
+                                <p class="soon-notice">بزودی ...</p>
+                            </div>
+
+                            <!-- locked boxes container of future features -->
+                            <div class="locked-box-container">
+                                <!-- locked box -->
+                                <div class="locked-box disable">
+                                    <span>
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M21.8979 12.597V9.73438C21.8979 6.38371 19.1806 3.66638 15.8299 3.66638C12.4792 3.65171 9.75124 6.35571 9.73657 9.70771V9.73438V12.597"
+                                                stroke="#2F2F2F" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M20.911 28.3328H10.723C7.93099 28.3328 5.66699 26.0701 5.66699 23.2768V17.5581C5.66699 14.7648 7.93099 12.5021 10.723 12.5021H20.911C23.703 12.5021 25.967 14.7648 25.967 17.5581V23.2768C25.967 26.0701 23.703 28.3328 20.911 28.3328Z"
+                                                stroke="#2F2F2F" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M15.8173 18.9369V21.8982" stroke="#2F2F2F" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <p>فیلتر براساس شهر</p>
+                                </div>
+                                <p class="soon-notice">بزودی ...</p>
+                            </div>
+                            <!-- /locked boxes container of future features -->
+                        </div>
+                    </div>
+                    <!-- /information boxes container -->
+
+                    <hr class="divide-line my-16"><!-- divide line -->
+                </section>
+                <!-- /More information -->
+
+
+                <section class="paymentWay-container mb-32">
+                    <p class="title">سفارشات با چه نوع روش پرداخت در گزارش شما وجود داشته باشد؟</p>
+                    <!-- notice box -->
+                    <div class="notice-box">
+                        <span>
+                            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M21.7795 2.66699H10.2208C5.69071 2.66699 2.66748 5.91046 2.66748 10.555V21.4457C2.66748 26.0946 5.68264 29.3337 10.2208 29.3337H21.7781C26.3176 29.3337 29.3341 26.0946 29.3341 21.4457V10.555C29.3341 5.90633 26.3178 2.66699 21.7795 2.66699ZM10.2208 4.66699H21.7795C25.1801 4.66699 27.3341 6.98028 27.3341 10.555V21.4457C27.3341 25.0206 25.18 27.3337 21.7781 27.3337H10.2208C6.82049 27.3337 4.66748 25.0208 4.66748 21.4457V10.555C4.66748 6.98482 6.82793 4.66699 10.2208 4.66699ZM15.9999 9.93913C16.5522 9.93913 16.9999 10.3868 16.9999 10.9391C16.9999 11.4454 16.6237 11.8638 16.1356 11.93L15.9866 11.9391C15.4343 11.9391 14.9866 11.4914 14.9866 10.9391C14.9866 10.4329 15.3628 10.0145 15.8509 9.94826L15.9999 9.93913ZM15.9866 14.1696C16.4928 14.1696 16.9112 14.5458 16.9774 15.0339L16.9866 15.1696V21.0616C16.9866 21.6139 16.5388 22.0616 15.9866 22.0616C15.4803 22.0616 15.0619 21.6854 14.9957 21.1973L14.9866 21.0616V15.1696C14.9866 14.6173 15.4343 14.1696 15.9866 14.1696Z"
+                                    fill="#168FDF" />
+                            </svg>
+                        </span>
+                        حداقل یکی از موارد باید انتخاب شود.
+                    </div>
+
+                    <!-- information boxes container -->
+                    <div class="info-boxes-container w-full mt-14 flex flex-col gap-y-8">
+                        <!-- information boxes row -->
+                        <div class="info-boxes">
+                            <!-- information box -->
+                            <div class="info-box">
+                                <label for="online-orders-pasargad">
+                                    <input type="checkbox" name="payment" id="online-orders-pasargad">
+                                    <span class="checkBox"></span>
+                                    سفارشات آنلاین (درگاه بانک پاسارگاد)
+                                </label>
+                            </div>
+
+                            <!-- information box -->
+                            <div class="info-box">
+                                <label for="online-orders-melli">
+                                    <input type="checkbox" name="payment" id="online-orders-melli">
+                                    <span class="checkBox"></span>
+                                    سفارشات آنلاین (درگاه بانک ملی)
+                                </label>
+                            </div>
+                        </div>
+                        <!-- information boxes row -->
+                        <div class="info-boxes">
+                            <!-- information box -->
+                            <div class="info-box">
+                                <label for="onSite-delivery-orders">
+                                    <input type="checkbox" name="payment" id="onSite-delivery-orders">
+                                    <span class="checkBox"></span>
+                                    سفارشات تحویل در محل
+                                </label>
+                            </div>
+
+                            <!-- information box -->
+                            <div class="info-box">
+                                <label for="direct-orders">
+                                    <input type="checkbox" name="payment" id="direct-orders">
+                                    <span class="checkBox"></span>
+                                    سفارشات مستقیم
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /information boxes container -->
+                </section>
+                <section class="submit-btns-container w-full flex justify-between mt-14 mb-1">
+                    <div class="button-box">
+                        <button type="submit">
+                            <span>
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M20.2153 16.0707C20.2153 18.3987 18.3273 20.2854 15.9993 20.2854C13.6713 20.2854 11.7847 18.3987 11.7847 16.0707C11.7847 13.7414 13.6713 11.8547 15.9993 11.8547C18.3273 11.8547 20.2153 13.7414 20.2153 16.0707Z"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M15.9972 25.8065C21.0745 25.8065 25.7185 22.1558 28.3332 16.0705C25.7185 9.98514 21.0745 6.33447 15.9972 6.33447H16.0025C10.9252 6.33447 6.28117 9.98514 3.6665 16.0705C6.28117 22.1558 10.9252 25.8065 16.0025 25.8065H15.9972Z"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+
+                            </span>
+                            نمایش گزارش
+                        </button>
+                    </div>
+                    <div class="button-box">
+                        <button type="submit">
+                            <span>
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M19.6504 3.68229H10.7797C8.0064 3.67162 5.73307 5.88229 5.66774 8.65429V22.9383C5.6064 25.7556 7.83974 28.0903 10.6571 28.153C10.6984 28.153 10.7384 28.1543 10.7797 28.153H21.4317C24.2237 28.0396 26.4237 25.733 26.4037 22.9383V10.717L19.6504 3.68229Z"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M19.3001 3.66663V7.54529C19.3001 9.43863 20.8308 10.9733 22.7241 10.9786H26.3975"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M18.4845 21.4845L12.5495 15.5495" stroke="white" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M18.4845 15.5495L12.5495 21.4844" stroke="white" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                            </span>
+                            خروجی اکسل
+                        </button>
+                        <div class="output-progress">
+                            <p class="">لطفا منتظر بمانید...</p>
+                            <p class="">35%</p>
+                        </div>
+                    </div>
+                    <div class="button-box">
+                        <button type="submit" class="disable">
+                            <span>
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M21.8978 12.5971V9.73444C21.8978 6.38377 19.1805 3.66644 15.8298 3.66644C12.4792 3.65177 9.75118 6.35577 9.73651 9.70777V9.73444V12.5971"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M20.9109 28.3329H10.7229C7.93093 28.3329 5.66693 26.0702 5.66693 23.2769V17.5582C5.66693 14.7649 7.93093 12.5022 10.7229 12.5022H20.9109C23.7029 12.5022 25.9669 14.7649 25.9669 17.5582V23.2769C25.9669 26.0702 23.7029 28.3329 20.9109 28.3329Z"
+                                        stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M15.8172 18.937V21.8983" stroke="white" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            خروجی مخصوص سپیدار
+                        </button>
+                        <p class="soon-notice">بزودی ...</p>
+                    </div>
+                </section>
             </form>
         </div>
         <!-- form container -->
@@ -103,7 +375,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <img src="../assets/Img/logo.svg" alt="Pishgam Negar" class="logo">
+        <img src="../assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
     </footer>
     <!-- /Footer -->
     <script src="./index.js"></script>
