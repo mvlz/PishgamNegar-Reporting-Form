@@ -80,7 +80,7 @@
 .datepicker-plot-area .datepicker-year-view .year-item-disable,
 .datepicker-plot-area .datepicker-month-view .month-item-disable {
   /* background-color: #f1f1f1; */
-  color: #ccc;
+  color: #979797;
   /* border: none; */
   /* text-shadow: none; */
   cursor: not-allowed;

@@ -72,7 +72,7 @@
                             </label>
                         </div>
                         <!-- date type body -->
-                        <div class="report-type-body mt-8">
+                        <div class="report-type-body">
                             <fieldset class="date-radios mb-4">
                                 <label for="today">
                                     <input type="radio" name="date" id="today" value="today">
@@ -127,9 +127,80 @@
                             </label>
                         </div>
                         <!-- order type body -->
-                        <div class="report-type-body">
-                            <p class="title">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
-                            <i class="iconly-Add-User icli"></i>
+                        <div class="report-type-body disable">
+                            <p class="title mb-4">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
+                            <div class="report-number-container">
+                                <p class="text">از شماره</p>
+                                <div class="num-input-box">
+                                    <div id="from-number" class="numinput-container">
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="first"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="second"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="third"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="fourth"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="fifth"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                    </div>
+                                    <p class="naminput-error hidden">
+                                        <span class="icon-Danger"></span>
+                                        شماره سفارش باید 5 رقمی باشد.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="report-number-container">
+                                <p class="text">تا شماره</p>
+                                <div class="num-input-box">
+                                    <div id="to-number" class="numinput-container">
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="first"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="second"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="third"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="fourth"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="text-center form-control" type="number" id="fifth"
+                                                maxlength="1" />
+                                            <span class="input-line"></span>
+                                        </div>
+                                    </div>
+                                    <p class="naminput-error">
+                                        <span class="icon-Danger"></span>
+                                        شماره سفارش باید 5 رقمی باشد.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -369,7 +440,7 @@
                 const timeSpanTds = tdds.filter(
                     (t) => parseInt(fromDate) <= parseInt(splitDate(t.dataset.date)) && parseInt(splitDate(t.dataset.date)) <= parseInt(toDate)
                 );
-                console.log(timeSpanTds);
+                // console.log(timeSpanTds);
                 if (timeSpanTds[timeSpanTds.length - 1].dataset.date !== timeSpanTds[0].dataset.date) {
 
                     timeSpanTds[timeSpanTds.length - 1].classList.add("toSelected")
@@ -387,7 +458,7 @@
                 return vv;
             }
             window.addEventListener("click", () => {
-                console.log(splitDate("1400,9,14"))
+                // console.log(splitDate("1400,9,14"))
 
                 range()
             })

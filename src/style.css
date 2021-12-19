@@ -7,6 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all ease-in-out 0.1s;
 }
 body {
   font-family: "Yekan Bakh" !important;
@@ -121,7 +122,7 @@ h1.title {
 }
 .report-type {
   width: calc((100% - 2rem) / 2);
-  height: 400px;
+  height: 27rem;
   border-radius: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -129,6 +130,7 @@ h1.title {
   padding: 2rem 4rem;
   border: 1px solid #cbcbcb;
   box-shadow: 0px 0px 0px 8px #f2f2f2;
+  gap: 2rem;
 }
 .report-type-checked {
   box-shadow: 0px 0px 0px 8px #f81e7414;
@@ -186,6 +188,7 @@ input[type="checkbox"] {
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 .report-type-body .title,
 .more-inf-sales .title,
@@ -393,4 +396,76 @@ input[type="checkbox"] {
   border-bottom-left-radius: 8px !important;
   border-top-right-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border: 2px solid var(--primary) !important;
+  box-shadow: none !important;
+}
+
+.validate {
+  border-radius: 20px;
+  height: 40px;
+  background-color: red;
+  border: 1px solid red;
+  width: 140px;
+}
+.form-control {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 1.5rem !important;
+  border: 1px solid #cbcbcb !important;
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.input-line {
+  position: absolute;
+  bottom: 1rem;
+  width: 2.625rem;
+  height: 1px;
+  background-color: #cbcbcb;
+}
+.form-group {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.num-input-box {
+  width: 26.5rem;
+}
+.numinput-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+.report-number-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.report-number-container .text {
+  font-size: 1.25rem;
+  color: #5e5e5e;
+}
+.naminput-error {
+  font-size: 1rem;
+  color: #dd0028;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+.naminput-error span {
+  font-size: 1.5rem;
+  margin-left: 0.75rem;
 }
