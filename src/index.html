@@ -7,7 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../assets/Styles/persian-datepicker.min.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/persian-date.min.js"></script>
+    <script src="../js/persian-datepicker.min.js"></script>
     <title>Pishgam Negar</title>
+
 </head>
 
 <body>
@@ -91,6 +96,38 @@
                                     30روز گذشته
                                 </label>
                             </fieldset>
+                            <div class="flex flex-col gap-y-8">
+                                <div class="date-input-box">
+                                    <input class="datepicker-demo range-from-example-alt flex-grow" id="rang-from"
+                                        placeholder="از تاریخ">
+                                    <label for="rang-from">
+                                        <span>
+                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M21.8915 3.47067C21.8303 3.01662 21.4441 2.66667 20.9768 2.66667C20.467 2.66667 20.0538 3.08315 20.0538 3.5969V4.62533H11.9575V3.5969L11.9491 3.47067C11.888 3.01662 11.5018 2.66667 11.0344 2.66667C10.5246 2.66667 10.1114 3.08315 10.1114 3.5969V4.64842C6.32873 4.90895 4 7.35986 4 11.3143V22.5387C4 26.7829 6.61112 29.3333 10.795 29.3333H21.2049C25.3937 29.3333 27.9999 26.8256 27.9999 22.6325V11.3143C28.012 7.35845 25.6907 4.90822 21.8999 4.64832V3.5969L21.8915 3.47067ZM20.0538 6.48584V7.67848L20.0622 7.80471C20.1233 8.25876 20.5095 8.60872 20.9768 8.60872C21.4866 8.60872 21.8999 8.19224 21.8999 7.67848V6.51334C24.658 6.74281 26.1626 8.40367 26.1538 11.3115V11.8503H5.84615V11.3144C5.84615 8.40836 7.35901 6.74399 10.1114 6.51352V7.67848L10.1198 7.80471C10.1809 8.25876 10.5671 8.60872 11.0344 8.60872C11.5442 8.60872 11.9575 8.19224 11.9575 7.67848V6.48584H20.0538ZM5.84615 13.7107V22.5388C5.84615 25.7422 7.61803 27.4729 10.795 27.4729H21.2049C24.3928 27.4729 26.1538 25.7784 26.1538 22.6326L26.1538 13.7107H5.84615ZM22.4016 17.6244C22.4016 17.1106 21.9883 16.6942 21.4785 16.6942L21.3418 16.7027C20.8913 16.7643 20.544 17.1535 20.544 17.6244C20.544 18.1382 20.9573 18.5546 21.4785 18.5546L21.6038 18.5461C22.0543 18.4845 22.4016 18.0953 22.4016 17.6244ZM16.017 16.6942C16.5268 16.6942 16.9401 17.1106 16.9401 17.6244C16.9401 18.0953 16.5928 18.4845 16.1423 18.5461L16.017 18.5546C15.4958 18.5546 15.0826 18.1382 15.0826 17.6244C15.0826 17.1535 15.4298 16.7643 15.8804 16.7027L16.017 16.6942ZM11.4672 17.6244C11.4672 17.1106 11.054 16.6942 10.5442 16.6942L10.4075 16.7027C9.95696 16.7643 9.6097 17.1535 9.6097 17.6244C9.6097 18.1382 10.023 18.5546 10.5328 18.5546L10.6694 18.5461C11.12 18.4845 11.4672 18.0953 11.4672 17.6244ZM21.4785 21.5147C21.9883 21.5147 22.4016 21.9311 22.4016 22.4449C22.4016 22.9158 22.0543 23.305 21.6038 23.3666L21.4785 23.3751C20.9573 23.3751 20.544 22.9586 20.544 22.4449C20.544 21.974 20.8913 21.5848 21.3418 21.5232L21.4785 21.5147ZM16.9401 22.4449C16.9401 21.9311 16.5268 21.5147 16.017 21.5147L15.8804 21.5232C15.4298 21.5848 15.0826 21.974 15.0826 22.4449C15.0826 22.9586 15.4958 23.3751 16.017 23.3751L16.1423 23.3666C16.5928 23.305 16.9401 22.9158 16.9401 22.4449ZM10.5442 21.5147C11.054 21.5147 11.4672 21.9311 11.4672 22.4449C11.4672 22.9158 11.12 23.305 10.6694 23.3666L10.5328 23.3751C10.023 23.3751 9.6097 22.9586 9.6097 22.4449C9.6097 21.974 9.95696 21.5848 10.4075 21.5232L10.5442 21.5147Z"
+                                                    fill="#5E5E5E" />
+                                            </svg>
+                                        </span>
+                                    </label>
+                                    <div class="range-from-example"></div>
+                                </div>
+                                <div class="date-input-box">
+                                    <input class="datepicker-demo range-to-example-alt flex-grow" id="rang-to"
+                                        placeholder="تا تاریخ">
+                                    <label for="rang-to">
+                                        <span>
+                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M21.8915 3.47067C21.8303 3.01662 21.4441 2.66667 20.9768 2.66667C20.467 2.66667 20.0538 3.08315 20.0538 3.5969V4.62533H11.9575V3.5969L11.9491 3.47067C11.888 3.01662 11.5018 2.66667 11.0344 2.66667C10.5246 2.66667 10.1114 3.08315 10.1114 3.5969V4.64842C6.32873 4.90895 4 7.35986 4 11.3143V22.5387C4 26.7829 6.61112 29.3333 10.795 29.3333H21.2049C25.3937 29.3333 27.9999 26.8256 27.9999 22.6325V11.3143C28.012 7.35845 25.6907 4.90822 21.8999 4.64832V3.5969L21.8915 3.47067ZM20.0538 6.48584V7.67848L20.0622 7.80471C20.1233 8.25876 20.5095 8.60872 20.9768 8.60872C21.4866 8.60872 21.8999 8.19224 21.8999 7.67848V6.51334C24.658 6.74281 26.1626 8.40367 26.1538 11.3115V11.8503H5.84615V11.3144C5.84615 8.40836 7.35901 6.74399 10.1114 6.51352V7.67848L10.1198 7.80471C10.1809 8.25876 10.5671 8.60872 11.0344 8.60872C11.5442 8.60872 11.9575 8.19224 11.9575 7.67848V6.48584H20.0538ZM5.84615 13.7107V22.5388C5.84615 25.7422 7.61803 27.4729 10.795 27.4729H21.2049C24.3928 27.4729 26.1538 25.7784 26.1538 22.6326L26.1538 13.7107H5.84615ZM22.4016 17.6244C22.4016 17.1106 21.9883 16.6942 21.4785 16.6942L21.3418 16.7027C20.8913 16.7643 20.544 17.1535 20.544 17.6244C20.544 18.1382 20.9573 18.5546 21.4785 18.5546L21.6038 18.5461C22.0543 18.4845 22.4016 18.0953 22.4016 17.6244ZM16.017 16.6942C16.5268 16.6942 16.9401 17.1106 16.9401 17.6244C16.9401 18.0953 16.5928 18.4845 16.1423 18.5461L16.017 18.5546C15.4958 18.5546 15.0826 18.1382 15.0826 17.6244C15.0826 17.1535 15.4298 16.7643 15.8804 16.7027L16.017 16.6942ZM11.4672 17.6244C11.4672 17.1106 11.054 16.6942 10.5442 16.6942L10.4075 16.7027C9.95696 16.7643 9.6097 17.1535 9.6097 17.6244C9.6097 18.1382 10.023 18.5546 10.5328 18.5546L10.6694 18.5461C11.12 18.4845 11.4672 18.0953 11.4672 17.6244ZM21.4785 21.5147C21.9883 21.5147 22.4016 21.9311 22.4016 22.4449C22.4016 22.9158 22.0543 23.305 21.6038 23.3666L21.4785 23.3751C20.9573 23.3751 20.544 22.9586 20.544 22.4449C20.544 21.974 20.8913 21.5848 21.3418 21.5232L21.4785 21.5147ZM16.9401 22.4449C16.9401 21.9311 16.5268 21.5147 16.017 21.5147L15.8804 21.5232C15.4298 21.5848 15.0826 21.974 15.0826 22.4449C15.0826 22.9586 15.4958 23.3751 16.017 23.3751L16.1423 23.3666C16.5928 23.305 16.9401 22.9158 16.9401 22.4449ZM10.5442 21.5147C11.054 21.5147 11.4672 21.9311 11.4672 22.4449C11.4672 22.9158 11.12 23.305 10.6694 23.3666L10.5328 23.3751C10.023 23.3751 9.6097 22.9586 9.6097 22.4449C9.6097 21.974 9.95696 21.5848 10.4075 21.5232L10.5442 21.5147Z"
+                                                    fill="#5E5E5E" />
+                                            </svg>
+                                        </span>
+                                    </label>
+                                    <div class="range-to-example"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -369,7 +406,6 @@
             </form>
         </div>
         <!-- form container -->
-
     </div>
     <!-- /container -->
 
@@ -379,6 +415,99 @@
     </footer>
     <!-- /Footer -->
     <script src="./index.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // $(".example1").pDatepicker();
+            var to, from;
+
+            to = $(".range-to-example-alt").persianDatepicker({
+                // inline: true,
+                // altField: '.range-to-example-alt',
+                altFormat: 'LLLL',
+                initialValue: false,
+                onSelect: function (unix) {
+                    to.touched = true;
+                    if (from && from.options && from.options.maxDate != unix) {
+                        var cachedValue = from.getState().selected.unixDate;
+                        from.options = { maxDate: unix };
+                        if (from.touched) {
+                            from.setDate(cachedValue);
+                        }
+                    }
+                },
+                timePicker: {
+                    enabled: true,
+                },
+                navigator: {
+                    scroll: {
+                        enabled: false,
+                    }
+                }
+            });
+            from = $(".range-from-example-alt").persianDatepicker({
+                // inline: true,
+                // altField: '.range-from-example-alt',
+                altFormat: 'LLLL',
+                initialValue: false,
+                onSelect: function (unix) {
+                    from.touched = true;
+                    if (to && to.options && to.options.minDate != unix) {
+                        var cachedValue = to.getState().selected.unixDate;
+                        to.options = { minDate: unix };
+                        if (to.touched) {
+                            to.setDate(cachedValue);
+                        }
+                    }
+                },
+                timePicker: {
+                    enabled: true,
+                },
+                navigator: {
+                    scroll: {
+                        enabled: false,
+                    }
+                },
+            });
+            function range() {
+                const tds = [...document.querySelectorAll(".datepicker-container td")];
+                const selectedTd = [
+                    ...document.querySelectorAll(".datepicker-container td.selected"),
+                ];
+
+                const getFrom = from.getState().selected;
+                const getTo = to.getState().selected;
+                const fromDate = getFrom.year + `${getFrom.month < 10 ? "0" + getFrom.month : getFrom.month}` + `${getFrom.date < 10 ? "0" + getFrom.date : getFrom.date}`
+                const toDate = getTo.year + `${getTo.month < 10 ? "0" + getTo.month : getTo.month}` + `${getTo.date < 10 ? "0" + getTo.date : getTo.date}`
+
+                const tdds = tds.filter((t) => ![...t.classList].includes("disabled"));
+                const timeSpanTds = tdds.filter(
+                    (t) => parseInt(fromDate) <= parseInt(splitDate(t.dataset.date)) && parseInt(splitDate(t.dataset.date)) <= parseInt(toDate)
+                );
+                console.log(timeSpanTds);
+                if (timeSpanTds[timeSpanTds.length - 1].dataset.date !== timeSpanTds[0].dataset.date) {
+
+                    timeSpanTds[timeSpanTds.length - 1].classList.add("toSelected")
+                    timeSpanTds[0].classList.add("fromSelected")
+                    timeSpanTds[timeSpanTds.length / 2].classList.add("fromSelected")
+                }
+
+                timeSpanTds.forEach((tst) => {
+                    tst.classList.add("time-span");
+                });
+            }
+            function splitDate(date) {
+                let varrey = date.split(",")
+                const vv = `${varrey[0]}` + `${varrey[1] < 10 ? "0" + varrey[1] : varrey[1]}` + `${varrey[2] < 10 ? "0" + varrey[2] : varrey[2]}`
+                return vv;
+            }
+            window.addEventListener("click", () => {
+                console.log(splitDate("1400,9,14"))
+
+                range()
+            })
+        });
+
+    </script>
 </body>
 
 </html>

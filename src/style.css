@@ -17,6 +17,10 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   direction: rtl;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 button {
   cursor: pointer;
@@ -101,6 +105,7 @@ h1.title {
 }
 
 .footer {
+  width: 100%;
   background-size: 200px;
   position: relative;
 }
@@ -338,4 +343,50 @@ input[type="checkbox"] {
   font-size: 1.25rem;
   color: var(--primary);
   line-height: 41.9px;
+}
+.date-input-box {
+  width: 100%;
+  height: 4.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid #cbcbcb;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  font-size: 1.25rem;
+  color: #5e5e5e;
+}
+.date-input-box input {
+  height: 100%;
+  border: none;
+  outline: none;
+}
+.time-span {
+  background-color: #f81e7414 !important;
+}
+.toSelected span,
+.fromSelected span {
+  color: #fff !important;
+  border: none;
+  background: radial-gradient(
+    82.86% 82.86% at 28.57% 17.14%,
+    #ff71a9 0%,
+    #f81e74 100%
+  );
+  box-shadow: 1px 8px 11px -1px rgb(248 30 116 / 47%);
+  border-radius: 0;
+}
+.fromSelected,
+.fromSelected span {
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+
+.toSelected,
+.toSelected span {
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
 }
