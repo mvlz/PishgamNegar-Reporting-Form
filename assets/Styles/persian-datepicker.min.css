@@ -51,7 +51,10 @@
 .datepicker-plot-area .datepicker-month-view .month-item,
 .datepicker-plot-area .datepicker-day-view .table-days td.disabled span,
 .datepicker-plot-area .datepicker-year-view .year-item-disable,
-.datepicker-plot-area .datepicker-month-view .month-item-disable,
+.datepicker-plot-area .datepicker-month-view .month-item-disable {
+  /* cursor: pointer; */
+  cursor: url("../Img/Arrow\ -\ Left.svg"), pointer;
+}
 .datepicker-plot-area .datepicker-time-view > .time-segment,
 .datepicker-plot-area .datepicker-time-view .down-btn,
 .datepicker-plot-area .datepicker-time-view .up-btn,
@@ -76,11 +79,11 @@
 .datepicker-plot-area .datepicker-day-view .table-days td.disabled span,
 .datepicker-plot-area .datepicker-year-view .year-item-disable,
 .datepicker-plot-area .datepicker-month-view .month-item-disable {
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   color: #ccc;
-  border: none;
-  text-shadow: none;
-  cursor: default;
+  /* border: none; */
+  /* text-shadow: none; */
+  cursor: not-allowed;
 }
 .datepicker-plot-area .datepicker-day-view .table-days td.today span {
   /* background-color: #333; */
@@ -691,4 +694,36 @@
 .pwt-btn-calendar {
   position: absolute;
   top: -2rem;
+}
+.pwt-btn.pwt-btn-prev,
+.pwt-btn.pwt-btn-next {
+  font-size: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pwt-btn.pwt-btn-prev::after,
+.pwt-btn.pwt-btn-next::after {
+  font-family: "iconly" !important;
+  color: #474c59;
+  font-size: 0.6rem;
+}
+.pwt-btn.pwt-btn-prev::after {
+  content: "\6c";
+}
+.pwt-btn.pwt-btn-next::after {
+  content: "\72";
+}
+.pwt-btn.pwt-btn-switch {
+  margin-left: 0.5rem;
+  position: relative;
+}
+.pwt-btn.pwt-btn-switch::after {
+  content: "\61";
+  color: #474c59;
+  font-family: "iconly";
+  font-size: 6px;
+  position: absolute;
+  left: 0;
+  font-weight: 600;
 }

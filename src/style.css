@@ -204,15 +204,11 @@ input[type="checkbox"] {
   height: 1.5rem;
 }
 .date-checked::after {
-  content: "";
-  position: absolute;
+  content: "\e903";
+  font-family: "iconly" !important;
   color: #fff;
-  width: 12px;
-  height: 7px;
-  border-bottom: solid 3px currentColor;
-  border-left: solid 3px currentColor;
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
+  position: absolute;
+  font-size: 10px;
 }
 .divide-line {
   width: 100%;
@@ -296,9 +292,7 @@ input[type="checkbox"] {
   align-items: center;
 }
 .checkBox.date-checked::after {
-  width: 0.9rem;
-  height: 0.6rem;
-  margin-bottom: 3px;
+  font-size: 13px;
 }
 .info-box-checked {
   border: 1px solid #f81e74;
@@ -359,6 +353,16 @@ input[type="checkbox"] {
   height: 100%;
   border: none;
   outline: none;
+}
+.date-input-box label {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.date-input-box span,
+.notice-box span,
+.button-box span {
+  font-size: 2rem;
 }
 .time-span {
   background-color: #f81e7414 !important;

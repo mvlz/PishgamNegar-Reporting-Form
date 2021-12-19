@@ -1,18 +1,98 @@
 @font-face {
-  font-family: yekan bakh;
+  font-family: "yekan bakh";
   font-style: normal;
   font-weight: 400;
   src: url("../Fonts/YEKANBAKH-REQULAR.TTF") format("truetype");
 }
 @font-face {
-  font-family: yekan bakh;
+  font-family: "yekan bakh";
   font-style: normal;
   font-weight: 700;
   src: url("../Fonts/YEKANBAKH-BOLD.TTF") format("truetype");
 }
 @font-face {
-  font-family: yekan bakh;
+  font-family: "yekan bakh";
   font-style: normal;
   font-weight: 900;
   src: url("../Fonts/YEKANBAKH-FAT.TTF") format("truetype");
+}
+@font-face {
+  font-family: "yekan bakh";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../Fonts/Yekan\ Bakh\ FaNum\ 06\ Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "yekan bakh";
+  font-style: normal;
+  font-weight: regular;
+  src: url("../Fonts/Yekan\ Bakh\ FaNum\ 04\ Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "iconly";
+  src: url("../Fonts/iconly.eot?5bofdk");
+  src: url("../Fonts/iconly.eot?5bofdk#iefix") format("embedded-opentype"),
+    url("../Fonts/iconly.ttf?5bofdk") format("truetype"),
+    url("../Fonts/iconly.woff?5bofdk") format("woff"),
+    url("../Fonts/iconly.svg?5bofdk#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "iconly" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Paper-Fail:before {
+  content: "\e902";
+}
+.icon-Lock:before {
+  content: "\e901";
+}
+.icon-Show:before {
+  content: "\e900";
+}
+.icon-Stroke-3:before {
+  content: "\e903";
+  color: #fff;
+}
+.icon-Arrow---Left:before {
+  content: "\6d";
+}
+.icon-Arrow---Left-2:before {
+  content: "\6c";
+  color: #474c59;
+}
+.icon-Arrow---Left-2-1:before {
+  content: "\72";
+  color: #474c59;
+}
+.icon-Arrow---Left-3:before {
+  content: "\61";
+  color: #474c59;
+}
+.icon-Calendar1:before {
+  content: "\63";
+  color: #5e5e5e;
+}
+.icon-Danger:before {
+  content: "\64";
+  color: #dd0028;
+}
+.icon-Info-Square:before {
+  content: "\69";
+  color: #168fdf;
 }
