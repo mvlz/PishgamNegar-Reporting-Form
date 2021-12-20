@@ -41,7 +41,7 @@
                 <!-- report state container -->
                 <section
                     class="report-button-container grid grid-cols-2 divide-x-2 divide-gray-300 text-2xl font-bold mb-12">
-                    <div class="divide-box" id="group1">
+                    <div class="divide-box">
                         <label for="myyCheck" class="active">گزارش تجمیعی
                             <input type="radio" name="report" id="myyCheck" onclick="myFunction()" value="Aggregate"
                                 class="report-input " checked>
@@ -58,10 +58,10 @@
 
 
                 <!-- form descibtion -->
-                <p class="text-2xl mt-10 mb-8">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
+                <p class="text-xl mt-10 mb-8 md:text-2xl">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
 
                 <!-- report type container -->
-                <section class="report-type-container flex justify-between w-full" id="group2">
+                <section class="report-type-container flex justify-between w-full">
                     <!-- date type -->
                     <div class="report-type date-type report-type-checked">
                         <!-- date type header -->
@@ -343,9 +343,10 @@
                         </button>
                     </div>
                     <div class="button-box">
-                        <button type="submit">
+                        <button type="submit" class="rendering">
                             <span class="icon-Paper-Fail"></span>
-                            خروجی اکسل
+                            <p class="submit-text">خروجی اکسل</p>
+                            <div class="dot-flashing"></div>
                         </button>
                         <div class="output-progress">
                             <p class="">لطفا منتظر بمانید...</p>
@@ -382,6 +383,7 @@
                 // altField: '.range-to-example-alt',
                 altFormat: 'LLLL',
                 initialValue: false,
+                responsive: false,
                 onSelect: function (unix) {
                     to.touched = true;
                     if (from && from.options && from.options.maxDate != unix) {
@@ -406,6 +408,7 @@
                 // altField: '.range-from-example-alt',
                 altFormat: 'LLLL',
                 initialValue: false,
+                responsive: false,
                 onSelect: function (unix) {
                     from.touched = true;
                     if (to && to.options && to.options.minDate != unix) {

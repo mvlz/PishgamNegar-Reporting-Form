@@ -119,3 +119,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 //   event.preventDefault();
 //   event.returnValue = "";
 // });
+const toolBoxes = document.querySelectorAll(".datepicker-container .toolbox");
+
+// const cancelBtn = document.createElement("button");
+console.log(toolBoxes);
+// // cancelBtn.classList.add("")
+// cancelBtn.innerHTML = "لغو";
+// toolBoxes.appendChild(cancelBtn);

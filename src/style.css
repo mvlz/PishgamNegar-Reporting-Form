@@ -122,7 +122,7 @@ h1.title {
 }
 .report-type {
   width: calc((100% - 2rem) / 2);
-  height: 27rem;
+  min-height: 27rem;
   border-radius: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -419,8 +419,8 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 140px;
 }
 .form-control {
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 100%;
+  height: 100%;
   border-radius: 1.5rem !important;
   border: 1px solid #cbcbcb !important;
   position: relative;
@@ -438,9 +438,13 @@ input[type="number"]::-webkit-outer-spin-button {
   position: relative;
   display: flex;
   justify-content: center;
+  width: 18%;
+  max-width: 4.5rem;
+  height: 4.5rem;
 }
 .num-input-box {
-  width: 26.5rem;
+  max-width: 26.5rem;
+  width: 100%;
 }
 .numinput-container {
   width: 100%;
@@ -468,4 +472,162 @@ input[type="number"]::-webkit-outer-spin-button {
 .naminput-error span {
   font-size: 1.5rem;
   margin-left: 0.75rem;
+}
+button.rendering {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    transparent 3rem,
+    #d81b65 1rem,
+    #d81b65 1.7rem
+  );
+  transition: all linear 0.3s;
+  background-size: 120%;
+  background-position-x: -4rem;
+  background-repeat: no-repeat;
+}
+.dot-flashing::before,
+.dot-flashing::after,
+.dot-flashing {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dot-flashing {
+  position: relative;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+  margin-right: 1rem;
+}
+
+.dot-flashing::before,
+.dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  animation: dotFlashing 1s infinite alternate;
+}
+
+.dot-flashing::before {
+  left: -12px;
+  animation-delay: 0s;
+}
+
+.dot-flashing::after {
+  left: 12px;
+  animation-delay: 1s;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: #ffffff;
+  }
+  100% {
+    background-color: #ffffff80;
+  }
+}
+
+@media screen and (max-width: 1710px) {
+  .more-inf-sales,
+  .paymentWay-container {
+    padding: 0 10rem;
+  }
+  .info-box,
+  .locked-box {
+    font-size: 1.25rem;
+  }
+  .report-type-body .date-radios {
+    /* justify-content: space-between; */
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .report-number-container {
+    flex-wrap: wrap;
+  }
+  .report-type {
+    padding: 2rem 5%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .report-type-container {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .report-type {
+    width: 80%;
+  }
+  .info-boxes,
+  .locked-box-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .info-box,
+  .locked-box,
+  .locked-box-container {
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .button-box button {
+    font-size: 1rem;
+  }
+  .more-inf-sales,
+  .paymentWay-container {
+    padding: 0 2rem;
+    margin: 0 !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  .main-box {
+    padding: 2rem;
+  }
+  .logo {
+    padding: 1rem 0;
+  }
+  .report-type,
+  .report-button-container,
+  .notice-box,
+  .button-box {
+    width: 100%;
+  }
+  h1.title {
+    font-size: 1.75rem;
+    line-height: unset;
+    text-align: center;
+  }
+  .submit-btns-container {
+    flex-direction: column;
+    margin-top: 0;
+    gap: 0.5rem;
+  }
+}
+@media screen and (max-width: 567px) {
+  .more-inf-sales,
+  .paymentWay-container {
+    padding: 0;
+  }
+  .main-box {
+    padding: 1rem;
+    width: 90%;
+    border-radius: 30px;
+  }
+  * {
+    line-height: unset !important;
+  }
+  .report-button-container,
+  .form-des {
+    font-size: 1rem !important;
+    margin-bottom: 0 !important;
+  }
+  .date-radios label,
+  .notice-box {
+    font-size: 0.785rem;
+  }
+  .date-input-box input {
+    max-width: 90%;
+  }
+  .datepicker-plot-area {
+    min-width: 90%;
+  }
 }
