@@ -1,4 +1,16 @@
-//Change style on click each elements and show the More information container when Sales one clicked.
+// =-=-=-=-=-=- Selectors -=-=-=-=-=-=-=- //
+const datePickers = [...document.querySelectorAll(".date-input-box input")];
+const infoBoxes = [...document.querySelectorAll(".info-box input")];
+const reportTypeRadios = [
+  ...document.querySelectorAll(".report-type-header input"),
+];
+const dateRadios = [...document.querySelectorAll(".date-radios input")];
+const fromNumInputs = document.querySelectorAll("#from-number input");
+const toNumInputs = document.querySelectorAll("#to-number input");
+const fromNumError = document.querySelector(".from-error");
+const toNumError = document.querySelector(".to-error");
+
+// Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
   const salesBtn = document.getElementById("sales");
   const aggregateBtn = document.getElementById("Aggregate");
@@ -17,9 +29,6 @@ function reportStateCheck() {
 }
 
 // Change styles of report type boxes on click.
-const reportTypeRadios = [
-  ...document.querySelectorAll(".report-type-header input"),
-];
 reportTypeRadios.forEach((typeRadio) => {
   typeRadio.addEventListener("click", () => {
     let disableInputs = [...document.querySelectorAll(".disable input")];
@@ -36,12 +45,12 @@ reportTypeRadios.forEach((typeRadio) => {
       reportTypeRadios[
         i
       ].parentElement.parentElement.nextElementSibling.classList.add("disable");
-      console.log(disableInputs);
 
       enableInputs.forEach((f) => {
         f.disabled = true;
         f.value = "";
-        console.log(f.disabled);
+        f.checked = false;
+        f.nextElementSibling.classList.remove("date-checked");
       });
       if (reportTypeRadios[i].checked) {
         continue;
@@ -54,7 +63,6 @@ reportTypeRadios.forEach((typeRadio) => {
     typeRadio.parentElement.parentElement.nextElementSibling.classList.remove(
       "disable"
     );
-    // console.log(disableInputs);
     disableInputs.forEach((f) => {
       f.disabled = false;
     });
@@ -62,12 +70,15 @@ reportTypeRadios.forEach((typeRadio) => {
 });
 
 // change styles of the Time&date-report-type input radios
-const dateRadios = [...document.querySelectorAll(".date-radios input")];
 dateRadios.forEach((dateRadio) => {
   dateRadio.addEventListener("click", () => {
     for (let i = 0; i < dateRadios.length; i++) {
       dateRadios[i].nextElementSibling.classList.remove("date-checked");
       if (dateRadios[i].checked) {
+        datePickers.forEach((dp) => {
+          dp.value = "";
+        });
+
         continue;
       }
     }
@@ -76,7 +87,6 @@ dateRadios.forEach((dateRadio) => {
 });
 
 // change styles of checkboxes of payment ways and More information in Sales state
-const infoBoxes = [...document.querySelectorAll(".info-box input")];
 infoBoxes.forEach((box) => {
   box.addEventListener("click", () => {
     box.parentElement.parentElement.classList.toggle("info-box-checked");
@@ -87,10 +97,6 @@ infoBoxes.forEach((box) => {
 // document.addEventListener("DOMContentLoaded", function (event) {
 
 // Order type of report logic
-const fromNumInputs = document.querySelectorAll("#from-number input");
-const toNumInputs = document.querySelectorAll("#to-number input");
-const fromNumError = document.querySelector(".from-error");
-const toNumError = document.querySelector(".to-error");
 let fromNumberVal = {
   num: 1,
 };
@@ -149,7 +155,7 @@ function orderInput(arrey, numError, joinVal) {
       ) {
         console.log("false");
         toNumError.classList.add("show-error");
-        toNumError.innerText = "شماره سفارش اشتباه است.";
+        toNumError.innerText = `شماره سفارش باید از  ${fromNumberVal.num}  بیشتر باشد.`;
       } else {
         numError.classList.remove("show-error");
         arrey[i].classList.remove("validate");
@@ -162,3 +168,11 @@ orderInput(fromNumInputs, fromNumError, fromNumberVal);
 orderInput(toNumInputs, toNumError, toNumberVal);
 
 // });
+datePickers.forEach((dp) => {
+  dp.addEventListener("focus", () => {
+    dateRadios.forEach((dr) => {
+      dr.checked = false;
+      dr.nextElementSibling.classList.remove("date-checked");
+    });
+  });
+});
