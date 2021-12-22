@@ -407,17 +407,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .form-control:focus {
   box-shadow: none;
-  border: 2px solid var(--primary) !important;
+  border: 2px solid dodgerblue !important;
   box-shadow: none !important;
 }
 
-.validate {
-  border-radius: 20px;
-  height: 40px;
-  background-color: red;
-  border: 1px solid red;
-  width: 140px;
-}
 .form-control {
   width: 100%;
   height: 100%;
@@ -461,15 +454,17 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 1.25rem;
   color: #5e5e5e;
 }
-.naminput-error {
+.numinput-error {
   font-size: 1rem;
   color: #dd0028;
   font-weight: 700;
   margin-top: 1.25rem;
   display: flex;
   align-items: center;
+  opacity: 0;
+  transform: translateY(-30px);
 }
-.naminput-error span {
+.numinput-error span {
   font-size: 1.5rem;
   margin-left: 0.75rem;
 }
@@ -630,4 +625,18 @@ button.rendering {
   .datepicker-plot-area {
     min-width: 90%;
   }
+}
+
+.show-error {
+  /* display: flex; */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.validate:focus {
+  /* border-radius: 20px; */
+  /* height: 40px; */
+  /* background-color: red; */
+  border: 2px solid red !important;
+  /* width: 140px; */
 }

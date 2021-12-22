@@ -42,14 +42,14 @@
                 <section
                     class="report-button-container grid grid-cols-2 divide-x-2 divide-gray-300 text-2xl font-bold mb-12">
                     <div class="divide-box">
-                        <label for="myyCheck" class="active">گزارش تجمیعی
-                            <input type="radio" name="report" id="myyCheck" onclick="myFunction()" value="Aggregate"
-                                class="report-input " checked>
+                        <label for="Aggregate" class="active">گزارش تجمیعی
+                            <input type="radio" name="report" id="Aggregate" onclick="reportStateCheck()"
+                                value="Aggregate" class="report-input " checked>
                         </label>
                     </div>
                     <div class="divide-box">
-                        <label for="myCheck">گزارش فروش
-                            <input type="radio" name="report" id="myCheck" onclick="myFunction()" value="sales"
+                        <label for="sales">گزارش فروش
+                            <input type="radio" name="report" id="sales" onclick="reportStateCheck()" value="sales"
                                 class="report-input">
                         </label>
                     </div>
@@ -67,7 +67,7 @@
                         <!-- date type header -->
                         <div class="report-type-header">
                             <label for="date" class="text-2xl">
-                                <input type="radio" name="type" id="date" checked onclick="checkedReportType()">
+                                <input type="radio" name="type" id="date" checked>
                                 <span class=" radio-circle radio-checked"></span>زمان و تاریخ
                             </label>
                         </div>
@@ -122,7 +122,7 @@
                         <!-- order type header -->
                         <div class="report-type-header">
                             <label for="order" class="text-2xl">
-                                <input type="radio" name="type" id="order" onclick="checkedReportType()">
+                                <input type="radio" name="type" id="order">
                                 <span class="radio-circle"></span>شماره سفارش
                             </label>
                         </div>
@@ -134,32 +134,32 @@
                                 <div class="num-input-box">
                                     <div id="from-number" class="numinput-container">
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="first"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="from-first"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="second"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="from-second"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="third"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="from-third"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="fourth"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="from-fourth"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="fifth"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="from-fifth"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                     </div>
-                                    <p class="naminput-error hidden">
+                                    <p class="from-error numinput-error">
                                         <span class="icon-Danger"></span>
                                         شماره سفارش باید 5 رقمی باشد.
                                     </p>
@@ -170,32 +170,34 @@
                                 <div class="num-input-box">
                                     <div id="to-number" class="numinput-container">
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="first"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="to-first"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="second"
-                                                maxlength="1" />
+                                            <input class="validate text-center form-control" type="text" id="to-second"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="third"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="to-third"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="fourth"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="to-fourth"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="number" id="fifth"
-                                                maxlength="1" />
+                                            <input class="text-center form-control" type="text" id="to-fifth"
+                                                maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                     </div>
-                                    <p class="naminput-error">
+
+                                    <!-- hji -->
+                                    <p class="to-error numinput-error">
                                         <span class="icon-Danger"></span>
                                         شماره سفارش باید 5 رقمی باشد.
                                     </p>
@@ -394,6 +396,7 @@
                         }
                     }
                 },
+                autoClose: true,
                 timePicker: {
                     enabled: true,
                 },
@@ -401,6 +404,9 @@
                     scroll: {
                         enabled: false,
                     }
+                },
+                toolbox: {
+                    enabled: false,
                 }
             });
             from = $(".range-from-example-alt").persianDatepicker({
@@ -409,6 +415,7 @@
                 altFormat: 'LLLL',
                 initialValue: false,
                 responsive: false,
+                autoClose: true,
                 onSelect: function (unix) {
                     from.touched = true;
                     if (to && to.options && to.options.minDate != unix) {
@@ -427,43 +434,46 @@
                         enabled: false,
                     }
                 },
-            });
-            function range() {
-                const tds = [...document.querySelectorAll(".datepicker-container td")];
-                const selectedTd = [
-                    ...document.querySelectorAll(".datepicker-container td.selected"),
-                ];
-
-                const getFrom = from.getState().selected;
-                const getTo = to.getState().selected;
-                const fromDate = getFrom.year + `${getFrom.month < 10 ? "0" + getFrom.month : getFrom.month}` + `${getFrom.date < 10 ? "0" + getFrom.date : getFrom.date}`
-                const toDate = getTo.year + `${getTo.month < 10 ? "0" + getTo.month : getTo.month}` + `${getTo.date < 10 ? "0" + getTo.date : getTo.date}`
-
-                const tdds = tds.filter((t) => ![...t.classList].includes("disabled"));
-                const timeSpanTds = tdds.filter(
-                    (t) => parseInt(fromDate) <= parseInt(splitDate(t.dataset.date)) && parseInt(splitDate(t.dataset.date)) <= parseInt(toDate)
-                );
-                // console.log(timeSpanTds);
-                if (timeSpanTds[timeSpanTds.length - 1].dataset.date !== timeSpanTds[0].dataset.date) {
-
-                    timeSpanTds[timeSpanTds.length - 1].classList.add("toSelected")
-                    timeSpanTds[0].classList.add("fromSelected")
-                    timeSpanTds[timeSpanTds.length / 2].classList.add("fromSelected")
+                toolbox: {
+                    enabled: false,
                 }
+            });
+            // function range() {
+            //     const tds = [...document.querySelectorAll(".datepicker-container td")];
+            //     const selectedTd = [
+            //         ...document.querySelectorAll(".datepicker-container td.selected"),
+            //     ];
 
-                timeSpanTds.forEach((tst) => {
-                    tst.classList.add("time-span");
-                });
-            }
-            function splitDate(date) {
-                let varrey = date.split(",")
-                const vv = `${varrey[0]}` + `${varrey[1] < 10 ? "0" + varrey[1] : varrey[1]}` + `${varrey[2] < 10 ? "0" + varrey[2] : varrey[2]}`
-                return vv;
-            }
+            //     const getFrom = from.getState().selected;
+            //     const getTo = to.getState().selected;
+            //     const fromDate = getFrom.year + `${getFrom.month < 10 ? "0" + getFrom.month : getFrom.month}` + `${getFrom.date < 10 ? "0" + getFrom.date : getFrom.date}`
+            //     const toDate = getTo.year + `${getTo.month < 10 ? "0" + getTo.month : getTo.month}` + `${getTo.date < 10 ? "0" + getTo.date : getTo.date}`
+
+            //     const tdds = tds.filter((t) => ![...t.classList].includes("disabled"));
+            //     const timeSpanTds = tdds.filter(
+            //         (t) => parseInt(fromDate) <= parseInt(splitDate(t.dataset.date)) && parseInt(splitDate(t.dataset.date)) <= parseInt(toDate)
+            //     );
+            //     // console.log(timeSpanTds);
+            //     if (timeSpanTds[timeSpanTds.length - 1].dataset.date !== timeSpanTds[0].dataset.date) {
+
+            //         timeSpanTds[timeSpanTds.length - 1].classList.add("toSelected")
+            //         timeSpanTds[0].classList.add("fromSelected")
+            //         timeSpanTds[timeSpanTds.length / 2].classList.add("fromSelected")
+            //     }
+
+            //     timeSpanTds.forEach((tst) => {
+            //         tst.classList.add("time-span");
+            //     });
+            // }
+            // function splitDate(date) {
+            //     let varrey = date.split(",")
+            //     const vv = `${varrey[0]}` + `${varrey[1] < 10 ? "0" + varrey[1] : varrey[1]}` + `${varrey[2] < 10 ? "0" + varrey[2] : varrey[2]}`
+            //     return vv;
+            // }
             window.addEventListener("click", () => {
                 // console.log(splitDate("1400,9,14"))
 
-                range()
+                // range()
             })
         });
 
