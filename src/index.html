@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="../assets/Styles/persian-datepicker.min.css">
     <script src="../js/jquery-3.6.0.min.js"></script>
@@ -28,19 +27,18 @@
         <img src="../assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
 
         <!-- title -->
-        <h1 class="title font-black">سامانه گزارش گیری فروشگاه آنلاین پیشگام نگار</h1>
+        <h1 class="title">سامانه گزارش گیری فروشگاه آنلاین پیشگام نگار</h1>
 
         <!-- form container -->
         <div class="main-box ">
-            <form class="form flex flex-col items-center" method="post" action="">
+            <form class="form" method="post" action="">
                 <!-- form descibtion -->
-                <p class="form-des font-normal text-2xl mb-8">
+                <p class="title">
                     امکان گزارش گیری در دو حالت گزارش فروش و تجمیعی وجود دارد. لطفا نوع
                     گزارش خود را انتخاب کنید.
                 </p>
                 <!-- report state container -->
-                <section
-                    class="report-button-container grid grid-cols-2 divide-x-2 divide-gray-300 text-2xl font-bold mb-12">
+                <section class="report-button-container">
                     <div class="divide-box">
                         <label for="Aggregate" class="active">گزارش تجمیعی
                             <input type="radio" name="report" id="Aggregate" onclick="reportStateCheck()"
@@ -58,22 +56,22 @@
 
 
                 <!-- form descibtion -->
-                <p class="text-xl mt-10 mb-8 md:text-2xl">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
+                <p class="title report-type-title">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
 
                 <!-- report type container -->
-                <section class="report-type-container flex justify-between w-full">
+                <section class="report-type-container">
                     <!-- date type -->
                     <div class="report-type date-type report-type-checked">
                         <!-- date type header -->
                         <div class="report-type-header">
-                            <label for="date" class="text-2xl">
+                            <label for="date" class="">
                                 <input type="radio" name="type" id="date" checked>
                                 <span class=" radio-circle radio-checked"></span>زمان و تاریخ
                             </label>
                         </div>
                         <!-- date type body -->
                         <div class="report-type-body">
-                            <fieldset class="date-radios mb-4">
+                            <div class="date-radios">
                                 <label for="today">
                                     <input type="radio" name="date" id="today" value="today">
                                     <span class="radio-circle">
@@ -95,8 +93,8 @@
                                     <span class="radio-circle"></span>
                                     30روز گذشته
                                 </label>
-                            </fieldset>
-                            <div class="flex flex-col gap-y-8">
+                            </div>
+                            <div class="calendars-container">
                                 <div class="date-input-box">
                                     <input class="datepicker-demo range-from-example-alt flex-grow" id="rang-from"
                                         placeholder="از تاریخ">
@@ -121,14 +119,14 @@
                     <div class="report-type order-type ">
                         <!-- order type header -->
                         <div class="report-type-header">
-                            <label for="order" class="text-2xl">
+                            <label for="order" class="">
                                 <input type="radio" name="type" id="order">
                                 <span class="radio-circle"></span>شماره سفارش
                             </label>
                         </div>
                         <!-- order type body -->
                         <div class="report-type-body disable">
-                            <p class="title mb-4">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
+                            <p class="title">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
                             <div class="report-number-container">
                                 <p class="text">از شماره</p>
                                 <div class="num-input-box">
@@ -175,7 +173,7 @@
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="validate text-center form-control" type="text" id="to-second"
+                                            <input class=" text-center form-control" type="text" id="to-second"
                                                 maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
@@ -208,7 +206,7 @@
                 </section>
                 <!-- /report type container -->
 
-                <hr class="divide-line my-16"><!-- divide line -->
+                <hr class="divide-line"><!-- divide line -->
 
 
                 <!-- More informations in sales report form -->
@@ -221,7 +219,7 @@
                     </div>
 
                     <!-- information boxes container -->
-                    <div class="info-boxes-container w-full mt-14 flex flex-col gap-y-8">
+                    <div class="info-boxes-container">
                         <!-- information boxes row -->
                         <div class="info-boxes">
                             <!-- information box -->
@@ -279,12 +277,12 @@
                     </div>
                     <!-- /information boxes container -->
 
-                    <hr class="divide-line my-16"><!-- divide line -->
+                    <hr class="divide-line"><!-- divide line -->
                 </section>
                 <!-- /More information -->
 
 
-                <section class="paymentWay-container mb-32">
+                <section class="paymentWay-container">
                     <p class="title">سفارشات با چه نوع روش پرداخت در گزارش شما وجود داشته باشد؟</p>
                     <!-- notice box -->
                     <div class="notice-box">
@@ -293,7 +291,7 @@
                     </div>
 
                     <!-- information boxes container -->
-                    <div class="info-boxes-container w-full mt-14 flex flex-col gap-y-8">
+                    <div class="info-boxes-container">
                         <!-- information boxes row -->
                         <div class="info-boxes">
                             <!-- information box -->
@@ -337,7 +335,7 @@
                     </div>
                     <!-- /information boxes container -->
                 </section>
-                <section class="submit-btns-container w-full flex justify-between mt-14 mb-1">
+                <section class="submit-btns-container">
                     <div class="button-box">
                         <button type="submit">
                             <span class="icon-Show"></span>
@@ -381,8 +379,9 @@
             var to, from;
 
             to = $(".range-to-example-alt").persianDatepicker({
-                // inline: true,
-                // altField: '.range-to-example-alt',
+                checkYear: function (year) {
+                    return year >= 1400;
+                },
                 altFormat: 'LLLL',
                 initialValue: false,
                 responsive: false,
@@ -410,8 +409,11 @@
                 }
             });
             from = $(".range-from-example-alt").persianDatepicker({
-                // inline: true,
-                // altField: '.range-from-example-alt',
+                checkYear: function (year) {
+                    return year >= 1400;
+                },
+                minDate: 1635150600000 || 1635180023000,
+                // 1635180023000
                 altFormat: 'LLLL',
                 initialValue: false,
                 responsive: false,
@@ -424,6 +426,8 @@
                         if (to.touched) {
                             to.setDate(cachedValue);
                         }
+                        // console.log(from.model.state.view);
+
                     }
                 },
                 timePicker: {

@@ -32,6 +32,10 @@ button:focus {
   outline: none !important;
   border: none;
 }
+input,
+button {
+  font-family: "yekan bakh";
+}
 .wrapper {
   width: 100%;
   height: auto;
@@ -62,6 +66,7 @@ h1.title {
   font-size: 3rem;
   line-height: 4.3rem;
   margin-bottom: 36px;
+  font-weight: 900;
 }
 .main-box {
   width: 80%;
@@ -71,15 +76,37 @@ h1.title {
   box-shadow: 0 4px 32px 0 #00000012;
   padding: 3.75rem 4rem;
 }
-.form-des {
+.main-box .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form > .title {
   line-height: 3.1rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.report-type-title.title {
+  font-size: 1.5rem;
+  margin: 2.5rem auto 2rem;
 }
 .report-button-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   background-color: #f2f2f2;
   border-radius: 2rem;
   width: 31rem;
   height: 5.5rem;
   direction: ltr;
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.divide-box:first-of-type {
+  border-right: 1px solid #cbcbcb;
 }
 .divide-box {
   display: flex;
@@ -104,11 +131,12 @@ h1.title {
 .hidden {
   display: none;
 }
-
 .footer {
   width: 100%;
   background-size: 200px;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 .footer::before {
   position: absolute;
@@ -119,6 +147,11 @@ h1.title {
   height: 28rem;
   background: #ffced2;
   z-index: -1;
+}
+.report-type-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 .report-type {
   width: calc((100% - 2rem) / 2);
@@ -137,6 +170,7 @@ h1.title {
   border: 1px solid var(--primary);
 }
 .report-type label {
+  font-size: 1.5rem;
   cursor: pointer;
   font-weight: 700;
 }
@@ -201,6 +235,13 @@ input[type="checkbox"] {
   display: flex;
   justify-content: flex-start;
   gap: 2.5rem;
+  margin-bottom: 1rem;
+}
+.calendars-container,
+.info-boxes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 .report-type-body .date-radios .radio-circle {
   width: 1.5rem;
@@ -216,6 +257,7 @@ input[type="checkbox"] {
 .divide-line {
   width: 100%;
   border-top: 1px solid #e6e6e6;
+  margin: 4rem 0;
 }
 .notice-box {
   width: 569px;
@@ -232,6 +274,16 @@ input[type="checkbox"] {
   font-weight: 400;
   margin: 0.5rem 0;
 }
+.info-boxes-container,
+.submit-btns-container {
+  width: 100%;
+  margin-top: 3.5rem;
+}
+.submit-btns-container {
+  margin-bottom: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+}
 .more-inf-sales,
 .paymentWay-container {
   display: flex;
@@ -239,6 +291,9 @@ input[type="checkbox"] {
   align-items: center;
   width: 100%;
   padding: 0 12rem;
+}
+.paymentWay-container {
+  margin-bottom: 8rem;
 }
 .more-inf-sales {
   display: none;
@@ -317,6 +372,9 @@ input[type="checkbox"] {
 }
 
 .button-box button {
+  font-family: "yekan bakh";
+}
+.button-box button {
   width: 100%;
   height: 4.5rem;
   border-radius: 9999px;
@@ -356,6 +414,9 @@ input[type="checkbox"] {
   height: 100%;
   border: none;
   outline: none;
+  font-size: 1.25rem;
+  flex-grow: 1;
+  color: #2f2f2f;
 }
 .date-input-box label {
   height: 100%;
@@ -405,10 +466,13 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-control:focus-visible {
   box-shadow: none;
-  border: 2px solid dodgerblue !important;
+  border: 2px solid var(--primary) !important;
   box-shadow: none !important;
+  outline: none;
+  color: #2f2f2f;
 }
 
 .form-control {
@@ -419,6 +483,7 @@ input[type="number"]::-webkit-outer-spin-button {
   position: relative;
   font-size: 1.5rem;
   font-weight: 700;
+  text-align: center;
 }
 .input-line {
   position: absolute;
@@ -593,7 +658,6 @@ button.rendering {
   }
   .submit-btns-container {
     flex-direction: column;
-    margin-top: 0;
     gap: 0.5rem;
   }
 }
@@ -611,13 +675,21 @@ button.rendering {
     line-height: unset !important;
   }
   .report-button-container,
-  .form-des {
+  .form > .title:not(.report-type-title) {
     font-size: 1rem !important;
     margin-bottom: 0 !important;
+    text-align: center;
   }
-  .date-radios label,
+  .report-type-title.title {
+    font-size: 1.25rem;
+  }
+  .info-box label,
+  .locked-box-container,
   .notice-box {
-    font-size: 0.785rem;
+    font-size: 1rem;
+  }
+  .date-radios label {
+    font-size: 0.875rem;
   }
   .date-input-box input {
     max-width: 90%;

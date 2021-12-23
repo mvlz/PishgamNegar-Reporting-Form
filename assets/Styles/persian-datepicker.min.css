@@ -80,15 +80,10 @@
 .datepicker-plot-area .datepicker-day-view .table-days td.disabled span,
 .datepicker-plot-area .datepicker-year-view .year-item-disable,
 .datepicker-plot-area .datepicker-month-view .month-item-disable {
-  /* background-color: #f1f1f1; */
   color: #979797;
-  /* border: none; */
-  /* text-shadow: none; */
   cursor: not-allowed;
 }
 .datepicker-plot-area .datepicker-day-view .table-days td.today span {
-  /* background-color: #333; */
-  /* color: #fff; */
   border: 0;
   text-shadow: none;
   border: 2px solid #f81e74;
@@ -103,10 +98,8 @@
 .datepicker-plot-area .datepicker-day-view .table-days td.selected span,
 .datepicker-plot-area .datepicker-year-view .year-item.selected,
 .datepicker-plot-area .datepicker-month-view .month-item.selected {
-  /* background-color: #005299; */
   color: #fff;
   border: none;
-  /* text-shadow: 1px 1px 1px #000; */
   background: radial-gradient(
     82.86% 82.86% at 28.57% 17.14%,
     #ff71a9 0%,
@@ -127,8 +120,6 @@
 .datepicker-plot-area .datepicker-day-view .table-days td span:hover,
 .datepicker-plot-area .datepicker-year-view .year-item:hover,
 .datepicker-plot-area .datepicker-month-view .month-item:hover {
-  /* background-color: #007be6;
-  color: #fff;*/
   border: 0;
   text-shadow: none;
   background-color: #f5e0e8;
@@ -149,8 +140,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.3); */
-  /* backdrop-filter: blur(4px); */
   flex-direction: column;
   gap: 1rem;
 }
@@ -158,19 +147,13 @@
   display: none;
 }
 .datepicker-plot-area {
-  /* box-sizing: border-box; */
   overflow: hidden !important;
-  /* min-height: 70px; */
-  /* display: block; */
-  /* width: 200px; */
-  /* min-width: 200px; */
   font: 14px "Yekan Bakh";
   background: linear-gradient(
     142.42deg,
     rgba(255, 248, 251) 14.79%,
     rgba(254, 248, 255) 107.42%
   );
-  /* box-shadow: inset -5px -5px 15px rgb(0 0 0 / 12%), inset 5px 5px 32px #ffffff; */
   backdrop-filter: blur(4px);
   border-radius: 1.25rem;
   width: 20rem;
@@ -210,10 +193,6 @@
   display: block;
   float: left;
   width: 100%;
-  /* padding: 5px; */
-  /* background: #f9f9f9; */
-  /* border-top: 1px solid #f1f1f1; */
-  /* background: rgb(243 243 243); */
   display: flex;
   align-items: center;
   position: relative;
@@ -222,7 +201,7 @@
   padding: 0 3.5rem 0 1rem;
   justify-content: flex-end;
   border-top: 1px solid #fee6f2;
-  /* padding-top: 0.5rem; */
+  margin-bottom: 1rem;
 }
 .datepicker-plot-area.datepicker-gregorian .datepicker-time-view {
   padding: 0 1rem 0 3.5rem;
@@ -231,10 +210,8 @@
 .datepicker-time-view::after {
   content: "";
   position: absolute;
-  /* top: 0; */
   width: 3.5rem;
   height: 1.25rem;
-  /* background: aqua; */
   font-size: 1rem;
   font-weight: 700;
 }
@@ -311,7 +288,6 @@
 .datepicker-plot-area.datepicker-state-no-meridian
   .datepicker-time-view
   > .time-segment {
-  /* width: 31.33%; */
   width: 2.5rem;
   height: 2.5rem;
   border: 1px solid #979797;
@@ -373,7 +349,6 @@
   height: 26px;
   line-height: 26px;
   padding: 0;
-  /* margin: 0; */
   margin: 4px auto;
   width: 2rem;
   height: 2rem;
@@ -467,9 +442,7 @@
 .datepicker-plot-area .toolbox {
   display: block;
   float: left;
-  /* width: 100%; */
   width: calc(100% - 2rem);
-  /* margin-top: 5px; */
   margin: 1.5rem 1rem;
   display: none;
 }
@@ -776,5 +749,8 @@
   padding-bottom: 0.5rem;
 }
 .datepicker-gregorian {
-  font-family: segoe ui, "Yekan Bakh";
+  font-family: segoe ui;
+}
+.datepicker-gregorian .datepicker-time-view input {
+  font-family: segoe ui;
 }
