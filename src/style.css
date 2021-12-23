@@ -222,7 +222,6 @@ input[type="checkbox"] {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 }
 .report-type-body .title,
 .more-inf-sales .title,
@@ -235,7 +234,7 @@ input[type="checkbox"] {
   display: flex;
   justify-content: flex-start;
   gap: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 .calendars-container,
 .info-boxes-container {
@@ -401,27 +400,31 @@ input[type="checkbox"] {
 }
 .date-input-box {
   width: 100%;
-  height: 4.5rem;
-  border-radius: 1.5rem;
-  border: 1px solid #cbcbcb;
   display: flex;
   align-items: center;
-  padding: 0 1.5rem;
   font-size: 1.25rem;
   color: #5e5e5e;
+  position: relative;
 }
 .date-input-box input {
-  height: 100%;
-  border: none;
   outline: none;
   font-size: 1.25rem;
   flex-grow: 1;
   color: #2f2f2f;
+  height: 4.5rem;
+  border-radius: 1.5rem;
+  padding: 0 1.5rem;
+  border: 1px solid #cbcbcb;
+}
+.date-input-box input:focus {
+  border-color: var(--primary);
 }
 .date-input-box label {
   height: 100%;
   display: flex;
   align-items: center;
+  position: absolute;
+  left: 1.5rem;
 }
 .date-input-box span,
 .notice-box span,
@@ -470,7 +473,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .form-control:focus-visible {
   box-shadow: none;
   border: 2px solid var(--primary) !important;
-  box-shadow: none !important;
+
+  box-shadow: 0px 0px 0px 3px #f81e7414;
   outline: none;
   color: #2f2f2f;
 }
@@ -513,7 +517,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .report-number-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+  min-height: 6.5rem;
 }
 .report-number-container .text {
   font-size: 1.25rem;
@@ -523,11 +528,11 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 1rem;
   color: #dd0028;
   font-weight: 700;
-  margin-top: 1.25rem;
   display: flex;
   align-items: center;
   opacity: 0;
   transform: translateY(-30px);
+  height: 0;
 }
 .numinput-error span {
   font-size: 1.5rem;
@@ -691,9 +696,6 @@ button.rendering {
   .date-radios label {
     font-size: 0.875rem;
   }
-  .date-input-box input {
-    max-width: 90%;
-  }
   .datepicker-plot-area {
     min-width: 90%;
   }
@@ -703,12 +705,13 @@ button.rendering {
   /* display: flex; */
   opacity: 1;
   transform: translateY(0);
+  height: unset;
+  margin: 0.25rem 0;
 }
-
-.validate:focus {
-  /* border-radius: 20px; */
-  /* height: 40px; */
-  /* background-color: red; */
-  border: 2px solid red !important;
-  /* width: 140px; */
+.report-type-body > p.title {
+  margin-bottom: 3rem;
+}
+.error-style input {
+  border: 1px solid #dd0028 !important;
+  color: #dd0028;
 }

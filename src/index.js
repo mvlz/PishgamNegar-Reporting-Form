@@ -9,6 +9,8 @@ const fromNumInputs = document.querySelectorAll("#from-number input");
 const toNumInputs = document.querySelectorAll("#to-number input");
 const fromNumError = document.querySelector(".from-error");
 const toNumError = document.querySelector(".to-error");
+const fromNumBoxes = document.querySelector("#from-number");
+const toNumBoxes = document.querySelector("#to-number");
 
 // Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
@@ -104,7 +106,7 @@ let toNumberVal = {
   num: 2,
 };
 // order type number input execute and error handling function
-function orderInput(arrey, numError, joinVal) {
+function orderInput(arrey, numError, joinVal, box) {
   let x;
   for (let i = 0; i < arrey.length; i++) {
     arrey[i].addEventListener("keydown", function (event) {
@@ -114,6 +116,10 @@ function orderInput(arrey, numError, joinVal) {
         } else {
           arrey[i - 1].focus();
         }
+      } else if (event.key === "ArrowLeft") {
+        arrey[i - 1].focus();
+      } else if (event.key === "ArrowRight") {
+        arrey[i + 1].focus();
       } else {
         if (i === arrey.length - 1 && arrey[i].value !== "") {
           return true;
@@ -145,31 +151,33 @@ function orderInput(arrey, numError, joinVal) {
       if (x.length < 5) {
         numError.classList.add("show-error");
         numError.innerText = "شماره سفارش باید 5 رقمی باشد.";
+        box.classList.add("error-style");
       } else if (x.length === 5 && joinVal.num < 87354) {
         numError.classList.add("show-error");
+        box.classList.add("error-style");
         numError.innerText = "شماره سفارش معتبر نیست.";
       } else if (
         fromNumberVal.num > 87354 &&
         toNumberVal.num > 87354 &&
         fromNumberVal.num > toNumberVal.num
       ) {
-        console.log("false");
         toNumError.classList.add("show-error");
+        box.classList.add("error-style");
         toNumError.innerText = `شماره سفارش باید از  ${fromNumberVal.num}  بیشتر باشد.`;
       } else {
         numError.classList.remove("show-error");
-        arrey[i].classList.remove("validate");
+        box.classList.remove("error-style");
       }
     });
   }
 }
 // Calling function to execute for From Order one and To Order One
-orderInput(fromNumInputs, fromNumError, fromNumberVal);
-orderInput(toNumInputs, toNumError, toNumberVal);
+orderInput(fromNumInputs, fromNumError, fromNumberVal, fromNumBoxes);
+orderInput(toNumInputs, toNumError, toNumberVal, toNumBoxes);
 
 // });
 datePickers.forEach((dp) => {
-  dp.addEventListener("focus", () => {
+  dp.addEventListener("click", () => {
     dateRadios.forEach((dr) => {
       dr.checked = false;
       dr.nextElementSibling.classList.remove("date-checked");
