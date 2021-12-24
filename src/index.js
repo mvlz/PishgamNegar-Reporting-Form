@@ -2,7 +2,7 @@
 const datePickers = [...document.querySelectorAll(".date-input-box input")];
 const infoBoxes = [...document.querySelectorAll(".info-box input")];
 const reportTypeRadios = [
-  ...document.querySelectorAll(".report-type-header input"),
+  ...document.querySelectorAll(".range-type-header input"),
 ];
 const dateRadios = [...document.querySelectorAll(".date-radios input")];
 const fromNumInputs = document.querySelectorAll("#from-number input");
@@ -14,9 +14,9 @@ const toNumBoxes = document.querySelector("#to-number");
 
 // Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
-  const salesBtn = document.getElementById("sales");
-  const aggregateBtn = document.getElementById("Aggregate");
-  const salesInfSection = document.getElementById("sales-more-inf");
+  const salesBtn = document.getElementById("salesReport");
+  const aggregateBtn = document.getElementById("aggregatedReport");
+  const salesInfSection = document.getElementById("extraOptionContainer");
   if (salesBtn.checked == true) {
     salesInfSection.style.display = "flex";
     salesBtn.parentElement.classList.add("active");
@@ -34,15 +34,13 @@ function reportStateCheck() {
 reportTypeRadios.forEach((typeRadio) => {
   typeRadio.addEventListener("click", () => {
     let disableInputs = [...document.querySelectorAll(".disable input")];
-    let enableInputs = [
-      ...document.querySelectorAll(".report-type-body input"),
-    ];
+    let enableInputs = [...document.querySelectorAll(".range-type-body input")];
     for (let i = 0; i < reportTypeRadios.length; i++) {
       reportTypeRadios[i].nextElementSibling.classList.remove("radio-checked");
       reportTypeRadios[
         i
       ].parentElement.parentElement.parentElement.classList.remove(
-        "report-type-checked"
+        "range-type-checked"
       );
       reportTypeRadios[
         i
@@ -60,7 +58,7 @@ reportTypeRadios.forEach((typeRadio) => {
     }
     typeRadio.nextElementSibling.classList.add("radio-checked");
     typeRadio.parentElement.parentElement.parentElement.classList.add(
-      "report-type-checked"
+      "range-type-checked"
     );
     typeRadio.parentElement.parentElement.nextElementSibling.classList.remove(
       "disable"
@@ -71,7 +69,7 @@ reportTypeRadios.forEach((typeRadio) => {
   });
 });
 
-// change styles of the Time&date-report-type input radios
+// change styles of the Time&date-range-type input radios
 dateRadios.forEach((dateRadio) => {
   dateRadio.addEventListener("click", () => {
     for (let i = 0; i < dateRadios.length; i++) {

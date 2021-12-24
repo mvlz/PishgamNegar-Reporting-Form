@@ -38,17 +38,17 @@
                     گزارش خود را انتخاب کنید.
                 </p>
                 <!-- report state container -->
-                <section class="report-button-container">
+                <section class="report-type-container">
                     <div class="divide-box">
-                        <label for="Aggregate" class="active">گزارش تجمیعی
-                            <input type="radio" name="report" id="Aggregate" onclick="reportStateCheck()"
-                                value="Aggregate" class="report-input " checked>
+                        <label for="aggregatedReport" class="active">گزارش تجمیعی
+                            <input type="radio" name="reportType" id="aggregatedReport" onclick="reportStateCheck()"
+                                value="aggregatedReport" class="report-input " checked>
                         </label>
                     </div>
                     <div class="divide-box">
-                        <label for="sales">گزارش فروش
-                            <input type="radio" name="report" id="sales" onclick="reportStateCheck()" value="sales"
-                                class="report-input">
+                        <label for="salesReport">گزارش فروش
+                            <input type="radio" name="reportType" id="salesReport" onclick="reportStateCheck()"
+                                value="salesReport" class="report-input">
                         </label>
                     </div>
                 </section>
@@ -56,76 +56,74 @@
 
 
                 <!-- form descibtion -->
-                <p class="title report-type-title">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
+                <p class="title range-type-title">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
 
                 <!-- report type container -->
-                <section class="report-type-container">
+                <section class="range-type-container">
                     <!-- date type -->
-                    <div class="report-type date-type report-type-checked">
+                    <div class="range-type date-type range-type-checked">
                         <!-- date type header -->
-                        <div class="report-type-header">
-                            <label for="date" class="">
-                                <input type="radio" name="type" id="date" checked>
+                        <div class="range-type-header">
+                            <label for="orderDate" class="">
+                                <input type="radio" name="rangeType" id="orderDate" checked value="orderDate">
                                 <span class=" radio-circle radio-checked"></span>زمان و تاریخ
                             </label>
                         </div>
                         <!-- date type body -->
-                        <div class="report-type-body">
+                        <div class="range-type-body">
                             <div class="date-radios">
                                 <label for="today">
-                                    <input type="radio" name="date" id="today" value="today">
-                                    <span class="radio-circle">
+                                    <input type="radio" name="definedRanges" id="today" value="today" checked>
+                                    <span class="radio-circle date-checked">
                                     </span>
                                     امروز
                                 </label>
                                 <label for="yesterday">
-                                    <input type="radio" name="date" id="yesterday" value="yesterday">
+                                    <input type="radio" name="definedRanges" id="yesterday" value="yesterday">
                                     <span class="radio-circle"></span>
                                     دیروز
                                 </label>
-                                <label for="lastSevenDay">
-                                    <input type="radio" name="date" id="lastSevenDay" value="lastSevenDay">
+                                <label for="lastWeek">
+                                    <input type="radio" name="definedRanges" id="lastWeek" value="lastWeek">
                                     <span class="radio-circle"></span>
                                     7روز گذشته
                                 </label>
                                 <label for="lastMonth">
-                                    <input type="radio" name="date" id="lastMonth" value="lastMonth">
+                                    <input type="radio" name="definedRanges" id="lastMonth" value="lastMonth">
                                     <span class="radio-circle"></span>
                                     30روز گذشته
                                 </label>
                             </div>
                             <div class="calendars-container">
                                 <div class="date-input-box">
-                                    <input class="datepicker-demo range-from-example-alt flex-grow" id="rang-from"
-                                        placeholder="از تاریخ">
-                                    <label for="rang-from">
+                                    <input class="datepicker-demo range-from-example-alt flex-grow" id="startRange"
+                                        name="startRange" placeholder="از تاریخ">
+                                    <label for="startRange">
                                         <span class="icon-Calendar1"></span>
                                     </label>
-                                    <div class="range-from-example"></div>
                                 </div>
                                 <div class="date-input-box">
-                                    <input class="datepicker-demo range-to-example-alt flex-grow" id="rang-to"
-                                        placeholder="تا تاریخ">
-                                    <label for="rang-to">
+                                    <input class="datepicker-demo range-to-example-alt flex-grow" id="endRange"
+                                        name="endRange" placeholder="تا تاریخ">
+                                    <label for="endRange ">
                                         <span class="icon-Calendar1"></span>
                                     </label>
-                                    <div class="range-to-example"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- order type -->
-                    <div class="report-type order-type ">
+                    <div class="range-type order-type ">
                         <!-- order type header -->
-                        <div class="report-type-header">
-                            <label for="order" class="">
-                                <input type="radio" name="type" id="order">
+                        <div class="range-type-header">
+                            <label for="orderId" class="">
+                                <input type="radio" name="rangeType" id="orderId" value="orderId">
                                 <span class="radio-circle"></span>شماره سفارش
                             </label>
                         </div>
                         <!-- order type body -->
-                        <div class="report-type-body disable">
+                        <div class="range-type-body disable">
                             <p class="title">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
                             <div class="report-number-container">
                                 <p class="text">از شماره</p>
@@ -193,8 +191,6 @@
                                             <span class="input-line"></span>
                                         </div>
                                     </div>
-
-                                    <!-- hji -->
                                     <p class="to-error numinput-error">
                                         <span class="icon-Danger"></span>
                                         شماره سفارش باید 5 رقمی باشد.
@@ -210,7 +206,7 @@
 
 
                 <!-- More informations in sales report form -->
-                <section class="more-inf-sales" id="sales-more-inf">
+                <section class="more-inf-sales" id="extraOptionContainer">
                     <p class="title">تمایل دارید چه اطلاعات دیگری در گزارش شما وجود داشته باشد؟</p>
                     <!-- notice box -->
                     <div class="notice-box">
@@ -224,8 +220,8 @@
                         <div class="info-boxes">
                             <!-- information box -->
                             <div class="info-box">
-                                <label for="customer-name">
-                                    <input type="checkbox" name="inf" id="customer-name">
+                                <label for="customerName">
+                                    <input type="checkbox" name="extraOptions" id="customerName" value="customerName">
                                     <span class="checkBox"></span>
                                     نام مشتری
                                 </label>
@@ -233,8 +229,8 @@
 
                             <!-- information box -->
                             <div class="info-box">
-                                <label for="order-status">
-                                    <input type="checkbox" name="inf" id="order-status">
+                                <label for="orderState">
+                                    <input type="checkbox" name="extraOptions" id="orderState" value="orderState">
                                     <span class="checkBox"></span>
                                     وضعیت سفارش
                                 </label>
@@ -296,8 +292,8 @@
                         <div class="info-boxes">
                             <!-- information box -->
                             <div class="info-box">
-                                <label for="online-orders-pasargad">
-                                    <input type="checkbox" name="payment" id="online-orders-pasargad">
+                                <label for="pasargad">
+                                    <input type="checkbox" name="paymentType" id="pasargad" value="pasargad">
                                     <span class="checkBox"></span>
                                     سفارشات آنلاین (درگاه بانک پاسارگاد)
                                 </label>
@@ -305,8 +301,8 @@
 
                             <!-- information box -->
                             <div class="info-box">
-                                <label for="online-orders-melli">
-                                    <input type="checkbox" name="payment" id="online-orders-melli">
+                                <label for="melli">
+                                    <input type="checkbox" name="paymentType" id="melli" value="melli">
                                     <span class="checkBox"></span>
                                     سفارشات آنلاین (درگاه بانک ملی)
                                 </label>
@@ -316,8 +312,8 @@
                         <div class="info-boxes">
                             <!-- information box -->
                             <div class="info-box">
-                                <label for="onSite-delivery-orders">
-                                    <input type="checkbox" name="payment" id="onSite-delivery-orders">
+                                <label for="cod">
+                                    <input type="checkbox" name="paymentType" id="cod" value="cod">
                                     <span class="checkBox"></span>
                                     سفارشات تحویل در محل
                                 </label>
@@ -325,8 +321,8 @@
 
                             <!-- information box -->
                             <div class="info-box">
-                                <label for="direct-orders">
-                                    <input type="checkbox" name="payment" id="direct-orders">
+                                <label for="direct">
+                                    <input type="checkbox" name="paymentType" id="direct" value="direct">
                                     <span class="checkBox"></span>
                                     سفارشات مستقیم
                                 </label>
@@ -337,27 +333,31 @@
                 </section>
                 <section class="submit-btns-container">
                     <div class="button-box">
-                        <button type="submit">
+                        <label for="showReport">
                             <span class="icon-Show"></span>
-                            نمایش گزارش
-                        </button>
+                            <p class="submit-text">نمایش گزارش</p>
+                            <input type="submit" name="showReport" id="showReport" value="نمایش گزارش">
+                        </label>
                     </div>
                     <div class="button-box">
-                        <button type="submit" class="rendering">
+                        <label for="exportExcel">
                             <span class="icon-Paper-Fail"></span>
+                            <input type="submit" class="rendering" name="exportExcel" value="خروجی اکسل"
+                                id="exportExcel">
                             <p class="submit-text">خروجی اکسل</p>
                             <div class="dot-flashing"></div>
-                        </button>
+                        </label>
                         <div class="output-progress">
                             <p class="">لطفا منتظر بمانید...</p>
                             <p class="">35%</p>
                         </div>
                     </div>
                     <div class="button-box">
-                        <button type="submit" class="disable">
+                        <label for="exportSepidar" class="disable">
                             <span class="icon-Lock"></span>
-                            خروجی مخصوص سپیدار
-                        </button>
+                            <p class="submit-text">خروجی مخصوص سپیدار</p>
+                            <input type="submit" name="exportSepidar" id="exportSepidar" value="خروجی مخصوص سپیدار">
+                        </label>
                         <p class="soon-notice">بزودی ...</p>
                     </div>
                 </section>
@@ -375,14 +375,11 @@
     <script src="./index.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            // $(".example1").pDatepicker();
             var to, from;
 
             to = $(".range-to-example-alt").persianDatepicker({
-                checkYear: function (year) {
-                    return year >= 1400;
-                },
                 altFormat: 'LLLL',
+                format: 'YYYY-MM-DD HH:mm:ss',
                 initialValue: false,
                 responsive: false,
                 onSelect: function (unix) {
@@ -409,12 +406,9 @@
                 }
             });
             from = $(".range-from-example-alt").persianDatepicker({
-                checkYear: function (year) {
-                    return year >= 1400;
-                },
-                minDate: 1635150600000 || 1635180023000,
-                // 1635180023000
+                minDate: 1635192623000,
                 altFormat: 'LLLL',
+                format: 'YYYY-MM-DD HH:mm:ss',
                 initialValue: false,
                 responsive: false,
                 autoClose: true,
@@ -426,8 +420,6 @@
                         if (to.touched) {
                             to.setDate(cachedValue);
                         }
-                        // console.log(from.model.state.view);
-
                     }
                 },
                 timePicker: {
@@ -440,7 +432,7 @@
                 },
                 toolbox: {
                     enabled: false,
-                }
+                },
             });
             // function range() {
             //     const tds = [...document.querySelectorAll(".datepicker-container td")];
