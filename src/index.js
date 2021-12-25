@@ -11,6 +11,9 @@ const fromNumError = document.querySelector(".from-error");
 const toNumError = document.querySelector(".to-error");
 const fromNumBoxes = document.querySelector("#from-number");
 const toNumBoxes = document.querySelector("#to-number");
+const extraOptionInputs = document.querySelectorAll(
+  ".extra-option-container input"
+);
 
 // Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
@@ -26,6 +29,10 @@ function reportStateCheck() {
     salesInfSection.style.display = "none";
     aggregateBtn.parentElement.classList.add("active");
     salesBtn.parentElement.classList.remove("active");
+    extraOptionInputs.forEach((extInput) => {
+      console.log(extInput.checked);
+      extInput.checked = false;
+    });
     // console.log("گزارش تجمیعی");
   }
 }
@@ -182,3 +189,27 @@ datePickers.forEach((dp) => {
     });
   });
 });
+
+const showReportBtn = document.querySelector("#showReport");
+console.log(showReportBtn);
+showReportBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("clicked");
+  modalBackdrop.classList.add("show-Modal");
+});
+
+const modalBackdrop = document.querySelector(".modal-backdrop");
+const closeModalBtn = document.querySelector(".close");
+closeModalBtn.addEventListener("click", () => {
+  modalBackdrop.classList.remove("show-Modal");
+});
+new gridjs.Grid({
+  columns: ["Name", "Email", "Phone Number"],
+  data: [
+    ["John", "john@example.com", "(353) 01 222 3333"],
+    ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
+    ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
+    ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
+    ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
+  ],
+}).render(document.getElementById("showReportModal"));

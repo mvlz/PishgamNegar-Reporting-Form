@@ -128,9 +128,6 @@ h1.title {
   align-items: center;
   cursor: pointer;
 }
-.hidden {
-  display: none;
-}
 .footer {
   width: 100%;
   background-size: 200px;
@@ -224,7 +221,7 @@ input[type="checkbox"] {
   flex-direction: column;
 }
 .range-type-body .title,
-.more-inf-sales .title,
+.extra-option-container .title,
 .paymentWay-container .title {
   font-size: 1.25rem;
   text-align: center;
@@ -283,7 +280,7 @@ input[type="checkbox"] {
   display: flex;
   justify-content: space-between;
 }
-.more-inf-sales,
+.extra-option-container,
 .paymentWay-container {
   display: flex;
   flex-direction: column;
@@ -294,7 +291,7 @@ input[type="checkbox"] {
 .paymentWay-container {
   margin-bottom: 8rem;
 }
-.more-inf-sales {
+.extra-option-container {
   display: none;
 }
 .info-boxes {
@@ -596,7 +593,7 @@ input[type="checkbox"] {
 }
 
 @media screen and (max-width: 1710px) {
-  .more-inf-sales,
+  .extra-option-container,
   .paymentWay-container {
     padding: 0 10rem;
   }
@@ -639,7 +636,7 @@ input[type="checkbox"] {
   .button-box input[type="submit"] {
     font-size: 1rem;
   }
-  .more-inf-sales,
+  .extra-option-container,
   .paymentWay-container {
     padding: 0 2rem;
     margin: 0 !important;
@@ -669,7 +666,7 @@ input[type="checkbox"] {
   }
 }
 @media screen and (max-width: 567px) {
-  .more-inf-sales,
+  .extra-option-container,
   .paymentWay-container {
     padding: 0;
   }
@@ -716,4 +713,52 @@ input[type="checkbox"] {
 .error-style input {
   border: 1px solid #dd0028 !important;
   color: #dd0028;
+}
+
+.modal-backdrop {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.329);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  opacity: 0;
+  transform: scale(0);
+  justify-content: center;
+  align-items: center;
+}
+.close {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1px;
+  background-color: white;
+  transform: rotate(45deg);
+}
+
+.close::before {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1px;
+  background-color: white;
+  transform: rotate(-45deg);
+}
+.show-Modal {
+  transform: scale(1);
+  opacity: 1;
 }

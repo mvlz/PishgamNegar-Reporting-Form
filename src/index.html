@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="../assets/Styles/persian-datepicker.min.css">
+    <link href="../assets/Styles/gridjs-mermaid.min.css" rel="stylesheet" />
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/persian-date.min.js"></script>
     <script src="../js/persian-datepicker.min.js"></script>
@@ -130,28 +131,28 @@
                                 <div class="num-input-box">
                                     <div id="from-number" class="numinput-container">
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="from-first"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="startId1"
+                                                name="startId1" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="from-second"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="startId2"
+                                                name="startId2" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="from-third"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="startId3"
+                                                name="startId3" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="from-fourth"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="startId4"
+                                                name="startId4" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="from-fifth"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="startId5"
+                                                name="startId5" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                     </div>
@@ -166,28 +167,28 @@
                                 <div class="num-input-box">
                                     <div id="to-number" class="numinput-container">
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="to-first"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="endId1"
+                                                name="endId1" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class=" text-center form-control" type="text" id="to-second"
-                                                maxlength="1" max="1" disabled />
+                                            <input class=" text-center form-control" type="text" id="endId2"
+                                                name="endId2" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="to-third"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="endId3"
+                                                name="endId3" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="to-fourth"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="endId4"
+                                                name="endId4" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input class="text-center form-control" type="text" id="to-fifth"
-                                                maxlength="1" max="1" disabled />
+                                            <input class="text-center form-control" type="text" id="endId5"
+                                                name="endId5" maxlength="1" max="1" disabled />
                                             <span class="input-line"></span>
                                         </div>
                                     </div>
@@ -206,7 +207,7 @@
 
 
                 <!-- More informations in sales report form -->
-                <section class="more-inf-sales" id="extraOptionContainer">
+                <section class="extra-option-container" id="extraOptionContainer">
                     <p class="title">تمایل دارید چه اطلاعات دیگری در گزارش شما وجود داشته باشد؟</p>
                     <!-- notice box -->
                     <div class="notice-box">
@@ -367,11 +368,18 @@
     </div>
     <!-- /container -->
 
+    <!-- Show report modal -->
+    <div class="modal-backdrop">
+        <span class="close"></span>
+        <div id="showReportModal"></div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <img src="../assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
     </footer>
     <!-- /Footer -->
+    <script src="../js/gridjs.umd.js"></script>
     <script src="./index.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
