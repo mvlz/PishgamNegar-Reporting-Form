@@ -8,6 +8,7 @@
   padding: 0;
   box-sizing: border-box;
   transition: all ease-in-out 0.1s;
+  scroll-behavior: smooth;
 }
 body {
   font-family: "Yekan Bakh" !important;
@@ -422,6 +423,9 @@ input[type="checkbox"] {
   border-radius: 1.5rem;
   padding: 0 1.5rem;
   border: 1px solid #cbcbcb;
+  z-index: 1;
+  direction: ltr;
+  text-align: right;
 }
 .date-input-box input:focus {
   border-color: var(--primary);
@@ -432,6 +436,7 @@ input[type="checkbox"] {
   align-items: center;
   position: absolute;
   left: 1.5rem;
+  z-index: 2;
 }
 .date-input-box span,
 .notice-box span,
@@ -532,10 +537,11 @@ input[type="checkbox"] {
   opacity: 0;
   transform: translateY(-30px);
   height: 0;
+  z-index: -1;
 }
-.numinput-error span {
+.numinput-error .icon-Danger {
   font-size: 1.5rem;
-  margin-left: 0.75rem;
+  margin-left: 0.5rem;
 }
 .rendering {
   background-image: linear-gradient(
@@ -761,4 +767,32 @@ input[type="checkbox"] {
 .show-Modal {
   transform: scale(1);
   opacity: 1;
+}
+.box-error {
+  border-radius: 10px;
+  animation: wiggle 0.8s 0.4s ease-out;
+  border: 1px solid red;
+  color: red;
+  padding: 0 1rem;
+  background-color: #f81e7414;
+}
+@keyframes wiggle {
+  0% {
+    transform: rotate(-3deg);
+  }
+  20% {
+    transform: rotate(5deg);
+  }
+  40% {
+    transform: rotate(-5deg);
+  }
+  60% {
+    transform: rotate(3deg);
+  }
+  90% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
 }

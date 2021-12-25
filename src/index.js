@@ -14,6 +14,8 @@ const toNumBoxes = document.querySelector("#to-number");
 const extraOptionInputs = document.querySelectorAll(
   ".extra-option-container input"
 );
+const paymentInputs = document.querySelectorAll(".paymentWay-container input");
+const mainForm = document.querySelector(".form");
 
 // Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
@@ -32,6 +34,8 @@ function reportStateCheck() {
     extraOptionInputs.forEach((extInput) => {
       console.log(extInput.checked);
       extInput.checked = false;
+      extInput.nextElementSibling.classList.remove("date-checked");
+      extInput.parentElement.parentElement.classList.remove("info-box-checked");
     });
     // console.log("گزارش تجمیعی");
   }
@@ -101,8 +105,6 @@ infoBoxes.forEach((box) => {
   });
 });
 
-// document.addEventListener("DOMContentLoaded", function (event) {
-
 // Order type of report logic
 let fromNumberVal = {
   num: 1,
@@ -155,12 +157,12 @@ function orderInput(arrey, numError, joinVal, box) {
       joinVal.num = parseInt(x);
       if (x.length < 5) {
         numError.classList.add("show-error");
-        numError.innerText = "شماره سفارش باید 5 رقمی باشد.";
+        numError.children[1].innerText = "شماره سفارش باید 5 رقمی باشد.";
         box.classList.add("error-style");
       } else if (x.length === 5 && joinVal.num < 87354) {
         numError.classList.add("show-error");
         box.classList.add("error-style");
-        numError.innerText = "شماره سفارش معتبر نیست.";
+        numError.children[1].innerText = "شماره سفارش معتبر نیست.";
       } else if (
         fromNumberVal.num > 87354 &&
         toNumberVal.num > 87354 &&
@@ -168,7 +170,7 @@ function orderInput(arrey, numError, joinVal, box) {
       ) {
         toNumError.classList.add("show-error");
         box.classList.add("error-style");
-        toNumError.innerText = `شماره سفارش باید از  ${fromNumberVal.num}  بیشتر باشد.`;
+        toNumError.children[1].innerText = `شماره سفارش باید از  ${fromNumberVal.num}  بیشتر باشد.`;
       } else {
         numError.classList.remove("show-error");
         box.classList.remove("error-style");
@@ -180,22 +182,85 @@ function orderInput(arrey, numError, joinVal, box) {
 orderInput(fromNumInputs, fromNumError, fromNumberVal, fromNumBoxes);
 orderInput(toNumInputs, toNumError, toNumberVal, toNumBoxes);
 
-// });
+const fromDay = {
+  digit: 1,
+};
+const toDay = {
+  digit: 1,
+};
+const sinceVal = 14000803201023;
+function dateErrorHandling(dateVal, datePicker) {
+  const error = datePicker.parentElement.nextElementSibling;
+  const val = datePicker.value.split(/[+-/*: ]+/).join("");
+  dateVal.digit = val;
+  if (datePicker.value === "") {
+    error.classList.add("show-error");
+    error.children[1].innerText = "پر کردن فیلد الزامی است.";
+  } else if (dateVal.digit < sinceVal) {
+    console.log("yo cant");
+    error.classList.add("show-error");
+    error.children[1].innerText = "این تاریخ معتبر نیست.";
+  } else if (
+    toDay.digit > sinceVal &&
+    fromDay.digit > sinceVal &&
+    toDay.digit < fromDay.digit
+  ) {
+    error.classList.add("show-error");
+    error.children[1].innerText = "از تاریخ شروع کوچک تر است.";
+  } else {
+    ("ok");
+    error.classList.remove("show-error");
+  }
+  console.log(dateVal.digit);
+}
+
 datePickers.forEach((dp) => {
   dp.addEventListener("click", () => {
     dateRadios.forEach((dr) => {
       dr.checked = false;
       dr.nextElementSibling.classList.remove("date-checked");
     });
+    dateErrorHandling(fromDay, datePickers[0]);
+    dateErrorHandling(toDay, datePickers[1]);
   });
 });
 
 const showReportBtn = document.querySelector("#showReport");
-console.log(showReportBtn);
+// console.log(showReportBtn);
 showReportBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("clicked");
-  modalBackdrop.classList.add("show-Modal");
+
+  const x = dateRadios.some((radio) => radio.checked); // true by default
+  const xx = datePickers.every((dp) => dp.value !== ""); // false by default
+  const w =
+    fromNumberVal.num > 87354 &&
+    toNumberVal.num > 87354 &&
+    fromNumberVal.num < toNumberVal.num;
+  if (x || xx) {
+    console.log("ok");
+  } else if (x) {
+    console.log("sefaresh okeye");
+  } else {
+    console.log("choose date or sefaresh");
+    const ele = document.querySelector(".range-type-title");
+    ele.classList.add("box-error");
+    window.scrollTo(0, ele.offsetTop - 50);
+  }
+  const z = [...paymentInputs].some((checkBox) => checkBox.checked);
+  const noticePay = document.querySelector(".paymentWay-container .notice-box");
+
+  if (!z) {
+    // console.log("false");
+    noticePay.classList.add("box-error");
+    window.scrollTo(0, noticePay.offsetTop - 50);
+  }
+
+  if (z && (w || x || xx)) {
+    console.log("submitted");
+    mainForm.submit();
+  } else {
+    console.log("has error");
+  }
 });
 
 const modalBackdrop = document.querySelector(".modal-backdrop");

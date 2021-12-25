@@ -96,19 +96,31 @@
                                 </label>
                             </div>
                             <div class="calendars-container">
-                                <div class="date-input-box">
-                                    <input class="datepicker-demo range-from-example-alt flex-grow" id="startRange"
-                                        name="startRange" placeholder="از تاریخ">
-                                    <label for="startRange">
-                                        <span class="icon-Calendar1"></span>
-                                    </label>
+                                <div class="from-date-row">
+                                    <div class="date-input-box">
+                                        <input class="datepicker-demo range-from-example-alt flex-grow" id="startRange"
+                                            name="startRange" placeholder="از تاریخ">
+                                        <label for="startRange">
+                                            <span class="icon-Calendar1"></span>
+                                        </label>
+                                    </div>
+                                    <p class="to-error numinput-error">
+                                        <span class="icon-Danger"></span>
+                                        <span>شماره سفارش باید 5 رقمی باشد.</span>
+                                    </p>
                                 </div>
-                                <div class="date-input-box">
-                                    <input class="datepicker-demo range-to-example-alt flex-grow" id="endRange"
-                                        name="endRange" placeholder="تا تاریخ">
-                                    <label for="endRange ">
-                                        <span class="icon-Calendar1"></span>
-                                    </label>
+                                <div class="to-date-row">
+                                    <div class="date-input-box">
+                                        <input class="datepicker-demo range-to-example-alt flex-grow" id="endRange"
+                                            name="endRange" placeholder="تا تاریخ">
+                                        <label for="endRange ">
+                                            <span class="icon-Calendar1"></span>
+                                        </label>
+                                    </div>
+                                    <p class="to-error numinput-error">
+                                        <span class="icon-Danger"></span>
+                                        <span>شماره سفارش باید 5 رقمی باشد.</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +170,7 @@
                                     </div>
                                     <p class="from-error numinput-error">
                                         <span class="icon-Danger"></span>
-                                        شماره سفارش باید 5 رقمی باشد.
+                                        <span>شماره سفارش باید 5 رقمی باشد.</span>
                                     </p>
                                 </div>
                             </div>
@@ -194,7 +206,7 @@
                                     </div>
                                     <p class="to-error numinput-error">
                                         <span class="icon-Danger"></span>
-                                        شماره سفارش باید 5 رقمی باشد.
+                                        <span>شماره سفارش باید 5 رقمی باشد.</span>
                                     </p>
                                 </div>
                             </div>
@@ -292,19 +304,19 @@
                         <!-- information boxes row -->
                         <div class="info-boxes">
                             <!-- information box -->
-                            <div class="info-box">
+                            <div class="info-box info-box-checked">
                                 <label for="pasargad">
-                                    <input type="checkbox" name="paymentType" id="pasargad" value="pasargad">
-                                    <span class="checkBox"></span>
+                                    <input checked type="checkbox" name="paymentType" id="pasargad" value="pasargad">
+                                    <span class="checkBox date-checked"></span>
                                     سفارشات آنلاین (درگاه بانک پاسارگاد)
                                 </label>
                             </div>
 
                             <!-- information box -->
-                            <div class="info-box">
+                            <div class="info-box info-box-checked">
                                 <label for="melli">
-                                    <input type="checkbox" name="paymentType" id="melli" value="melli">
-                                    <span class="checkBox"></span>
+                                    <input checked type="checkbox" name="paymentType" id="melli" value="melli">
+                                    <span class="checkBox date-checked"></span>
                                     سفارشات آنلاین (درگاه بانک ملی)
                                 </label>
                             </div>
@@ -387,7 +399,7 @@
 
             to = $(".range-to-example-alt").persianDatepicker({
                 altFormat: 'LLLL',
-                format: 'YYYY-MM-DD HH:mm:ss',
+                // format: 'YYYY-MM-DD HH:mm:ss',
                 initialValue: false,
                 responsive: false,
                 onSelect: function (unix) {
@@ -400,6 +412,14 @@
                         }
                     }
                 },
+                formatter: function (unixDate) {
+                    var self = this;
+                    var pdate = new persianDate(unixDate);
+                    pdate.formatPersian = false;
+                    let format = pdate.format("YYYY-MM-DD HH:mm:ss")
+                    return format;
+                },
+                minDate: 1635192623000,
                 autoClose: true,
                 timePicker: {
                     enabled: true,
@@ -429,6 +449,13 @@
                             to.setDate(cachedValue);
                         }
                     }
+                },
+                formatter: function (unixDate) {
+                    var self = this;
+                    var pdate = new persianDate(unixDate);
+                    pdate.formatPersian = false;
+                    let format = pdate.format("YYYY-MM-DD HH:mm:ss")
+                    return format;
                 },
                 timePicker: {
                     enabled: true,
