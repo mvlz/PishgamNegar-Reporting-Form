@@ -203,39 +203,50 @@ function orderErrorHandling(numVal, numError, box) {
     box.classList.remove("error-style");
   }
 }
-// date type variables
-const fromDay = {
-  digit: 1,
-};
-const toDay = {
-  digit: 1,
-};
-const dateSinceVal = 14000803201023;
-// validation of datepickers use in submit validation.
-function dateErrorHandling(dateVal, datePicker) {
+function dateErrorHandling(datePicker) {
   const error = datePicker.parentElement.nextElementSibling;
-  const val = datePicker.value.split(/[+-/*: ]+/).join("");
-  dateVal.digit = val;
   if (datePicker.value === "") {
     error.classList.add("show-error");
-    error.children[1].innerText = "پر کردن فیلد الزامی است.";
-  } else if (dateVal.digit < dateSinceVal) {
+    error.children[1].innerText = "پر کردن این فیلد الزامی است.";
+  } else {
+    error.classList.remove("show-error");
+  }
+}
+// date type variables
+let dateSinceVal = 14000803201023;
+// validation of datepickers use in submit validation.
+function dateInputs(datePicker) {
+  if (datePicker.value.startsWith("20")) {
+    dateSinceVal = 20211025201023;
+  }
+  const error = datePicker.parentElement.nextElementSibling;
+  const val = datePicker.value.split(/[+-/*: ]+/).join("");
+  const x = document.querySelectorAll(".calendars-container .numinput-error");
+  if (datePicker.value !== "" && val > 10 && val < dateSinceVal) {
     console.log("yo cant");
     error.classList.add("show-error");
-    error.children[1].innerText = "این تاریخ معتبر نیست.";
+    error.children[1].innerText = "تاریخ معتبر نیست.";
   } else if (
-    toDay.digit > dateSinceVal &&
-    fromDay.digit > dateSinceVal &&
-    toDay.digit < fromDay.digit
+    (datePickers[0].value.startsWith("20") &&
+      datePickers[1].value.startsWith("14")) ||
+    (datePickers[1].value.startsWith("20") &&
+      datePickers[0].value.startsWith("14"))
   ) {
     error.classList.add("show-error");
-    error.children[1].innerText = "از تاریخ شروع کوچک تر است.";
+    error.children[1].innerText = "فرمت تاریخ شروع و پایان برابر نیست.";
+  } else if (
+    datePickers[0].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
+    datePickers[1].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
+    datePickers[1].value.split(/[+-/*: ]+/).join("") <
+      datePickers[0].value.split(/[+-/*: ]+/).join("")
+  ) {
+    x[1].classList.add("show-error");
+    x[1].children[1].innerText = "از تاریخ شروع کوچک تر است.";
   } else {
     ("ok");
     error.classList.remove("show-error");
   }
 }
-
 // ---- When datepickers clicked, unchecked radio buttons.
 datePickers.forEach((dp) => {
   dp.addEventListener("click", () => {
@@ -243,6 +254,8 @@ datePickers.forEach((dp) => {
       dr.checked = false;
       dr.nextElementSibling.classList.remove("date-checked");
     });
+    dateInputs(datePickers[0]);
+    dateInputs(datePickers[1]);
   });
 });
 
@@ -253,20 +266,28 @@ showReportBtn.addEventListener("click", (e) => {
 
   const rangeTitle = document.querySelector(".range-type-title");
   const dateRadioBtns = dateRadios.some((radio) => radio.checked);
-  const datePickersInputs = datePickers.every((dp) => dp.value !== "");
+  // const datePickersInputs = datePickers.every((dp) => dp.value !== "");
   const noticePay = document.querySelector(".paymentWay-container .notice-box");
   const ordersInputs =
     fromNumberVal.num > orderSinceVal &&
     toNumberVal.num > orderSinceVal &&
     fromNumberVal.num < toNumberVal.num;
 
-  if (dateRadioBtns || datePickersInputs) {
+  const datesInput =
+    datePickers[0].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
+    datePickers[1].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
+    datePickers[1].value.split(/[+-/*: ]+/).join("") >
+      datePickers[0].value.split(/[+-/*: ]+/).join("");
+
+  if (dateRadioBtns || datesInput) {
     console.log("ok");
   } else if (ordersInputs) {
     console.log("sefaresh okeye");
   } else if (reportTypeRadios[0].checked && !dateRadioBtns) {
-    dateErrorHandling(fromDay, datePickers[0]);
-    dateErrorHandling(toDay, datePickers[1]);
+    dateErrorHandling(datePickers[0]);
+    dateErrorHandling(datePickers[1]);
+    dateInputs(datePickers[0]);
+    dateInputs(datePickers[1]);
     window.scrollTo(0, rangeTitle.offsetTop - 50);
   } else if (reportTypeRadios[1].checked) {
     orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
@@ -286,7 +307,7 @@ showReportBtn.addEventListener("click", (e) => {
     window.scrollTo(0, noticePay.offsetTop - 50);
   } else if (
     requiredCheckBoxes &&
-    (ordersInputs || dateRadioBtns || datePickersInputs)
+    (ordersInputs || dateRadioBtns || datesInput)
   ) {
     console.log("submitted");
     mainForm.submit();
@@ -300,49 +321,49 @@ closeModalBtn.addEventListener("click", () => {
 });
 
 // =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
-new gridjs.Grid({
-  columns: [
-    "سفارش",
-    "پرداخت",
-    "نام",
-    "جمع پرداخت",
-    "جمع محصول",
-    "جمع حمل و نقل",
-    "تاریخ",
-    "موقعیت فعلی",
-    "بررسی نهایی",
-    "مجموع تخفیف",
-  ],
-  server: {
-    url: "http://localhost:8080/data",
-    then: (data) =>
-      data.map((d) => [
-        d.id_order,
-        d.payment,
-        d.customer_name,
-        d.total_paid,
-        d.total_products,
-        d.total_shipping,
-        d.order_date,
-        d.current_state_name,
-        d.final_check,
-        d.total_discounts_calc,
-      ]),
-  },
-  style: {
-    table: {
-      // border: "3px solid #ccc",
-      // width: " 100%",
-      // "font-size": "1rem",
-    },
-    th: {
-      // "background-color": "rgba(0, 0, 0, 0.1)",
-      color: "#000",
-      "border-bottom": "3px solid #ccc",
-      "text-align": "center",
-    },
-    td: {
-      "text-align": "center",
-    },
-  },
-}).render(document.getElementById("showReportModal"));
+// new gridjs.Grid({
+//   columns: [
+//     "سفارش",
+//     "پرداخت",
+//     "نام",
+//     "جمع پرداخت",
+//     "جمع محصول",
+//     "جمع حمل و نقل",
+//     "تاریخ",
+//     "موقعیت فعلی",
+//     "بررسی نهایی",
+//     "مجموع تخفیف",
+//   ],
+//   server: {
+//     // url: "http://localhost:8080/data",
+//     then: (data) =>
+//       data.map((d) => [
+//         d.id_order,
+//         d.payment,
+//         d.customer_name,
+//         d.total_paid,
+//         d.total_products,
+//         d.total_shipping,
+//         d.order_date,
+//         d.current_state_name,
+//         d.final_check,
+//         d.total_discounts_calc,
+//       ]),
+//   },
+//   style: {
+//     table: {
+//       // border: "3px solid #ccc",
+//       // width: " 100%",
+//       // "font-size": "1rem",
+//     },
+//     th: {
+//       // "background-color": "rgba(0, 0, 0, 0.1)",
+//       color: "#000",
+//       "border-bottom": "3px solid #ccc",
+//       "text-align": "center",
+//     },
+//     td: {
+//       "text-align": "center",
+//     },
+//   },
+// }).render(document.getElementById("showReportModal"));
