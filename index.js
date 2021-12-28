@@ -16,6 +16,9 @@ const extraOptionInputs = document.querySelectorAll(
 );
 const paymentInputs = document.querySelectorAll(".paymentWay-container input");
 const mainForm = document.querySelector(".form");
+const modalBackdrop = document.querySelector(".modal-backdrop");
+const closeModalBtn = document.querySelector(".close");
+const showReportBtn = document.querySelector("#showReport");
 
 // Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
@@ -59,7 +62,13 @@ reportTypeRadios.forEach((typeRadio) => {
 
       enableInputs.forEach((f) => {
         f.disabled = true;
-        f.value = "";
+        if (f.type !== "radio") {
+          f.value = "";
+        }
+        if (f.type === "text") {
+          fromNumberVal.num = 1;
+          toNumberVal.num = 2;
+        }
         f.checked = false;
         f.nextElementSibling.classList.remove("date-checked");
       });
@@ -105,14 +114,15 @@ infoBoxes.forEach((box) => {
   });
 });
 
-// Order type of report logic
+// order type variables.
 let fromNumberVal = {
   num: 1,
 };
 let toNumberVal = {
   num: 2,
 };
-// order type number input execute and error handling function
+const orderSinceVal = 87354;
+// order-type inputs execute and error handling.
 function orderInput(arrey, numError, joinVal, box) {
   let x;
   for (let i = 0; i < arrey.length; i++) {
@@ -153,19 +163,18 @@ function orderInput(arrey, numError, joinVal, box) {
         `${arrey[3].value}` +
         `${arrey[4].value}`;
 
-      //--Error conditions
       joinVal.num = parseInt(x);
       if (x.length < 5) {
         numError.classList.add("show-error");
         numError.children[1].innerText = "شماره سفارش باید 5 رقمی باشد.";
         box.classList.add("error-style");
-      } else if (x.length === 5 && joinVal.num < 87354) {
+      } else if (x.length === 5 && joinVal.num < orderSinceVal) {
         numError.classList.add("show-error");
         box.classList.add("error-style");
         numError.children[1].innerText = "شماره سفارش معتبر نیست.";
       } else if (
-        fromNumberVal.num > 87354 &&
-        toNumberVal.num > 87354 &&
+        fromNumberVal.num > orderSinceVal &&
+        toNumberVal.num > orderSinceVal &&
         fromNumberVal.num > toNumberVal.num
       ) {
         toNumError.classList.add("show-error");
@@ -178,17 +187,31 @@ function orderInput(arrey, numError, joinVal, box) {
     });
   }
 }
-// Calling function to execute for From Order one and To Order One
+
+// Calling function to execute for From Order one and To Order
 orderInput(fromNumInputs, fromNumError, fromNumberVal, fromNumBoxes);
 orderInput(toNumInputs, toNumError, toNumberVal, toNumBoxes);
 
+// validation of order-type inputs use in submit validation.
+function orderErrorHandling(numVal, numError, box) {
+  if (numVal.num < 10) {
+    numError.classList.add("show-error");
+    numError.children[1].innerText = "پر کردن این فیلد الزامی است.";
+    box.classList.add("error-style");
+  } else {
+    numError.classList.remove("show-error");
+    box.classList.remove("error-style");
+  }
+}
+// date type variables
 const fromDay = {
   digit: 1,
 };
 const toDay = {
   digit: 1,
 };
-const sinceVal = 14000803201023;
+const dateSinceVal = 14000803201023;
+// validation of datepickers use in submit validation.
 function dateErrorHandling(dateVal, datePicker) {
   const error = datePicker.parentElement.nextElementSibling;
   const val = datePicker.value.split(/[+-/*: ]+/).join("");
@@ -196,13 +219,13 @@ function dateErrorHandling(dateVal, datePicker) {
   if (datePicker.value === "") {
     error.classList.add("show-error");
     error.children[1].innerText = "پر کردن فیلد الزامی است.";
-  } else if (dateVal.digit < sinceVal) {
+  } else if (dateVal.digit < dateSinceVal) {
     console.log("yo cant");
     error.classList.add("show-error");
     error.children[1].innerText = "این تاریخ معتبر نیست.";
   } else if (
-    toDay.digit > sinceVal &&
-    fromDay.digit > sinceVal &&
+    toDay.digit > dateSinceVal &&
+    fromDay.digit > dateSinceVal &&
     toDay.digit < fromDay.digit
   ) {
     error.classList.add("show-error");
@@ -211,51 +234,60 @@ function dateErrorHandling(dateVal, datePicker) {
     ("ok");
     error.classList.remove("show-error");
   }
-  console.log(dateVal.digit);
 }
 
+// ---- When datepickers clicked, unchecked radio buttons.
 datePickers.forEach((dp) => {
   dp.addEventListener("click", () => {
     dateRadios.forEach((dr) => {
       dr.checked = false;
       dr.nextElementSibling.classList.remove("date-checked");
     });
-    dateErrorHandling(fromDay, datePickers[0]);
-    dateErrorHandling(toDay, datePickers[1]);
   });
 });
 
-const showReportBtn = document.querySelector("#showReport");
-// console.log(showReportBtn);
+//=-=-=-=-=-  form validation on submit -=-=-=-=-=//
 showReportBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  // modalBackdrop.classList.add("show-Modal");
 
-  const x = dateRadios.some((radio) => radio.checked); // true by default
-  const xx = datePickers.every((dp) => dp.value !== ""); // false by default
-  const w =
-    fromNumberVal.num > 87354 &&
-    toNumberVal.num > 87354 &&
+  const rangeTitle = document.querySelector(".range-type-title");
+  const dateRadioBtns = dateRadios.some((radio) => radio.checked);
+  const datePickersInputs = datePickers.every((dp) => dp.value !== "");
+  const noticePay = document.querySelector(".paymentWay-container .notice-box");
+  const ordersInputs =
+    fromNumberVal.num > orderSinceVal &&
+    toNumberVal.num > orderSinceVal &&
     fromNumberVal.num < toNumberVal.num;
-  if (x || xx) {
+
+  if (dateRadioBtns || datePickersInputs) {
     console.log("ok");
-  } else if (x) {
+  } else if (ordersInputs) {
     console.log("sefaresh okeye");
+  } else if (reportTypeRadios[0].checked && !dateRadioBtns) {
+    dateErrorHandling(fromDay, datePickers[0]);
+    dateErrorHandling(toDay, datePickers[1]);
+    window.scrollTo(0, rangeTitle.offsetTop - 50);
+  } else if (reportTypeRadios[1].checked) {
+    orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
+    orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
+    window.scrollTo(0, rangeTitle.offsetTop - 50);
   } else {
     console.log("choose date or sefaresh");
-    const ele = document.querySelector(".range-type-title");
-    ele.classList.add("box-error");
-    window.scrollTo(0, ele.offsetTop - 50);
+    rangeTitle.classList.add("box-error");
+    window.scrollTo(0, rangeTitle.offsetTop - 50);
   }
-  const z = [...paymentInputs].some((checkBox) => checkBox.checked);
-  const noticePay = document.querySelector(".paymentWay-container .notice-box");
+  const requiredCheckBoxes = [...paymentInputs].some(
+    (checkBox) => checkBox.checked
+  );
 
-  if (!z) {
-    // console.log("false");
+  if (!requiredCheckBoxes) {
     noticePay.classList.add("box-error");
     window.scrollTo(0, noticePay.offsetTop - 50);
-  }
-
-  if (z && (w || x || xx)) {
+  } else if (
+    requiredCheckBoxes &&
+    (ordersInputs || dateRadioBtns || datePickersInputs)
+  ) {
     console.log("submitted");
     mainForm.submit();
   } else {
@@ -263,18 +295,54 @@ showReportBtn.addEventListener("click", (e) => {
   }
 });
 
-const modalBackdrop = document.querySelector(".modal-backdrop");
-const closeModalBtn = document.querySelector(".close");
 closeModalBtn.addEventListener("click", () => {
   modalBackdrop.classList.remove("show-Modal");
 });
+
+// =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
 new gridjs.Grid({
-  columns: ["Name", "Email", "Phone Number"],
-  data: [
-    ["John", "john@example.com", "(353) 01 222 3333"],
-    ["Mark", "mark@gmail.com", "(01) 22 888 4444"],
-    ["Eoin", "eoin@gmail.com", "0097 22 654 00033"],
-    ["Sarah", "sarahcdd@gmail.com", "+322 876 1233"],
-    ["Afshin", "afshin@mail.com", "(353) 22 87 8356"],
+  columns: [
+    "سفارش",
+    "پرداخت",
+    "نام",
+    "جمع پرداخت",
+    "جمع محصول",
+    "جمع حمل و نقل",
+    "تاریخ",
+    "موقعیت فعلی",
+    "بررسی نهایی",
+    "مجموع تخفیف",
   ],
+  server: {
+    url: "http://localhost:8080/data",
+    then: (data) =>
+      data.map((d) => [
+        d.id_order,
+        d.payment,
+        d.customer_name,
+        d.total_paid,
+        d.total_products,
+        d.total_shipping,
+        d.order_date,
+        d.current_state_name,
+        d.final_check,
+        d.total_discounts_calc,
+      ]),
+  },
+  style: {
+    table: {
+      // border: "3px solid #ccc",
+      // width: " 100%",
+      // "font-size": "1rem",
+    },
+    th: {
+      // "background-color": "rgba(0, 0, 0, 0.1)",
+      color: "#000",
+      "border-bottom": "3px solid #ccc",
+      "text-align": "center",
+    },
+    td: {
+      "text-align": "center",
+    },
+  },
 }).render(document.getElementById("showReportModal"));

@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="../assets/Styles/persian-datepicker.min.css">
-    <link href="../assets/Styles/gridjs-mermaid.min.css" rel="stylesheet" />
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/persian-date.min.js"></script>
-    <script src="../js/persian-datepicker.min.js"></script>
+    <link rel="stylesheet" href="assets/Styles/persian-datepicker.min.css">
+    <link href="assets/Styles/gridjs-mermaid.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/persian-date.min.js"></script>
+    <script src="js/persian-datepicker.min.js"></script>
     <title>Pishgam Negar</title>
 
 </head>
@@ -18,14 +18,14 @@
 <body>
     <!-- backdrop -->
     <div class="backdrop">
-        <img src="../assets/Img/backdrop.png" alt="cosmetic">
+        <img src="assets/Img/backdrop.png" alt="cosmetic">
     </div>
     <!-- /backdrop -->
 
     <!-- container -->
     <div class="wrapper mx-auto">
         <!-- logo -->
-        <img src="../assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
+        <img src="assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
 
         <!-- title -->
         <h1 class="title">سامانه گزارش گیری فروشگاه آنلاین پیشگام نگار</h1>
@@ -104,9 +104,9 @@
                                             <span class="icon-Calendar1"></span>
                                         </label>
                                     </div>
-                                    <p class="to-error numinput-error">
+                                    <p class="numinput-error">
                                         <span class="icon-Danger"></span>
-                                        <span>شماره سفارش باید 5 رقمی باشد.</span>
+                                        <span>پر کردن فیلد الزامی است.</span>
                                     </p>
                                 </div>
                                 <div class="to-date-row">
@@ -117,9 +117,9 @@
                                             <span class="icon-Calendar1"></span>
                                         </label>
                                     </div>
-                                    <p class="to-error numinput-error">
+                                    <p class="numinput-error">
                                         <span class="icon-Danger"></span>
-                                        <span>شماره سفارش باید 5 رقمی باشد.</span>
+                                        <span>پر کردن فیلد الزامی است.</span>
                                     </p>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
                             <!-- information box -->
                             <div class="info-box">
                                 <label for="customerName">
-                                    <input type="checkbox" name="extraOptions" id="customerName" value="customerName">
+                                    <input type="checkbox" name="extraOptions[]" id="customerName" value="customerName">
                                     <span class="checkBox"></span>
                                     نام مشتری
                                 </label>
@@ -243,7 +243,7 @@
                             <!-- information box -->
                             <div class="info-box">
                                 <label for="orderState">
-                                    <input type="checkbox" name="extraOptions" id="orderState" value="orderState">
+                                    <input type="checkbox" name="extraOptions[]" id="orderState" value="orderState">
                                     <span class="checkBox"></span>
                                     وضعیت سفارش
                                 </label>
@@ -306,7 +306,7 @@
                             <!-- information box -->
                             <div class="info-box info-box-checked">
                                 <label for="pasargad">
-                                    <input checked type="checkbox" name="paymentType" id="pasargad" value="pasargad">
+                                    <input checked type="checkbox" name="paymentType[]" id="pasargad" value="pasargad">
                                     <span class="checkBox date-checked"></span>
                                     سفارشات آنلاین (درگاه بانک پاسارگاد)
                                 </label>
@@ -315,7 +315,7 @@
                             <!-- information box -->
                             <div class="info-box info-box-checked">
                                 <label for="melli">
-                                    <input checked type="checkbox" name="paymentType" id="melli" value="melli">
+                                    <input checked type="checkbox" name="paymentType[]" id="melli" value="melli">
                                     <span class="checkBox date-checked"></span>
                                     سفارشات آنلاین (درگاه بانک ملی)
                                 </label>
@@ -326,7 +326,7 @@
                             <!-- information box -->
                             <div class="info-box">
                                 <label for="cod">
-                                    <input type="checkbox" name="paymentType" id="cod" value="cod">
+                                    <input type="checkbox" name="paymentType[]" id="cod" value="cod">
                                     <span class="checkBox"></span>
                                     سفارشات تحویل در محل
                                 </label>
@@ -335,7 +335,7 @@
                             <!-- information box -->
                             <div class="info-box">
                                 <label for="direct">
-                                    <input type="checkbox" name="paymentType" id="direct" value="direct">
+                                    <input type="checkbox" name="paymentType[]" id="direct" value="direct">
                                     <span class="checkBox"></span>
                                     سفارشات مستقیم
                                 </label>
@@ -388,10 +388,10 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <img src="../assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
+        <img src="assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
     </footer>
     <!-- /Footer -->
-    <script src="../js/gridjs.umd.js"></script>
+    <script src="js/gridjs.umd.js"></script>
     <script src="./index.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

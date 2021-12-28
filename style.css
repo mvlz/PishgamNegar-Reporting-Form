@@ -62,6 +62,7 @@ button {
   width: 17rem;
   padding: 4rem 0;
   margin: auto;
+  z-index: -1;
 }
 h1.title {
   font-size: 3rem;
@@ -423,9 +424,9 @@ input[type="checkbox"] {
   border-radius: 1.5rem;
   padding: 0 1.5rem;
   border: 1px solid #cbcbcb;
-  z-index: 1;
   direction: ltr;
   text-align: right;
+  z-index: 1;
 }
 .date-input-box input:focus {
   border-color: var(--primary);
@@ -732,27 +733,28 @@ input[type="checkbox"] {
   opacity: 0;
   transform: scale(0);
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 .close {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 1px solid var(--primary);
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 .close::after {
   content: "";
   position: absolute;
   width: 1rem;
   height: 1px;
-  background-color: white;
+  background-color: var(--primary);
   transform: rotate(45deg);
 }
 
@@ -761,7 +763,7 @@ input[type="checkbox"] {
   position: absolute;
   width: 1rem;
   height: 1px;
-  background-color: white;
+  background-color: var(--primary);
   transform: rotate(-45deg);
 }
 .show-Modal {

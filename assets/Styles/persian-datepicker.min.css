@@ -95,6 +95,11 @@
   border: none;
   text-shadow: none;
 }
+.datepicker-plot-area .datepicker-day-view .table-days td.selected span:hover,
+.datepicker-plot-area .datepicker-year-view .year-item.selected:hover,
+.datepicker-plot-area .datepicker-month-view .month-item.selected:hover {
+  color: white !important;
+}
 .datepicker-plot-area .datepicker-day-view .table-days td.selected span,
 .datepicker-plot-area .datepicker-year-view .year-item.selected,
 .datepicker-plot-area .datepicker-month-view .month-item.selected {
@@ -159,7 +164,7 @@
   width: 20rem;
   min-height: 29rem;
   overflow: visible;
-  box-shadow: 0px 1px 150px 10px #ccc;
+  box-shadow: 0px 1px 20rem 5rem #959595;
 }
 .datepicker-plot-area.datepicker-state-only-time {
   padding: 0;
