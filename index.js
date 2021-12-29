@@ -19,12 +19,19 @@ const mainForm = document.querySelector(".form");
 const modalBackdrop = document.querySelector(".modal-backdrop");
 const closeModalBtn = document.querySelector(".close");
 const showReportBtn = document.querySelector("#showReport");
-
+const paymentNotice = document.querySelector(
+  ".paymentWay-container .notice-box"
+);
+const rangeTitle = document.querySelector(".range-type-title");
+const salesBtn = document.getElementById("salesReport");
+const aggregateBtn = document.getElementById("aggregatedReport");
+const salesInfSection = document.getElementById("extraOptionContainer");
+// Change date with (YYYY-MM-DD HH:mm:ss) to join without any extra characters.
+function dateToNum(val) {
+  return val.split(/[+-/*: ]+/).join("");
+}
 // Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
-  const salesBtn = document.getElementById("salesReport");
-  const aggregateBtn = document.getElementById("aggregatedReport");
-  const salesInfSection = document.getElementById("extraOptionContainer");
   if (salesBtn.checked == true) {
     salesInfSection.style.display = "flex";
     salesBtn.parentElement.classList.add("active");
@@ -35,7 +42,6 @@ function reportStateCheck() {
     aggregateBtn.parentElement.classList.add("active");
     salesBtn.parentElement.classList.remove("active");
     extraOptionInputs.forEach((extInput) => {
-      console.log(extInput.checked);
       extInput.checked = false;
       extInput.nextElementSibling.classList.remove("date-checked");
       extInput.parentElement.parentElement.classList.remove("info-box-checked");
@@ -124,7 +130,7 @@ let toNumberVal = {
 const orderSinceVal = 87354;
 // order-type inputs execute and error handling.
 function orderInput(arrey, numError, joinVal, box) {
-  let x;
+  let joinInputsVals;
   for (let i = 0; i < arrey.length; i++) {
     arrey[i].addEventListener("keydown", function (event) {
       if (event.key === "Backspace") {
@@ -156,19 +162,19 @@ function orderInput(arrey, numError, joinVal, box) {
       }
 
       // ---- Error handling of order type ----- //
-      x =
+      joinInputsVals =
         `${arrey[0].value}` +
         `${arrey[1].value}` +
         `${arrey[2].value}` +
         `${arrey[3].value}` +
         `${arrey[4].value}`;
 
-      joinVal.num = parseInt(x);
-      if (x.length < 5) {
+      joinVal.num = parseInt(joinInputsVals);
+      if (joinInputsVals.length < 5) {
         numError.classList.add("show-error");
         numError.children[1].innerText = "شماره سفارش باید 5 رقمی باشد.";
         box.classList.add("error-style");
-      } else if (x.length === 5 && joinVal.num < orderSinceVal) {
+      } else if (joinInputsVals.length === 5 && joinVal.num < orderSinceVal) {
         numError.classList.add("show-error");
         box.classList.add("error-style");
         numError.children[1].innerText = "شماره سفارش معتبر نیست.";
@@ -205,11 +211,11 @@ function orderErrorHandling(numVal, numError, box) {
 }
 function dateErrorHandling(datePicker) {
   const error = datePicker.parentElement.nextElementSibling;
-  if (datePicker.value === "") {
+  if (!datePicker.value) {
     error.classList.add("show-error");
     error.children[1].innerText = "پر کردن این فیلد الزامی است.";
   } else {
-    error.classList.remove("show-error");
+    dateInputs(datePicker);
   }
 }
 // date type variables
@@ -220,8 +226,10 @@ function dateInputs(datePicker) {
     dateSinceVal = 20211025201023;
   }
   const error = datePicker.parentElement.nextElementSibling;
-  const val = datePicker.value.split(/[+-/*: ]+/).join("");
-  const x = document.querySelectorAll(".calendars-container .numinput-error");
+  const val = dateToNum(datePicker.value);
+  const dateInputsErrors = document.querySelectorAll(
+    ".calendars-container .numinput-error"
+  );
   if (datePicker.value !== "" && val > 10 && val < dateSinceVal) {
     console.log("yo cant");
     error.classList.add("show-error");
@@ -235,13 +243,12 @@ function dateInputs(datePicker) {
     error.classList.add("show-error");
     error.children[1].innerText = "فرمت تاریخ شروع و پایان برابر نیست.";
   } else if (
-    datePickers[0].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
-    datePickers[1].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
-    datePickers[1].value.split(/[+-/*: ]+/).join("") <
-      datePickers[0].value.split(/[+-/*: ]+/).join("")
+    dateToNum(datePickers[0].value) > dateSinceVal &&
+    dateToNum(datePickers[1].value) > dateSinceVal &&
+    dateToNum(datePickers[1].value) < dateToNum(datePickers[0].value)
   ) {
-    x[1].classList.add("show-error");
-    x[1].children[1].innerText = "از تاریخ شروع کوچک تر است.";
+    dateInputsErrors[1].classList.add("show-error");
+    dateInputsErrors[1].children[1].innerText = "از تاریخ شروع کوچک تر است.";
   } else {
     ("ok");
     error.classList.remove("show-error");
@@ -262,53 +269,47 @@ datePickers.forEach((dp) => {
 //=-=-=-=-=-  form validation on submit -=-=-=-=-=//
 showReportBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  // Show Modal
   // modalBackdrop.classList.add("show-Modal");
-
-  const rangeTitle = document.querySelector(".range-type-title");
-  const dateRadioBtns = dateRadios.some((radio) => radio.checked);
-  // const datePickersInputs = datePickers.every((dp) => dp.value !== "");
-  const noticePay = document.querySelector(".paymentWay-container .notice-box");
-  const ordersInputs =
+  const scrollToTitle = function (title, x, y) {
+    window.scrollTo(x, title.offsetTop - y);
+  };
+  const isDateRadio = dateRadios.some((radio) => radio.checked);
+  const isOrders =
     fromNumberVal.num > orderSinceVal &&
     toNumberVal.num > orderSinceVal &&
     fromNumberVal.num < toNumberVal.num;
 
-  const datesInput =
-    datePickers[0].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
-    datePickers[1].value.split(/[+-/*: ]+/).join("") > dateSinceVal &&
-    datePickers[1].value.split(/[+-/*: ]+/).join("") >
-      datePickers[0].value.split(/[+-/*: ]+/).join("");
+  const isDateInput =
+    dateToNum(datePickers[0].value) > dateSinceVal &&
+    dateToNum(datePickers[1].value) > dateSinceVal &&
+    dateToNum(datePickers[1].value) > dateToNum(datePickers[0].value);
 
-  if (dateRadioBtns || datesInput) {
-    console.log("ok");
-  } else if (ordersInputs) {
-    console.log("sefaresh okeye");
-  } else if (reportTypeRadios[0].checked && !dateRadioBtns) {
-    dateErrorHandling(datePickers[0]);
-    dateErrorHandling(datePickers[1]);
-    dateInputs(datePickers[0]);
-    dateInputs(datePickers[1]);
-    window.scrollTo(0, rangeTitle.offsetTop - 50);
-  } else if (reportTypeRadios[1].checked) {
-    orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
-    orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
-    window.scrollTo(0, rangeTitle.offsetTop - 50);
-  } else {
-    console.log("choose date or sefaresh");
-    rangeTitle.classList.add("box-error");
-    window.scrollTo(0, rangeTitle.offsetTop - 50);
-  }
-  const requiredCheckBoxes = [...paymentInputs].some(
+  const isRequiredCheckBox = [...paymentInputs].some(
     (checkBox) => checkBox.checked
   );
 
-  if (!requiredCheckBoxes) {
-    noticePay.classList.add("box-error");
-    window.scrollTo(0, noticePay.offsetTop - 50);
-  } else if (
-    requiredCheckBoxes &&
-    (ordersInputs || dateRadioBtns || datesInput)
-  ) {
+  if (isDateRadio || isDateInput) {
+    console.log("ok");
+  } else if (isOrders) {
+    console.log("sefaresh okeye");
+  } else if (reportTypeRadios[0].checked && !isDateRadio) {
+    dateErrorHandling(datePickers[0]);
+    dateErrorHandling(datePickers[1]);
+    scrollToTitle(rangeTitle, 0, 50);
+  } else if (reportTypeRadios[1].checked) {
+    orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
+    orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
+    scrollToTitle(rangeTitle, 0, 50);
+  } else {
+    console.log("choose date or sefaresh");
+    rangeTitle.classList.add("box-error");
+    scrollToTitle(rangeTitle, 0, 50);
+  }
+  if (!isRequiredCheckBox) {
+    paymentNotice.classList.add("box-error");
+    scrollToTitle(paymentNotice, 0, 50);
+  } else if (isRequiredCheckBox && (isOrders || isDateRadio || isDateInput)) {
     console.log("submitted");
     mainForm.submit();
   } else {
@@ -316,6 +317,7 @@ showReportBtn.addEventListener("click", (e) => {
   }
 });
 
+// Close Modal
 closeModalBtn.addEventListener("click", () => {
   modalBackdrop.classList.remove("show-Modal");
 });
