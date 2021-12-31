@@ -269,8 +269,6 @@ datePickers.forEach((dp) => {
 //=-=-=-=-=-  form validation on submit -=-=-=-=-=//
 showReportBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  // Show Modal
-  // modalBackdrop.classList.add("show-Modal");
   const scrollToTitle = function (title, x, y) {
     window.scrollTo(x, title.offsetTop - y);
   };
@@ -289,83 +287,25 @@ showReportBtn.addEventListener("click", (e) => {
     (checkBox) => checkBox.checked
   );
 
-  if (isDateRadio || isDateInput) {
-    console.log("ok");
-  } else if (isOrders) {
-    console.log("sefaresh okeye");
-  } else if (reportTypeRadios[0].checked && !isDateRadio) {
+  const isRange = isOrders || isDateRadio || isDateInput;
+
+  if (!isRange && reportTypeRadios[0].checked && !isDateRadio) {
     dateErrorHandling(datePickers[0]);
     dateErrorHandling(datePickers[1]);
     scrollToTitle(rangeTitle, 0, 50);
-  } else if (reportTypeRadios[1].checked) {
+  } else if (!isRange && reportTypeRadios[1].checked) {
     orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
     orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
     scrollToTitle(rangeTitle, 0, 50);
-  } else {
-    console.log("choose date or sefaresh");
-    rangeTitle.classList.add("box-error");
-    scrollToTitle(rangeTitle, 0, 50);
   }
+
   if (!isRequiredCheckBox) {
     paymentNotice.classList.add("box-error");
     scrollToTitle(paymentNotice, 0, 50);
-  } else if (isRequiredCheckBox && (isOrders || isDateRadio || isDateInput)) {
+  } else if (isRequiredCheckBox && isRange) {
     console.log("submitted");
     mainForm.submit();
   } else {
     console.log("has error");
   }
 });
-
-// Close Modal
-closeModalBtn.addEventListener("click", () => {
-  modalBackdrop.classList.remove("show-Modal");
-});
-
-// =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
-// new gridjs.Grid({
-//   columns: [
-//     "سفارش",
-//     "پرداخت",
-//     "نام",
-//     "جمع پرداخت",
-//     "جمع محصول",
-//     "جمع حمل و نقل",
-//     "تاریخ",
-//     "موقعیت فعلی",
-//     "بررسی نهایی",
-//     "مجموع تخفیف",
-//   ],
-//   server: {
-//     // url: "http://localhost:8080/data",
-//     then: (data) =>
-//       data.map((d) => [
-//         d.id_order,
-//         d.payment,
-//         d.customer_name,
-//         d.total_paid,
-//         d.total_products,
-//         d.total_shipping,
-//         d.order_date,
-//         d.current_state_name,
-//         d.final_check,
-//         d.total_discounts_calc,
-//       ]),
-//   },
-//   style: {
-//     table: {
-//       // border: "3px solid #ccc",
-//       // width: " 100%",
-//       // "font-size": "1rem",
-//     },
-//     th: {
-//       // "background-color": "rgba(0, 0, 0, 0.1)",
-//       color: "#000",
-//       "border-bottom": "3px solid #ccc",
-//       "text-align": "center",
-//     },
-//     td: {
-//       "text-align": "center",
-//     },
-//   },
-// }).render(document.getElementById("showReportModal"));

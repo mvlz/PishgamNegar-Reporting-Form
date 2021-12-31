@@ -44,7 +44,6 @@
 [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: "iconly" !important;
-  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -78,7 +77,7 @@
 }
 .icon-Arrow---Left-2-1:before {
   content: "\72";
-  color: #474c59;
+  /* color: #474c59; */
 }
 .icon-Arrow---Left-3:before {
   content: "\61";

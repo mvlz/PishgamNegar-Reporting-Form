@@ -9,6 +9,7 @@
   box-sizing: border-box;
   transition: all ease-in-out 0.1s;
   scroll-behavior: smooth;
+  text-decoration: none;
 }
 body {
   font-family: "Yekan Bakh" !important;
@@ -21,8 +22,8 @@ body {
   direction: rtl;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
 }
 button {
   cursor: pointer;
@@ -36,6 +37,49 @@ button:focus {
 input,
 button {
   font-family: "yekan bakh";
+}
+.header-container {
+  width: 100%;
+  padding: 0 2rem;
+  height: 4rem;
+  background-color: #fff;
+  box-shadow: 0px 7px 5px -3px #eee;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  align-items: center;
+}
+.header-container .logo {
+  width: 10rem;
+  padding: 0;
+  margin: 0;
+}
+.header-container .backBtn {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  display: grid;
+  place-content: center;
+}
+.header-container .backBtn:hover {
+  box-shadow: 1px 10px 10px -5px #eee;
+  background-color: var(--primary);
+  transform: translateY(-4px);
+  color: #fff;
+  font-size: 0.875rem;
+}
+.header-container .backBtn:hover span {
+  filter: drop-shadow(1px 1px 4px rgb(0 0 0 / 20%));
+}
+#showReportModal {
+  width: 80%;
+  margin: auto;
+}
+#showReportModal div.gridjs-head {
+  display: flex;
 }
 .wrapper {
   width: 100%;
@@ -618,6 +662,9 @@ input[type="checkbox"] {
   }
   .range-type {
     padding: 2rem 5%;
+  }
+  #showReportModal {
+    width: 90%;
   }
 }
 @media screen and (max-width: 1200px) {

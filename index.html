@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="assets/Styles/persian-datepicker.min.css">
-    <link href="assets/Styles/gridjs-mermaid.min.css" rel="stylesheet" />
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/persian-date.min.js"></script>
     <script src="js/persian-datepicker.min.js"></script>
@@ -23,7 +22,7 @@
     <!-- /backdrop -->
 
     <!-- container -->
-    <div class="wrapper mx-auto">
+    <div class="wrapper">
         <!-- logo -->
         <img src="assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
 
@@ -380,18 +379,13 @@
     </div>
     <!-- /container -->
 
-    <!-- Show report modal -->
-    <div class="modal-backdrop">
-        <span class="close"></span>
-        <div id="showReportModal"></div>
-    </div>
+
 
     <!-- Footer -->
     <footer class="footer">
         <img src="assets/Img/pn-logo.png" alt="Pishgam Negar" class="logo">
     </footer>
     <!-- /Footer -->
-    <script src="js/gridjs.umd.js"></script>
     <script src="./index.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -399,19 +393,8 @@
 
             to = $(".range-to-example-alt").persianDatepicker({
                 altFormat: 'LLLL',
-                // format: 'YYYY-MM-DD HH:mm:ss',
                 initialValue: false,
                 responsive: false,
-                // onSelect: function (unix) {
-                //     to.touched = true;
-                //     if (from && from.options && from.options.maxDate != unix) {
-                //         var cachedValue = from.getState().selected.unixDate;
-                //         from.options = { maxDate: unix };
-                //         // if (from.touched) {
-                //         //     from.setDate(cachedValue);
-                //         // }
-                //     }
-                // },
                 formatter: function (unixDate) {
                     var self = this;
                     var pdate = new persianDate(unixDate);
@@ -436,21 +419,9 @@
             from = $(".range-from-example-alt").persianDatepicker({
                 minDate: 1635192623000,
                 altFormat: 'LLLL',
-                format: 'YYYY-MM-DD HH:mm:ss',
                 initialValue: false,
                 responsive: false,
                 autoClose: true,
-                // onSelect: function (unix) {
-                //     from.touched = true;
-                //     if (to && to.options && to.options.minDate != unix) {
-                //         var cachedValue = to.getState().selected.unixDate;
-                //         to.options = { minDate: unix };
-                //         // if (to.touched) {
-                //         //     to.setDate(cachedValue);
-                //         // }
-                //         // console.log(from.options);
-                //     }
-                // },
                 formatter: function (unixDate) {
                     var self = this;
                     var pdate = new persianDate(unixDate);
@@ -470,43 +441,6 @@
                     enabled: false,
                 },
             });
-            // function range() {
-            //     const tds = [...document.querySelectorAll(".datepicker-container td")];
-            //     const selectedTd = [
-            //         ...document.querySelectorAll(".datepicker-container td.selected"),
-            //     ];
-
-            //     const getFrom = from.getState().selected;
-            //     const getTo = to.getState().selected;
-            //     const fromDate = getFrom.year + `${getFrom.month < 10 ? "0" + getFrom.month : getFrom.month}` + `${getFrom.date < 10 ? "0" + getFrom.date : getFrom.date}`
-            //     const toDate = getTo.year + `${getTo.month < 10 ? "0" + getTo.month : getTo.month}` + `${getTo.date < 10 ? "0" + getTo.date : getTo.date}`
-
-            //     const tdds = tds.filter((t) => ![...t.classList].includes("disabled"));
-            //     const timeSpanTds = tdds.filter(
-            //         (t) => parseInt(fromDate) <= parseInt(splitDate(t.dataset.date)) && parseInt(splitDate(t.dataset.date)) <= parseInt(toDate)
-            //     );
-            //     // console.log(timeSpanTds);
-            //     if (timeSpanTds[timeSpanTds.length - 1].dataset.date !== timeSpanTds[0].dataset.date) {
-
-            //         timeSpanTds[timeSpanTds.length - 1].classList.add("toSelected")
-            //         timeSpanTds[0].classList.add("fromSelected")
-            //         timeSpanTds[timeSpanTds.length / 2].classList.add("fromSelected")
-            //     }
-
-            //     timeSpanTds.forEach((tst) => {
-            //         tst.classList.add("time-span");
-            //     });
-            // }
-            // function splitDate(date) {
-            //     let varrey = date.split(",")
-            //     const vv = `${varrey[0]}` + `${varrey[1] < 10 ? "0" + varrey[1] : varrey[1]}` + `${varrey[2] < 10 ? "0" + varrey[2] : varrey[2]}`
-            //     return vv;
-            // }
-            // window.addEventListener("click", () => {
-            // console.log(splitDate("1400,9,14"))
-
-            // range()
-            // })
         });
 
     </script>

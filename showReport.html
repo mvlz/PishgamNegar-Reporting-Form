@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pishgam Negar</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="assets/Styles/gridjs-mermaid.min.css" rel="stylesheet" />
+
+</head>
+
+<body class="show-page">
+
+    <header class="header-container">
+        <img src="assets/Img/pn-logo.png" alt="" class="logo">
+        <a href="index.html" class="backBtn">
+            <span class="icon-Arrow---Left-2-1"></span>
+        </a>
+
+    </header>
+
+    <div id="showReportModal"></div>
+
+    <script src="js/gridjs.umd.js"></script>
+    <script>
+        // =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
+        new gridjs.Grid({
+            columns: [
+                "سفارش",
+                "پرداخت",
+                "نام",
+                "جمع پرداخت",
+                "جمع محصول",
+                "جمع حمل و نقل",
+                "تاریخ",
+                "موقعیت فعلی",
+                "بررسی نهایی",
+                "مجموع تخفیف",
+            ],
+            server: {
+                url: "http://localhost:8080/data",
+                then: (data) =>
+                    data.map((d) => [
+                        d.id_order,
+                        d.payment,
+                        d.customer_name,
+                        d.total_paid,
+                        d.total_products,
+                        d.total_shipping,
+                        d.order_date,
+                        d.current_state_name,
+                        d.final_check,
+                        d.total_discounts_calc,
+                    ]),
+            },
+            fixedHeader: true,
+            sort: true,
+            search: true,
+            resizable: true,
+            style: {
+                table: {
+                    width: " 100%",
+                    margin: "auto",
+                    "font-size": "0.875rem",
+                },
+                th: {
+                    color: "#000",
+                    "border-bottom": "3px solid #ccc",
+                    "text-align": "center",
+                },
+                td: {
+                    "text-align": "center",
+                },
+            },
+        }).render(document.getElementById("showReportModal"));
+
+    </script>
+</body>
+
+</html>
