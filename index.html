@@ -71,6 +71,7 @@
                         </div>
                         <!-- date type body -->
                         <div class="range-type-body">
+                            <!-- radio buttons of date range -->
                             <div class="date-radios">
                                 <label for="today">
                                     <input type="radio" name="definedRanges" id="today" value="today" checked>
@@ -99,11 +100,14 @@
                                     انتخاب بازه
                                 </label>
                             </div>
+                            <!-- /radio buttons of date range -->
+
+                            <!-- datepickers inputs of date range -->
                             <div class="calendars-container">
                                 <div class="from-date-row">
                                     <div class="date-input-box disable">
-                                        <input class="datepicker-demo range-from-example-alt " id="startRange"
-                                            name="startRange" placeholder="از تاریخ" disabled>
+                                        <input class="startRange " id="startRange" name="startRange"
+                                            placeholder="از تاریخ" disabled>
                                         <label for="startRange">
                                             <span class="icon-Calendar1"></span>
                                         </label>
@@ -115,8 +119,8 @@
                                 </div>
                                 <div class="to-date-row">
                                     <div class="date-input-box disable">
-                                        <input class="datepicker-demo range-to-example-alt " id="endRange"
-                                            name="endRange" placeholder="تا تاریخ" disabled>
+                                        <input class="endRange " id="endRange" name="endRange" placeholder="تا تاریخ"
+                                            disabled>
                                         <label for="endRange ">
                                             <span class="icon-Calendar1"></span>
                                         </label>
@@ -127,8 +131,11 @@
                                     </p>
                                 </div>
                             </div>
+                            <!-- /datepickers inputs of date range -->
                         </div>
+                        <!-- /date type body -->
                     </div>
+                    <!-- /date type -->
 
                     <!-- order type -->
                     <div class="range-type order-type ">
@@ -142,6 +149,7 @@
                         <!-- order type body -->
                         <div class="range-type-body disable">
                             <p class="title">شماره 5 رقمی سفارش مورد نظر خود را وارد کنید.</p>
+                            <!-- Start number -->
                             <div class="report-number-container">
                                 <p class="text">از شماره</p>
                                 <div class="num-input-box">
@@ -178,6 +186,9 @@
                                     </p>
                                 </div>
                             </div>
+                            <!-- /Start number -->
+
+                            <!-- End number -->
                             <div class="report-number-container">
                                 <p class="text">تا شماره</p>
                                 <div class="num-input-box">
@@ -214,8 +225,11 @@
                                     </p>
                                 </div>
                             </div>
+                            <!-- End number -->
                         </div>
+                        <!-- /order type body -->
                     </div>
+                    <!-- /order type -->
                 </section>
                 <!-- /report type container -->
 
@@ -348,7 +362,9 @@
                     </div>
                     <!-- /information boxes container -->
                 </section>
+                <!-- form submit buttons -->
                 <section class="submit-btns-container">
+                    <!-- Show report submit button -->
                     <div class="button-box">
                         <label for="showReport">
                             <span class="icon-Show"></span>
@@ -356,6 +372,7 @@
                             <input type="submit" name="showReport" id="showReport" value="نمایش گزارش">
                         </label>
                     </div>
+                    <!-- Excel export submit button -->
                     <div class="button-box">
                         <label for="exportExcel">
                             <span class="icon-Paper-Fail"></span>
@@ -369,6 +386,7 @@
                             <p class="">35%</p>
                         </div>
                     </div>
+                    <!-- Sepidar export submit button -->
                     <div class="button-box">
                         <label for="exportSepidar" class="disable">
                             <span class="icon-Lock"></span>
@@ -378,6 +396,7 @@
                         <p class="soon-notice">بزودی ...</p>
                     </div>
                 </section>
+                <!-- form submit buttons -->
             </form>
         </div>
         <!-- form container -->
@@ -396,7 +415,7 @@
         $(document).ready(function () {
             var to, from;
 
-            to = $(".range-to-example-alt").persianDatepicker({
+            to = $(".endRange").persianDatepicker({
                 altFormat: 'LLLL',
                 initialValue: false,
                 responsive: false,
@@ -421,7 +440,7 @@
                     enabled: false,
                 }
             });
-            from = $(".range-from-example-alt").persianDatepicker({
+            from = $(".startRange").persianDatepicker({
                 minDate: 1635192623000,
                 altFormat: 'LLLL',
                 initialValue: false,

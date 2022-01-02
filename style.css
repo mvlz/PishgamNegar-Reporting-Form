@@ -2,6 +2,9 @@
 
 :root {
   --primary: #f81e74;
+  --secondry: #f81e7414;
+  --lightGray: #cbcbcb;
+  --darkGray: #2f2f2f;
 }
 * {
   margin: 0;
@@ -22,8 +25,6 @@ body {
   direction: rtl;
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
 }
 button {
   cursor: pointer;
@@ -152,7 +153,7 @@ h1.title {
 }
 
 .divide-box:first-of-type {
-  border-right: 1px solid #cbcbcb;
+  border-right: 1px solid var(--lightGray);
 }
 .divide-box {
   display: flex;
@@ -204,12 +205,12 @@ h1.title {
   flex-direction: column;
   align-items: center;
   padding: 2rem 4rem;
-  border: 1px solid #cbcbcb;
+  border: 1px solid var(--lightGray);
   box-shadow: 0px 0px 0px 8px #f2f2f2;
   gap: 2rem;
 }
 .range-type-checked {
-  box-shadow: 0px 0px 0px 8px #f81e7414;
+  box-shadow: 0px 0px 0px 8px var(--secondry);
   border: 1px solid var(--primary);
 }
 .range-type label {
@@ -242,7 +243,7 @@ input[type="checkbox"] {
   position: relative;
   width: 2rem;
   height: 2rem;
-  border: 1px solid #2f2f2f;
+  border: 1px solid var(--darkGray);
   margin-left: 0.5rem;
   border-radius: 50%;
   display: flex;
@@ -276,7 +277,7 @@ input[type="checkbox"] {
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  gap: 2.5rem;
+  gap: 1rem;
   margin-bottom: 3rem;
 }
 .calendars-container,
@@ -350,13 +351,13 @@ input[type="checkbox"] {
   height: 4.5rem;
   border-radius: 1.5rem;
   padding: 0 1.5rem;
-  border: 1px solid #cbcbcb;
+  border: 1px solid var(--lightGray);
   box-sizing: border-box;
   box-shadow: 0px 0px 0px 4px #f7f7f7;
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-  color: #2f2f2f;
+  color: var(--darkGray);
 }
 .info-box label,
 .locked-box {
@@ -384,7 +385,7 @@ input[type="checkbox"] {
   display: inline-block;
   width: 2rem;
   height: 2rem;
-  border: 1px solid #2f2f2f;
+  border: 1px solid var(--darkGray);
   box-sizing: border-box;
   border-radius: 0.5rem;
   display: flex;
@@ -397,7 +398,7 @@ input[type="checkbox"] {
 .info-box-checked {
   border: 1px solid #f81e74;
   box-sizing: border-box;
-  box-shadow: 0px 0px 0px 4px #feedf4;
+  box-shadow: 0px 0px 0px 4px var(--secondry);
 }
 
 .date-checked {
@@ -463,11 +464,11 @@ input[type="checkbox"] {
   outline: none;
   font-size: 1.25rem;
   flex-grow: 1;
-  color: #2f2f2f;
+  color: var(--darkGray);
   height: 4.5rem;
   border-radius: 1.5rem;
   padding: 0 1.5rem;
-  border: 1px solid #cbcbcb;
+  border: 1px solid var(--lightGray);
   direction: ltr;
   text-align: right;
   z-index: 1;
@@ -489,7 +490,7 @@ input[type="checkbox"] {
   font-size: 2rem;
 }
 .time-span {
-  background-color: #f81e7414 !important;
+  background-color: var(--secondry) !important;
 }
 .toSelected span,
 .fromSelected span {
@@ -522,17 +523,16 @@ input[type="checkbox"] {
 .form-control:focus-visible {
   box-shadow: none;
   border: 2px solid var(--primary) !important;
-
-  box-shadow: 0px 0px 0px 3px #f81e7414;
+  box-shadow: 0px 0px 0px 3px var(--secondry);
   outline: none;
-  color: #2f2f2f;
+  color: var(--darkGray);
 }
 
 .form-control {
   width: 100%;
   height: 100%;
   border-radius: 1.5rem !important;
-  border: 1px solid #cbcbcb !important;
+  border: 1px solid var(--lightGray) !important;
   position: relative;
   font-size: 1.5rem;
   font-weight: 700;
@@ -543,7 +543,7 @@ input[type="checkbox"] {
   bottom: 1rem;
   width: 2.625rem;
   height: 1px;
-  background-color: #cbcbcb;
+  background-color: var(--lightGray);
 }
 .form-group {
   position: relative;
@@ -823,7 +823,7 @@ input[type="checkbox"] {
   border: 1px solid red;
   color: red;
   padding: 0 1rem;
-  background-color: #f81e7414;
+  background-color: var(--secondry);
 }
 @keyframes wiggle {
   0% {

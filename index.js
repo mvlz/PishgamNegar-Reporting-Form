@@ -26,6 +26,7 @@ const rangeTitle = document.querySelector(".range-type-title");
 const salesBtn = document.getElementById("salesReport");
 const aggregateBtn = document.getElementById("aggregatedReport");
 const salesInfSection = document.getElementById("extraOptionContainer");
+
 // Change date with (YYYY-MM-DD HH:mm:ss) to join without any extra characters.
 function dateToNum(val) {
   return val.split(/[+-/*: ]+/).join("");
@@ -56,7 +57,6 @@ reportTypeRadios.forEach((typeRadio) => {
     let disableInputs = [...document.querySelectorAll(".disable input")];
     let enableInputs = [...document.querySelectorAll(".range-type-body input")];
     for (let i = 0; i < reportTypeRadios.length; i++) {
-      // console.log(enableInputs);
       reportTypeRadios[i].nextElementSibling.classList.remove("radio-checked");
       reportTypeRadios[
         i
@@ -66,7 +66,6 @@ reportTypeRadios.forEach((typeRadio) => {
       reportTypeRadios[
         i
       ].parentElement.parentElement.nextElementSibling.classList.add("disable");
-      // console.log(datePickers);
       enableInputs.forEach((f) => {
         f.disabled = true;
         if (f.type !== "radio") {
@@ -225,6 +224,7 @@ function orderErrorHandling(numVal, numError, box) {
     box.classList.remove("error-style");
   }
 }
+// validation of date-type inputs use in submit validation.
 function dateErrorHandling(datePicker) {
   const error = datePicker.parentElement.nextElementSibling;
   if (!datePicker.value) {
@@ -236,7 +236,7 @@ function dateErrorHandling(datePicker) {
 }
 // date type variables
 let dateSinceVal = 14000803201023;
-// validation of datepickers use in submit validation.
+// validation of datepickers
 function dateInputs(datePicker) {
   if (datePicker.value.startsWith("20")) {
     dateSinceVal = 20211025201023;
@@ -247,7 +247,6 @@ function dateInputs(datePicker) {
     ".calendars-container .numinput-error"
   );
   if (datePicker.value !== "" && val > 10 && val < dateSinceVal) {
-    console.log("yo cant");
     error.classList.add("show-error");
     error.children[1].innerText = "تاریخ معتبر نیست.";
   } else if (
@@ -270,7 +269,7 @@ function dateInputs(datePicker) {
     error.classList.remove("show-error");
   }
 }
-// ---- When datepickers clicked, unchecked radio buttons.
+// ---- Call datepickers validation
 datePickers.forEach((dp) => {
   dp.addEventListener("click", () => {
     dateInputs(datePickers[0]);
@@ -284,13 +283,17 @@ showReportBtn.addEventListener("click", (e) => {
   const scrollToTitle = function (title, x, y) {
     window.scrollTo(x, title.offsetTop - y);
   };
-  const isDateRadio = dateRadios.some((radio) => radio.checked);
+  const isDateRadio =
+    dateRadios.some((radio) => radio.checked) &&
+    !dateRadios[dateRadios.length - 1].checked;
+  const customRange = document.getElementById("customRange");
   const isOrders =
     fromNumberVal.num > orderSinceVal &&
     toNumberVal.num > orderSinceVal &&
     fromNumberVal.num < toNumberVal.num;
 
   const isDateInput =
+    customRange.checked &&
     dateToNum(datePickers[0].value) > dateSinceVal &&
     dateToNum(datePickers[1].value) > dateSinceVal &&
     dateToNum(datePickers[1].value) > dateToNum(datePickers[0].value);
@@ -300,25 +303,23 @@ showReportBtn.addEventListener("click", (e) => {
   );
 
   const isRange = isOrders || isDateRadio || isDateInput;
-
-  if (!isRange && reportTypeRadios[0].checked && !isDateRadio) {
-    dateErrorHandling(datePickers[0]);
-    dateErrorHandling(datePickers[1]);
-    scrollToTitle(rangeTitle, 0, 50);
-    rangeTitle.classList.add("box-error");
-  } else if (!isRange && reportTypeRadios[1].checked) {
+  if (!isRange && reportTypeRadios[1].checked) {
     orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
     orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
     scrollToTitle(rangeTitle, 0, 50);
+  } else if (!isDateRadio && !isDateInput) {
+    dateErrorHandling(datePickers[0]);
+    dateErrorHandling(datePickers[1]);
+    scrollToTitle(rangeTitle, 0, 50);
+  } else if (reportTypeRadios[0].checked && !isRange) {
+    scrollToTitle(rangeTitle, 0, 50);
+    rangeTitle.classList.add("box-error");
   }
 
   if (!isRequiredCheckBox) {
     paymentNotice.classList.add("box-error");
     scrollToTitle(paymentNotice, 0, 50);
   } else if (isRequiredCheckBox && isRange) {
-    console.log("submitted");
     mainForm.submit();
-  } else {
-    console.log("has error");
   }
 });
