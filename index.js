@@ -56,6 +56,7 @@ reportTypeRadios.forEach((typeRadio) => {
     let disableInputs = [...document.querySelectorAll(".disable input")];
     let enableInputs = [...document.querySelectorAll(".range-type-body input")];
     for (let i = 0; i < reportTypeRadios.length; i++) {
+      // console.log(enableInputs);
       reportTypeRadios[i].nextElementSibling.classList.remove("radio-checked");
       reportTypeRadios[
         i
@@ -65,18 +66,19 @@ reportTypeRadios.forEach((typeRadio) => {
       reportTypeRadios[
         i
       ].parentElement.parentElement.nextElementSibling.classList.add("disable");
-
+      // console.log(datePickers);
       enableInputs.forEach((f) => {
         f.disabled = true;
         if (f.type !== "radio") {
           f.value = "";
+        } else {
+          f.checked = false;
+          f.nextElementSibling.classList.remove("date-checked");
         }
         if (f.type === "text") {
           fromNumberVal.num = 1;
           toNumberVal.num = 2;
         }
-        f.checked = false;
-        f.nextElementSibling.classList.remove("date-checked");
       });
       if (reportTypeRadios[i].checked) {
         continue;
@@ -90,7 +92,16 @@ reportTypeRadios.forEach((typeRadio) => {
       "disable"
     );
     disableInputs.forEach((f) => {
-      f.disabled = false;
+      if (f.id !== "startRange" && f.id !== "endRange") {
+        f.disabled = false;
+      } else {
+        f.disabled = true;
+        f.parentElement.classList.add("disable");
+      }
+      if (f.type === "radio") {
+        dateRadios[0].checked = true;
+        dateRadios[0].nextElementSibling.classList.add("date-checked");
+      }
     });
   });
 });
@@ -100,13 +111,18 @@ dateRadios.forEach((dateRadio) => {
   dateRadio.addEventListener("click", () => {
     for (let i = 0; i < dateRadios.length; i++) {
       dateRadios[i].nextElementSibling.classList.remove("date-checked");
-      if (dateRadios[i].checked) {
+      if (dateRadios[i].id === "customRange" && dateRadios[i].checked) {
         datePickers.forEach((dp) => {
-          dp.value = "";
+          dp.disabled = false;
+          dp.parentElement.classList.remove("disable");
         });
-
         continue;
       }
+      datePickers.forEach((dp) => {
+        dp.value = "";
+        dp.disabled = true;
+        dp.parentElement.classList.add("disable");
+      });
     }
     dateRadio.nextElementSibling.classList.add("date-checked");
   });
@@ -257,10 +273,6 @@ function dateInputs(datePicker) {
 // ---- When datepickers clicked, unchecked radio buttons.
 datePickers.forEach((dp) => {
   dp.addEventListener("click", () => {
-    dateRadios.forEach((dr) => {
-      dr.checked = false;
-      dr.nextElementSibling.classList.remove("date-checked");
-    });
     dateInputs(datePickers[0]);
     dateInputs(datePickers[1]);
   });
@@ -293,6 +305,7 @@ showReportBtn.addEventListener("click", (e) => {
     dateErrorHandling(datePickers[0]);
     dateErrorHandling(datePickers[1]);
     scrollToTitle(rangeTitle, 0, 50);
+    rangeTitle.classList.add("box-error");
   } else if (!isRange && reportTypeRadios[1].checked) {
     orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
     orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
