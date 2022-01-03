@@ -57,20 +57,22 @@ button {
 }
 .header-container .backBtn {
   display: block;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
   border: 1px solid var(--primary);
   color: var(--primary);
   display: grid;
   place-content: center;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 .header-container .backBtn:hover {
   box-shadow: 1px 10px 10px -5px #eee;
   background-color: var(--primary);
-  transform: translateY(-4px);
+  transform: translateY(3px);
   color: #fff;
-  font-size: 0.875rem;
+  /* font-size: 0.875rem; */
 }
 .header-container .backBtn:hover span {
   filter: drop-shadow(1px 1px 4px rgb(0 0 0 / 20%));

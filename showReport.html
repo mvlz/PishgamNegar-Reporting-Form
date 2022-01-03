@@ -16,6 +16,7 @@
     <header class="header-container">
         <img src="assets/Img/pn-logo.png" alt="" class="logo">
         <a href="index.html" class="backBtn">
+            بازگشت
             <span class="icon-Arrow---Left-2-1"></span>
         </a>
 
@@ -26,35 +27,41 @@
     <script src="js/gridjs.umd.js"></script>
     <script>
         // =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
+        let dataa = [
+            { name: 'John', email: 'john@example.com', phoneNumber: '(353) 01 222 3333' },
+            { name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444' },
+        ];
         new gridjs.Grid({
-            columns: [
-                "سفارش",
-                "پرداخت",
-                "نام",
-                "جمع پرداخت",
-                "جمع محصول",
-                "جمع حمل و نقل",
-                "تاریخ",
-                "موقعیت فعلی",
-                "بررسی نهایی",
-                "مجموع تخفیف",
-            ],
-            server: {
-                url: "http://localhost:8080/data",
-                then: (data) =>
-                    data.map((d) => [
-                        d.id_order,
-                        d.payment,
-                        d.customer_name,
-                        d.total_paid,
-                        d.total_products,
-                        d.total_shipping,
-                        d.order_date,
-                        d.current_state_name,
-                        d.final_check,
-                        d.total_discounts_calc,
-                    ]),
-            },
+            data: dataa,
+            // columns: [
+            //     "سفارش",
+            //     "پرداخت",
+            //     "نام",
+            //     "جمع پرداخت",
+            //     "جمع محصول",
+            //     "جمع حمل و نقل",
+            //     "تاریخ",
+            //     "موقعیت فعلی",
+            //     "بررسی نهایی",
+            //     "مجموع تخفیف",
+            // ],
+            // 
+            // server: {
+            //     url: "http://localhost:8080/data",
+            //     then: (data) =>
+            //         data.map((d) => [
+            //             d.id_order,
+            //             d.payment,
+            //             d.customer_name,
+            //             d.total_paid,
+            //             d.total_products,
+            //             d.total_shipping,
+            //             d.order_date,
+            //             d.current_state_name,
+            //             d.final_check,
+            //             d.total_discounts_calc,
+            //         ]),
+            // },
             fixedHeader: true,
             sort: true,
             search: true,
@@ -72,8 +79,15 @@
                 },
                 td: {
                     "text-align": "center",
+                    padding: "4px",
                 },
             },
+            pagination: {
+                enabled: true,
+                limit: 10,
+                summary: false
+            }
+
         }).render(document.getElementById("showReportModal"));
 
     </script>
