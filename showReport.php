@@ -26,20 +26,19 @@
     <?php
     require 'report.php';
     echo "
-    <script src="js/gridjs.umd.js"></script>
+    <script src='js/gridjs.umd.js'></script>
     <script>
         // =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
-
         new gridjs.Grid({
+            columns: $columnsList,
             data: $data,
-            fixedHeader: true,
             sort: true,
             search: true,
-            resizable: true,
+            autoWidth: true,
             pagination: {
-                enabled: true,
-                limit: 10,
-                summary: false
+                'enabled': 'true',
+                'limit': '15',
+                'summary': 'true'
             },
             language: {
                 'search': {
@@ -48,22 +47,24 @@
             },
             style: {
                 table: {
-                    width: '100%',
-                    margin: 'auto',
-                    'font-size': '0.8rem'
+                    'margin': 'auto',
+                    'font-size': '1rem',
+                    'white-space': 'nowrap'
                 },
                 th: {
-                    color: '#000',
+                    'color': '#000',
                     'border-bottom': '3px solid #ccc',
-                    'text-align': 'center'
+                    'text-align': 'center',
+                    'width': '100%'
                 },
                 td: {
                     'text-align': 'center',
-                    padding: '4px'
+                    'padding': '5px'
                 },
             },
 
-        }).render(document.getElementById('showReportModal'));"
+        }).render(document.getElementById('showReportModal'));
+        </script>"
     ?>
 </body>
 

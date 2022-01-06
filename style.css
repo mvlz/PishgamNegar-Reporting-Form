@@ -847,3 +847,8 @@ input[type="checkbox"] {
     transform: rotate(0);
   }
 }
+
+.gridjs-th-content {
+  text-overflow: inherit !important;
+  overflow: visible !important;
+}
