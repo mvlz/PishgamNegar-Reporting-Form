@@ -852,3 +852,17 @@ input[type="checkbox"] {
   text-overflow: inherit !important;
   overflow: visible !important;
 }
+table.gridjs-table {
+  margin: auto !important;
+  font-size: 1rem !important;
+  white-space: nowrap !important;
+}
+th.gridjs-th {
+  color: #000 !important;
+  border-bottom: 3px solid #ccc !important;
+  text-align: center;
+  padding: 14px 5px !important;
+}
+td.gridjs-td {
+  padding: 5px !important;
+}

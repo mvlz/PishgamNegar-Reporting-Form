@@ -45,24 +45,6 @@
                     'placeholder': 'جستجو...'
                 },
             },
-            style: {
-                table: {
-                    'margin': 'auto',
-                    'font-size': '1rem',
-                    'white-space': 'nowrap'
-                },
-                th: {
-                    'color': '#000',
-                    'border-bottom': '3px solid #ccc',
-                    'text-align': 'center',
-                    'width': '100%'
-                },
-                td: {
-                    'text-align': 'center',
-                    'padding': '5px'
-                },
-            },
-
         }).render(document.getElementById('showReportModal'));
         </script>"
     ?>
