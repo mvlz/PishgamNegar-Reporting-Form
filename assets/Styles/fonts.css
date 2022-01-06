@@ -2,39 +2,39 @@
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: 400;
-  src: url("../Fonts/YEKANBAKH-REQULAR.TTF") format("truetype");
+  src: url("../fonts/YEKANBAKH-REQULAR.TTF") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: 700;
-  src: url("../Fonts/YEKANBAKH-BOLD.TTF") format("truetype");
+  src: url("../fonts/YEKANBAKH-BOLD.TTF") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: 900;
-  src: url("../Fonts/YEKANBAKH-FAT.TTF") format("truetype");
+  src: url("../fonts/YEKANBAKH-FAT.TTF") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: bold;
-  src: url("../Fonts/Yekan\ Bakh\ FaNum\ 06\ Bold.ttf") format("truetype");
+  src: url("../fonts/Yekan-Bakh-FaNum-06-Bold.ttf") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: regular;
-  src: url("../Fonts/Yekan\ Bakh\ FaNum\ 04\ Regular.ttf") format("truetype");
+  src: url("../fonts/Yekan-Bakh-FaNum-04-Regular.ttf") format("truetype");
 }
 @font-face {
   font-family: "iconly";
-  src: url("../Fonts/iconly.eot?5bofdk");
-  src: url("../Fonts/iconly.eot?5bofdk#iefix") format("embedded-opentype"),
-    url("../Fonts/iconly.ttf?5bofdk") format("truetype"),
-    url("../Fonts/iconly.woff?5bofdk") format("woff"),
-    url("../Fonts/iconly.svg?5bofdk#icomoon") format("svg");
+  src: url("../fonts/iconly.eot?5bofdk");
+  src: url("../fonts/iconly.eot?5bofdk#iefix") format("embedded-opentype"),
+    url("../fonts/iconly.ttf?5bofdk") format("truetype"),
+    url("../fonts/iconly.woff?5bofdk") format("woff"),
+    url("../fonts/iconly.svg?5bofdk#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -77,7 +77,6 @@
 }
 .icon-Arrow---Left-2-1:before {
   content: "\72";
-  /* color: #474c59; */
 }
 .icon-Arrow---Left-3:before {
   content: "\61";

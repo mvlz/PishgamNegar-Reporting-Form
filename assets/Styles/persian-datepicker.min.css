@@ -52,8 +52,7 @@
 .datepicker-plot-area .datepicker-day-view .table-days td.disabled span,
 .datepicker-plot-area .datepicker-year-view .year-item-disable,
 .datepicker-plot-area .datepicker-month-view .month-item-disable {
-  /* cursor: pointer; */
-  cursor: url("../Img/Arrow\ -\ Left.svg"), pointer;
+  cursor: url("../img/arrow-left.svg"), pointer;
 }
 .datepicker-plot-area .datepicker-time-view > .time-segment,
 .datepicker-plot-area .datepicker-time-view .down-btn,
