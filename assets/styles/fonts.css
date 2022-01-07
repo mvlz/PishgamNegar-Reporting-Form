@@ -2,31 +2,31 @@
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/YEKANBAKH-REQULAR.TTF") format("truetype");
+  src: url("../fonts/yekhanbakh-regular.ttf") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: 700;
-  src: url("../fonts/YEKANBAKH-BOLD.TTF") format("truetype");
+  src: url("../fonts/yekanbakh-bold.ttf") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: 900;
-  src: url("../fonts/YEKANBAKH-FAT.TTF") format("truetype");
+  src: url("../fonts/yekanbakh-fat.ttf") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: bold;
-  src: url("../fonts/Yekan-Bakh-FaNum-06-Bold.ttf") format("truetype");
+  src: url("../fonts/yekan-bakh-fanum-06-bold.ttf") format("truetype");
 }
 @font-face {
   font-family: "yekan bakh";
   font-style: normal;
   font-weight: regular;
-  src: url("../fonts/Yekan-Bakh-FaNum-04-Regular.ttf") format("truetype");
+  src: url("../fonts/yekan-bakh-fanum-04-regular.ttf") format("truetype");
 }
 @font-face {
   font-family: "iconly";
