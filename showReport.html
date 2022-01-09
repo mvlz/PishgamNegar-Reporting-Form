@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pishgam Negar</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <link href="assets/styles/gridjs-mermaid.min.css" rel="stylesheet" />
+
+</head>
+
+<body class="show-page">
+
+    <header class="header-container">
+        <img src="assets/Img/pn-logo.png" alt="" class="logo">
+        <a href="index.html" class="backBtn">
+            بازگشت
+            <span class="icon-Arrow---Left-2-1"></span>
+        </a>
+
+    </header>
+
+    <div id="showReportModal"></div>
+
+    <script src="js/gridjs.umd.js"></script>
+    <script>
+        // =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
+        let dataa = [
+            { name: 'John', email: 'john@example.com', phoneNumber: '(353) 01 222 3333' },
+            { name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444' },
+        ];
+
+        new gridjs.Grid({
+            columns: [{
+                name: 'Name',
+                formatter: (cell) => `Name: ${cell}`
+            },
+                'Email',
+                'Phone Number',
+            {
+                name: 'Sum',
+                formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "رایگان"
+
+            },
+            {
+                name: 'Finally',
+                formatter: (cell) => gridjs.html(`<span class='${(cell.split(' ').join('')).toLowerCase() === 'ok' ? 'finalTd-ok' : 'finalTd-notOk'}'>${cell}</span>`)
+
+            },
+                'order_date'
+            ],
+            data: [
+                ['John mark', 'john@example.com', '(353) 01 222 3333', '8200028', 'OK', '2021-12-25 18:13:28'],
+                ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '8200029', 'Not OK', '2021-12-25 15:13:26'],
+                ['John', 'john@example.com', '(353) 01 222 3333', '8200027', 'OK', '2021-12-25 14:37:48'],
+                ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '8200021', 'OK', '2021-12-25 18:13:28'],
+                ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '0', 'Not OK', '2021-12-25 13:27:36'],
+            ],
+            sort: true,
+            search: true,
+            resizable: true,
+
+            pagination: {
+                enabled: true,
+                limit: 15,
+                summary: true,
+            },
+            language: {
+                'search': {
+                    'placeholder': 'جستجو...'
+                },
+            },
+        }).render(document.getElementById("showReportModal"));
+
+    </script>
+</body>
+
+</html>
