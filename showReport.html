@@ -71,6 +71,24 @@
                 'search': {
                     'placeholder': 'جستجو...'
                 },
+                sort: {
+                    sortAsc: 'مرتب سازی بصورت صعودی',
+                    sortDesc: 'مرتب سازی بصورت نزولی',
+                },
+                'pagination': {
+                    'previous': 'قبلی',
+                    'next': 'بعدی',
+                    navigate: (page, pages) => `صفحه ${page} از ${pages}`,
+                    page: (page) => `صفحه ${page}`,
+                    'showing': 'نمایش',
+                    'of': 'از',
+                    'to': 'تا',
+                    'results': () => 'نتایج'
+                },
+                'loading': 'در حال بارگذاری...',
+                'noRecordsFound': 'چیزی یافت نشد',
+                'error': 'هنگام دریافت داده ها خطایی رخ داد',
+
             },
         }).render(document.getElementById("showReportModal"));
 
