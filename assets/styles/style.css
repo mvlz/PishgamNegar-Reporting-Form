@@ -788,31 +788,29 @@ input[type="checkbox"] {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  border: 1px solid var(--primary);
+  /* border: 1px solid var(--primary); */
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  left: 0.5rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
 }
-.close::after {
-  content: "";
-  position: absolute;
-  width: 1rem;
-  height: 1px;
-  background-color: var(--primary);
-  transform: rotate(45deg);
-}
-
+.close::after,
 .close::before {
   content: "";
   position: absolute;
   width: 1rem;
   height: 1px;
-  background-color: var(--primary);
+  background-color: white;
+}
+.close::after {
+  transform: rotate(45deg);
+}
+
+.close::before {
   transform: rotate(-45deg);
 }
 .show-Modal {
@@ -886,4 +884,54 @@ td.gridjs-td {
 }
 td.gridjs-td[data-column-id="order_date"] {
   direction: ltr !important;
+}
+.toast {
+  width: 20rem;
+  min-height: 4rem;
+  border-radius: 10px;
+  background-color: var(--primary);
+  box-shadow: 0px 0px 0px 3px var(--primary);
+  position: fixed;
+  color: white;
+  z-index: 1;
+  bottom: 3.5rem;
+  right: 2rem;
+  animation-name: slideIn;
+  animation-duration: 0.8s;
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-out {
+  animation-name: slideOut;
+  animation-duration: 0.8s;
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(150px);
+    opacity: 0;
+  }
+}
+
+.toast-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0.25rem 0;
 }

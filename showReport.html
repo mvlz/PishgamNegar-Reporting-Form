@@ -23,41 +23,93 @@
     </header>
 
     <div id="showReportModal"></div>
+    <div class="toast">
+        <p class="notice">بررسی نهایی یفارشات "OK" است</p>
+        <div class="toast-body">
 
+        </div>
+        <div class="close"></div>
+    </div>
     <script src="js/gridjs.umd.js"></script>
     <script>
         // =-=-=-=-=-=-=  Grid JS  =-=-=-=-=-=-=//
-        let dataa = [
-            { name: 'John', email: 'john@example.com', phoneNumber: '(353) 01 222 3333' },
-            { name: 'Mark', email: 'mark@gmail.com', phoneNumber: '(01) 22 888 4444' },
-        ];
-
         new gridjs.Grid({
-            columns: [{
-                name: 'Name',
-                formatter: (cell) => `Name: ${cell}`
-            },
-                'Email',
-                'Phone Number',
-            {
-                name: 'Sum',
-                formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "رایگان"
+            // columns: [{
+            //     name: 'Name',
+            //     formatter: (cell) => `Name: ${cell}`
+            // },
+            //     'Email',
+            //     'Phone Number',
+            // {
+            //     name: 'Sum',
+            //     formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "رایگان"
 
-            },
-            {
-                name: 'Finally',
-                formatter: (cell) => gridjs.html(`<span class='${(cell.split(' ').join('')).toLowerCase() === 'ok' ? 'finalTd-ok' : 'finalTd-notOk'}'>${cell}</span>`)
+            // },
+            // {
+            //     name: 'Finally',
+            //     formatter: (cell) => gridjs.html(`<span class='${(cell.split(' ').join('')).toLowerCase() === 'ok' ? 'finalTd-ok' : 'finalTd-notOk'}'>${cell}</span>`)
 
-            },
-                'order_date'
-            ],
+            // },
+            //     'order_date'
+            // ],
+            // data: [
+            //     ['John mark', 'john@example.com', '(353) 01 222 3333', '8200028', 'OK', '2021-12-25 18:13:28'],
+            //     ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '8200029', 'Not OK', '2021-12-25 15:13:26'],
+            //     ['John', 'john@example.com', '(353) 01 222 3333', '8200027', 'OK', '2021-12-25 14:37:48'],
+            //     ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '8200021', 'OK', '2021-12-25 18:13:28'],
+            //     ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '0', 'Not OK', '2021-12-25 13:27:36'],
+            // ],
+            columns: [
+                { id: 'id_order', name: 'شناسه سفارش' },
+                { id: 'customer_name', name: 'نام مشتری' },
+                { id: 'payment', name: 'روش پرداخت' },
+                {
+                    id: 'total_paid',
+                    name: 'مبلغ پرداخت شده',
+                    formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "ندارد"
+                },
+                {
+                    id: 'total_products',
+                    name: 'جمع محصولات',
+                    formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "ندارد"
+                },
+                {
+                    id: 'total_shipping',
+                    name: 'هزینه حمل',
+                    formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "رایگان"
+                },
+                {
+                    id: 'total_discounts_calc',
+                    name: 'جمع تخفیفات',
+                    formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "ندارد"
+                },
+                { id: 'current_state_name', name: 'وضعیت سفارش' }, { id: 'order_date', name: 'تاریخ سفارش' },
+                {
+                    id: 'final_check', name: 'بررسی نهایی',
+                    formatter: (cell) => {
+                        return gridjs.html(`<span class='${(cell.split(' ').join('')).toLowerCase() === 'ok' ? 'finalTd-ok' : 'finalTd-notOk'}'>${cell}</span>`)
+                        console.log(cell);
+                    }
+                }],
             data: [
-                ['John mark', 'john@example.com', '(353) 01 222 3333', '8200028', 'OK', '2021-12-25 18:13:28'],
-                ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '8200029', 'Not OK', '2021-12-25 15:13:26'],
-                ['John', 'john@example.com', '(353) 01 222 3333', '8200027', 'OK', '2021-12-25 14:37:48'],
-                ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '8200021', 'OK', '2021-12-25 18:13:28'],
-                ['Mark', 'mark@gmail.com', '(01) 22 888 4444', '0', 'Not OK', '2021-12-25 13:27:36'],
-            ],
+                { "id_order": 91707, "customer_name": "م. شوشتری", "payment": "پاسارگاد", "total_paid": 447440, "total_products": 447440, "total_shipping": 0, "total_discounts_calc": 0, "current_state_name": "پرداخت تاييد شده", "order_date": "2022-01-10 11:42:54", "final_check": "OK" },
+                { "id_order": 91706, "customer_name": "و. فروشگاه اینترنتی جامداد", "payment": "پاسارگاد", "total_paid": 47460, "total_products": 47460, "total_shipping": 35000, "total_discounts_calc": 35000, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-10 10:13:13", "final_check": "OK" },
+                { "id_order": 91705, "customer_name": "ر. قنبری", "payment": "پرداخت در هنگام تحویل (COD)", "total_paid": 274400, "total_products": 274400, "total_shipping": 0, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-10 00:31:20", "final_check": "Not OK" },
+                { "id_order": 91704, "customer_name": "آ. کاویانی", "payment": "پاسارگاد", "total_paid": 274400, "total_products": 274400, "total_shipping": 0, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-10 00:16:37", "final_check": "OK" },
+                { "id_order": 91703, "customer_name": "ن. ذوالفقاری", "payment": "پاسارگاد", "total_paid": 331755, "total_products": 331755, "total_shipping": 0, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-09 23:21:46", "final_check": "OK" },
+                { "id_order": 91702, "customer_name": "ث. فیضی", "payment": "پاسارگاد", "total_paid": 413610, "total_products": 397610, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-09 23:02:44", "final_check": "OK" },
+                { "id_order": 91701, "customer_name": "س. رسولی ", "payment": "پرداخت در هنگام تحویل (COD)", "total_paid": 361250, "total_products": 361250, "total_shipping": 0, "total_discounts_calc": 0, "current_state_name": "پرداخت در محل", "order_date": "2022-01-09 21:27:39", "final_check": "Not OK" },
+                { "id_order": 91700, "customer_name": "ا. دبیری", "payment": "پاسارگاد", "total_paid": 65300, "total_products": 49300, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-09 15:49:40", "final_check": "OK" },
+                { "id_order": 91699, "customer_name": "م. معصومی", "payment": "پاسارگاد", "total_paid": 80500, "total_products": 64500, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-09 14:04:26", "final_check": "OK" },
+                { "id_order": 91698, "customer_name": "ه. فروشگاه اینترنتی می تایم", "payment": "پاسارگاد", "total_paid": 757400, "total_products": 722400, "total_shipping": 35000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-09 12:03:58", "final_check": "OK" },
+                { "id_order": 91697, "customer_name": "م. زینلی ", "payment": "پاسارگاد", "total_paid": 609725, "total_products": 593725, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-09 11:31:25", "final_check": "OK" },
+                { "id_order": 91696, "customer_name": "س. نجفی ", "payment": "پاسارگاد", "total_paid": 180485, "total_products": 164485, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-09 10:37:18", "final_check": "OK" },
+                { "id_order": 91695, "customer_name": "و. رفیعی", "payment": "سداد(بانک ملی)", "total_paid": 489100, "total_products": 473100, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-09 02:18:53", "final_check": "Not OK" },
+                { "id_order": 91694, "customer_name": "غ. حسن زاده", "payment": "پاسارگاد", "total_paid": 180000, "total_products": 164000, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-08 21:18:39", "final_check": "OK" },
+                { "id_order": 91693, "customer_name": "ا. جعفری", "payment": "پاسارگاد", "total_paid": 237000, "total_products": 221000, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-08 20:49:13", "final_check": "OK" },
+                { "id_order": 91692, "customer_name": "پ. همتی", "payment": "پرداخت در هنگام تحویل (COD)", "total_paid": 295800, "total_products": 295800, "total_shipping": 0, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-08 19:29:54", "final_check": "Not OK" },
+                { "id_order": 91691, "customer_name": "آ. آهنچی", "payment": "پرداخت در هنگام تحویل (COD)", "total_paid": 378655, "total_products": 378655, "total_shipping": 0, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده تهران", "order_date": "2022-01-08 19:09:29", "final_check": "Not OK" },
+                { "id_order": 91690, "customer_name": "م. مرادی", "payment": "سداد(بانک ملی)", "total_paid": 121705, "total_products": 105705, "total_shipping": 16000, "total_discounts_calc": 0, "current_state_name": "بسته بندی شده ", "order_date": "2022-01-08 18:10:41", "final_check": "OK" },],
             sort: true,
             search: true,
             resizable: true,
@@ -90,8 +142,32 @@
                 'error': 'هنگام دریافت داده ها خطایی رخ داد',
 
             },
-        }).render(document.getElementById("showReportModal"));
+        }).render(document.getElementById('showReportModal'));
 
+        // Show toast 
+        let finalNotOk = [91705, 91701, 91695, 91692, 91691];
+        const notice = document.querySelector('.notice');
+
+        if (finalNotOk.length == 0) {
+            notice.innerText = 'بررسی نهایی تمامی سفارشات OK است'
+        } else {
+            notice.innerText = `سفارشات زیر را بررسی کنید.  (${finalNotOk.length})`
+            finalNotOk.forEach(id => {
+                const item = document.createElement('p')
+                item.innerHTML = `${id}`
+                console.log(item);
+                document.querySelector('.toast-body').appendChild(item)
+            });
+        }
+
+        //Close toast
+        const closeBtn = document.querySelector('.close')
+        closeBtn.addEventListener('click', () => {
+            closeBtn.parentElement.classList.add('slide-out')
+            setTimeout(() => {
+                closeBtn.parentElement.style.display = 'none';
+            }, 750);
+        })
     </script>
 </body>
 
