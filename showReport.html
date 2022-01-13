@@ -166,7 +166,7 @@
             finalNotOk.forEach(id => {
                 const item = document.createElement('p')
                 item.innerHTML = `${id}`
-                console.log(item);
+                // console.log(item);
                 document.querySelector('.toast-body').appendChild(item)
             });
         }
@@ -179,6 +179,33 @@
                 closeBtn.parentElement.style.display = 'none';
             }, 750);
         })
+
+        // Static data for example
+        const infoArray = [
+            {
+                num: 8964,
+                title: "تحویل درب منزل",
+                isCost: true,
+                list: 'payment',
+            },
+            {
+                num: 591,
+                title: "ملی",
+                isCost: false,
+                list: 'summary',
+            }
+        ]
+        // Append items to DOM lists
+        function appendListItem(params) {
+            if (params) {
+                const item = document.createElement("li")
+                item.innerText = `${params.title}: ${params.num} ${params.isCost ? "تومان" : ""}`
+                document.querySelector(`.${params.list}-list`).appendChild(item)
+            }
+        }
+
+        infoArray.forEach(obj => appendListItem(obj))
+
     </script>
 </body>
 

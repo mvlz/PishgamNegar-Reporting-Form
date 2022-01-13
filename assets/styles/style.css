@@ -971,9 +971,10 @@ td.gridjs-td[data-column-id="order_date"] {
 .bottom-details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0.75rem 0;
 }
 .detail-container {
-  padding: 0.75rem 1.5rem;
+  padding: 0 1.5rem;
 }
 .detail-container:first-of-type {
   border-left: 1px solid var(--lightGray);
