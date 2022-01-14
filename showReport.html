@@ -36,23 +36,11 @@
         <section class="bottom-details">
             <div class="detail-container">
                 <h3 class="detail-title">مجموع پرداختی ها به تفکیک روش پرداخت</h3>
-                <ul class="payment-list">
-                    <li class="payment-item">درگاه پاسارگاد: 255 تومان</li>
-                    <li class="payment-item">درگاه ملی: 999 تومان</li>
-                    <li class="payment-item">پرداخت در محل: 888 تومان</li>
-                    <li class="payment-item">پرداخت مستقیم: 8888 تومان</li>
-                </ul>
+                <ul class="payment-list"></ul>
             </div>
             <div class="detail-container">
                 <h3 class="detail-title">خلاصه گزارش</h3>
-                <ul class="summary-list">
-                    <li class="summary-item">تعداد سفارشات: 9</li>
-                    <li class="summary-item">تعداد اقلام: 999عدد</li>
-                    <li class="summary-item">مجموع تخفیف ها: 777 تومان</li>
-                    <li class="summary-item">مجموع هزینه ارسال: 1111 تومان</li>
-                    <li class="summary-item">مجموع پرداختی ها: 5555 تومان</li>
-                    <li class="summary-item">مجموع محصولات: 77777 تومان</li>
-                </ul>
+                <ul class="summary-list"></ul>
             </div>
         </section>
     </div>
@@ -180,31 +168,37 @@
             }, 750);
         })
 
-        // Static data for example
+        // footer details data
         const infoArray = [
             {
-                num: 8964,
-                title: "تحویل درب منزل",
-                isCost: true,
-                list: 'payment',
+                "id": "melli",
+                "report": "sales",
+                "value": "8964",
+                "title": "درگاه ملی",
+                "isCost": "true",
+                "list": "payment",
             },
             {
-                num: 591,
-                title: "ملی",
-                isCost: false,
-                list: 'summary',
+                "id": "totalDiscount",
+                "report": "sales",
+                "value": "591",
+                "title": "مجموع هزینه ارسال",
+                "isCost": "false",
+                "list": "summary",
             }
         ]
         // Append items to DOM lists
         function appendListItem(params) {
             if (params) {
                 const item = document.createElement("li")
-                item.innerText = `${params.title}: ${params.num} ${params.isCost ? "تومان" : ""}`
+                item.innerText = `${params.title}: ${params.value} ${params.isCost === "true" ? "تومان" : "عدد"}`
                 document.querySelector(`.${params.list}-list`).appendChild(item)
             }
         }
+        const footerDetails = document.querySelector(".bottom-details") // footer details box
 
-        infoArray.forEach(obj => appendListItem(obj))
+        // condition of showing footer lists
+        infoArray.length !== 0 ? infoArray.forEach(obj => appendListItem(obj)) : footerDetails.style.display = "none";
 
     </script>
 </body>
