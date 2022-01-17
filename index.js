@@ -34,12 +34,12 @@ function dateToNum(val) {
 // Change style on click each elements and show the More information container when Sales one clicked.
 function reportStateCheck() {
   if (salesBtn.checked == true) {
-    salesInfSection.style.display = "flex";
+    // salesInfSection.style.display = "flex";
     salesBtn.parentElement.classList.add("active");
     aggregateBtn.parentElement.classList.remove("active");
     // console.log("گزارش فروش");
   } else {
-    salesInfSection.style.display = "none";
+    // salesInfSection.style.display = "none";
     aggregateBtn.parentElement.classList.add("active");
     salesBtn.parentElement.classList.remove("active");
     extraOptionInputs.forEach((extInput) => {
@@ -142,7 +142,7 @@ let fromNumberVal = {
 let toNumberVal = {
   num: 2,
 };
-const orderSinceVal = 87354;
+const orderSinceVal = 91326;
 // order-type inputs execute and error handling.
 function orderInput(arrey, numError, joinVal, box) {
   let joinInputsVals;
@@ -235,11 +235,11 @@ function dateErrorHandling(datePicker) {
   }
 }
 // date type variables
-let dateSinceVal = 14000803201023;
+let dateSinceVal = 14001001000000;
 // validation of datepickers
 function dateInputs(datePicker) {
   if (datePicker.value.startsWith("20")) {
-    dateSinceVal = 20211025201023;
+    dateSinceVal = 20211222000000;
   }
   const error = datePicker.parentElement.nextElementSibling;
   const val = dateToNum(datePicker.value);

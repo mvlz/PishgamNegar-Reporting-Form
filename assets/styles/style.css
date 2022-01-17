@@ -13,7 +13,6 @@
   transition: all ease-in-out 0.1s;
   scroll-behavior: smooth;
   text-decoration: none;
-  list-style: none;
 }
 body {
   font-family: "Yekan Bakh" !important;
@@ -951,7 +950,7 @@ td.gridjs-td[data-column-id="order_date"] {
   width: 100%;
   z-index: 1;
   min-height: 4rem;
-  background-color: #f9fafb;
+  background-color: #fff;
   margin-top: 1rem;
 }
 .top-details .detail-title {
@@ -962,6 +961,7 @@ td.gridjs-td[data-column-id="order_date"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5px;
 }
 .bottom-details .detail-title {
   margin-bottom: 0.5rem;
@@ -983,5 +983,5 @@ td.gridjs-td[data-column-id="order_date"] {
 .summary-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  font-size: 0.875rem;
+  font-size: 1rem;
 }

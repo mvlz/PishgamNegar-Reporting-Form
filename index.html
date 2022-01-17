@@ -40,15 +40,15 @@
                 <!-- report state container -->
                 <section class="report-type-container">
                     <div class="divide-box">
-                        <label for="aggregatedReport" class="active">گزارش تجمیعی
+                        <label for="aggregatedReport">گزارش تجمیعی
                             <input type="radio" name="reportType" id="aggregatedReport" onclick="reportStateCheck()"
-                                value="aggregatedReport" class="report-input " checked>
+                                value="aggregatedReport" class="report-input ">
                         </label>
                     </div>
                     <div class="divide-box">
-                        <label for="salesReport">گزارش فروش
+                        <label for="salesReport" class="active">گزارش فروش
                             <input type="radio" name="reportType" id="salesReport" onclick="reportStateCheck()"
-                                value="salesReport" class="report-input">
+                                value="salesReport" class="report-input" checked>
                         </label>
                     </div>
                 </section>
@@ -237,19 +237,19 @@
 
 
                 <!-- More informations in sales report form -->
-                <section class="extra-option-container" id="extraOptionContainer">
+                <!-- <section class="extra-option-container" id="extraOptionContainer">
                     <p class="title">تمایل دارید چه اطلاعات دیگری در گزارش شما وجود داشته باشد؟</p>
-                    <!-- notice box -->
+                     notice box 
                     <div class="notice-box">
                         <span class="icon-Info-Square"></span>
                         انتخاب این موارد اختیاری است.
                     </div>
 
-                    <!-- information boxes container -->
+                     information boxes container 
                     <div class="info-boxes-container">
-                        <!-- information boxes row -->
+                         information boxes row 
                         <div class="info-boxes">
-                            <!-- information box -->
+                             information box 
                             <div class="info-box">
                                 <label for="customerName">
                                     <input type="checkbox" name="extraOptions[]" id="customerName" value="customerName">
@@ -258,7 +258,7 @@
                                 </label>
                             </div>
 
-                            <!-- information box -->
+                             information box 
                             <div class="info-box">
                                 <label for="orderState">
                                     <input type="checkbox" name="extraOptions[]" id="orderState" value="orderState">
@@ -268,11 +268,11 @@
                             </div>
                         </div>
 
-                        <!-- information boxes row -->
+                         information boxes row 
                         <div class="info-boxes">
-                            <!-- locked boxes container of future features -->
+                             locked boxes container of future features 
                             <div class="locked-box-container">
-                                <!-- locked box -->
+                                 locked box 
                                 <div class="locked-box disable">
                                     <span class="icon-Lock"></span>
                                     <p>تعداد محصولات</p>
@@ -280,9 +280,9 @@
                                 <p class="soon-notice">بزودی ...</p>
                             </div>
 
-                            <!-- locked boxes container of future features -->
+                             locked boxes container of future features 
                             <div class="locked-box-container">
-                                <!-- locked box -->
+                                 locked box 
                                 <div class="locked-box disable">
                                     <span class="icon-Lock"></span>
                                     <p>فقط مشتری اولی ها</p>
@@ -290,22 +290,22 @@
                                 <p class="soon-notice">بزودی ...</p>
                             </div>
 
-                            <!-- locked boxes container of future features -->
+                             locked boxes container of future features 
                             <div class="locked-box-container">
-                                <!-- locked box -->
+                                 locked box 
                                 <div class="locked-box disable">
                                     <span class="icon-Lock"></span>
                                     <p>فیلتر براساس شهر</p>
                                 </div>
                                 <p class="soon-notice">بزودی ...</p>
                             </div>
-                            <!-- /locked boxes container of future features -->
+                             /locked boxes container of future features 
                         </div>
                     </div>
-                    <!-- /information boxes container -->
+                     /information boxes container 
 
-                    <hr class="divide-line"><!-- divide line -->
-                </section>
+                    <hr class="divide-line"> divide line 
+                </section> -->
                 <!-- /More information -->
 
 
@@ -377,21 +377,22 @@
                         <label for="exportExcel">
                             <span class="icon-Paper-Fail"></span>
                             <input type="submit" class="rendering" name="exportExcel" value="خروجی اکسل"
-                                id="exportExcel">
+                                id="exportExcel" formaction="exportExcel.php">
                             <p class="submit-text">خروجی اکسل</p>
-                            <div class="dot-flashing"></div>
+                            <!-- <div class="dot-flashing"></div> -->
                         </label>
-                        <div class="output-progress">
+                        <!-- <div class="output-progress">
                             <p class="">لطفا منتظر بمانید...</p>
                             <p class="">35%</p>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Sepidar export submit button -->
                     <div class="button-box">
                         <label for="exportSepidar" class="disable">
                             <span class="icon-Lock"></span>
                             <p class="submit-text">خروجی مخصوص سپیدار</p>
-                            <input type="submit" name="exportSepidar" id="exportSepidar" value="خروجی مخصوص سپیدار">
+                            <input type="submit" name="exportSepidar" id="exportSepidar" value="خروجی مخصوص سپیدار"
+                                disabled>
                         </label>
                         <p class="soon-notice">بزودی ...</p>
                     </div>
@@ -426,7 +427,7 @@
                     let format = pdate.format("YYYY-MM-DD HH:mm:ss")
                     return format;
                 },
-                minDate: 1635192623000,
+                minDate: 1640131200000,
                 autoClose: true,
                 timePicker: {
                     enabled: true,
@@ -441,7 +442,7 @@
                 }
             });
             from = $(".startRange").persianDatepicker({
-                minDate: 1635192623000,
+                minDate: 1640131200000,
                 altFormat: 'LLLL',
                 initialValue: false,
                 responsive: false,
