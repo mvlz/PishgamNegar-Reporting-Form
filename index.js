@@ -19,6 +19,7 @@ const mainForm = document.querySelector(".form");
 const modalBackdrop = document.querySelector(".modal-backdrop");
 const closeModalBtn = document.querySelector(".close");
 const showReportBtn = document.querySelector("#showReport");
+const exportExcelBtn = document.querySelector("#exportExcel");
 const paymentNotice = document.querySelector(
   ".paymentWay-container .notice-box"
 );
@@ -278,48 +279,54 @@ datePickers.forEach((dp) => {
 });
 
 //=-=-=-=-=-  form validation on submit -=-=-=-=-=//
-showReportBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const scrollToTitle = function (title, x, y) {
-    window.scrollTo(x, title.offsetTop - y);
-  };
-  const isDateRadio =
-    dateRadios.some((radio) => radio.checked) &&
-    !dateRadios[dateRadios.length - 1].checked;
-  const customRange = document.getElementById("customRange");
-  const isOrders =
-    fromNumberVal.num > orderSinceVal &&
-    toNumberVal.num > orderSinceVal &&
-    fromNumberVal.num < toNumberVal.num;
+function formSubmition(btn, action) {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const scrollToTitle = function (title, x, y) {
+      window.scrollTo(x, title.offsetTop - y);
+    };
+    const isDateRadio =
+      dateRadios.some((radio) => radio.checked) &&
+      !dateRadios[dateRadios.length - 1].checked;
+    const customRange = document.getElementById("customRange");
+    const isOrders =
+      fromNumberVal.num > orderSinceVal &&
+      toNumberVal.num > orderSinceVal &&
+      fromNumberVal.num < toNumberVal.num;
 
-  const isDateInput =
-    customRange.checked &&
-    dateToNum(datePickers[0].value) > dateSinceVal &&
-    dateToNum(datePickers[1].value) > dateSinceVal &&
-    dateToNum(datePickers[1].value) > dateToNum(datePickers[0].value);
+    const isDateInput =
+      customRange.checked &&
+      dateToNum(datePickers[0].value) > dateSinceVal &&
+      dateToNum(datePickers[1].value) > dateSinceVal &&
+      dateToNum(datePickers[1].value) > dateToNum(datePickers[0].value);
 
-  const isRequiredCheckBox = [...paymentInputs].some(
-    (checkBox) => checkBox.checked
-  );
+    const isRequiredCheckBox = [...paymentInputs].some(
+      (checkBox) => checkBox.checked
+    );
 
-  const isRange = isOrders || isDateRadio || isDateInput;
-  if (!isRange && reportTypeRadios[1].checked) {
-    orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
-    orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
-    scrollToTitle(rangeTitle, 0, 50);
-  } else if (!isDateRadio && !isDateInput) {
-    dateErrorHandling(datePickers[0]);
-    dateErrorHandling(datePickers[1]);
-    scrollToTitle(rangeTitle, 0, 50);
-  } else if (reportTypeRadios[0].checked && !isRange) {
-    scrollToTitle(rangeTitle, 0, 50);
-    rangeTitle.classList.add("box-error");
-  }
+    const isRange = isOrders || isDateRadio || isDateInput;
+    if (!isRange && reportTypeRadios[1].checked) {
+      orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
+      orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
+      scrollToTitle(rangeTitle, 0, 50);
+    } else if (!isDateRadio && !isDateInput) {
+      dateErrorHandling(datePickers[0]);
+      dateErrorHandling(datePickers[1]);
+      scrollToTitle(rangeTitle, 0, 50);
+    } else if (reportTypeRadios[0].checked && !isRange) {
+      scrollToTitle(rangeTitle, 0, 50);
+      rangeTitle.classList.add("box-error");
+    }
 
-  if (!isRequiredCheckBox) {
-    paymentNotice.classList.add("box-error");
-    scrollToTitle(paymentNotice, 0, 50);
-  } else if (isRequiredCheckBox && isRange) {
-    mainForm.submit();
-  }
-});
+    if (!isRequiredCheckBox) {
+      paymentNotice.classList.add("box-error");
+      scrollToTitle(paymentNotice, 0, 50);
+    } else if (isRequiredCheckBox && isRange) {
+      mainForm.action = action;
+      mainForm.submit();
+    }
+  });
+}
+
+formSubmition(showReportBtn, "showReport.php"); // Show Report btn submited
+formSubmition(exportExcelBtn, "exportExcel.php"); // Export excel btn submited
