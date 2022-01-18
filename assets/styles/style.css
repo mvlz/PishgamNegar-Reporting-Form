@@ -80,6 +80,10 @@ button {
 .container {
   width: 80%;
   margin: 2rem auto;
+  min-height: calc(100vh - 8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .wrapper {
   width: 100%;
@@ -572,7 +576,7 @@ input[type="checkbox"] {
   font-size: 1.25rem;
   color: #5e5e5e;
 }
-.numinput-error {
+.input-error {
   font-size: 1rem;
   color: #dd0028;
   font-weight: 700;
@@ -583,7 +587,7 @@ input[type="checkbox"] {
   height: 0;
   z-index: -1;
 }
-.numinput-error .icon-Danger {
+.input-error .icon-Danger {
   font-size: 1.5rem;
   margin-left: 0.5rem;
 }
@@ -984,4 +988,10 @@ td.gridjs-td[data-column-id="order_date"] {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   font-size: 1rem;
+}
+.report-error {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
 }

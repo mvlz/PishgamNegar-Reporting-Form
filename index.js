@@ -27,7 +27,7 @@ const rangeTitle = document.querySelector(".range-type-title");
 const salesBtn = document.getElementById("salesReport");
 const aggregateBtn = document.getElementById("aggregatedReport");
 const salesInfSection = document.getElementById("extraOptionContainer");
-
+const allInputErrors = [...document.querySelectorAll(".input-error")];
 // Change date with (YYYY-MM-DD HH:mm:ss) to join without any extra characters.
 function dateToNum(val) {
   return val.split(/[+-/*: ]+/).join("");
@@ -57,6 +57,9 @@ reportTypeRadios.forEach((typeRadio) => {
   typeRadio.addEventListener("click", () => {
     let disableInputs = [...document.querySelectorAll(".disable input")];
     let enableInputs = [...document.querySelectorAll(".range-type-body input")];
+
+    allInputErrors.forEach((error) => error.classList.remove("show-error")); // Hide all errors
+
     for (let i = 0; i < reportTypeRadios.length; i++) {
       reportTypeRadios[i].nextElementSibling.classList.remove("radio-checked");
       reportTypeRadios[
@@ -67,17 +70,18 @@ reportTypeRadios.forEach((typeRadio) => {
       reportTypeRadios[
         i
       ].parentElement.parentElement.nextElementSibling.classList.add("disable");
-      enableInputs.forEach((f) => {
-        f.disabled = true;
-        if (f.type !== "radio") {
-          f.value = "";
+      enableInputs.forEach((input) => {
+        input.disabled = true;
+        if (input.type !== "radio") {
+          input.value = "";
         } else {
-          f.checked = false;
-          f.nextElementSibling.classList.remove("date-checked");
+          input.checked = false;
+          input.nextElementSibling.classList.remove("date-checked");
         }
-        if (f.type === "text") {
+        if (input.type === "text") {
           fromNumberVal.num = 1;
           toNumberVal.num = 2;
+          input.parentElement.parentElement.classList.remove("error-style");
         }
       });
       if (reportTypeRadios[i].checked) {
@@ -91,14 +95,14 @@ reportTypeRadios.forEach((typeRadio) => {
     typeRadio.parentElement.parentElement.nextElementSibling.classList.remove(
       "disable"
     );
-    disableInputs.forEach((f) => {
-      if (f.id !== "startRange" && f.id !== "endRange") {
-        f.disabled = false;
+    disableInputs.forEach((input) => {
+      if (input.id !== "startRange" && input.id !== "endRange") {
+        input.disabled = false;
       } else {
-        f.disabled = true;
-        f.parentElement.classList.add("disable");
+        input.disabled = true;
+        input.parentElement.classList.add("disable");
       }
-      if (f.type === "radio") {
+      if (input.type === "radio") {
         dateRadios[0].checked = true;
         dateRadios[0].nextElementSibling.classList.add("date-checked");
       }
@@ -193,11 +197,11 @@ function orderInput(arrey, numError, joinVal, box) {
       } else if (joinInputsVals.length === 5 && joinVal.num < orderSinceVal) {
         numError.classList.add("show-error");
         box.classList.add("error-style");
-        numError.children[1].innerText = "شماره سفارش معتبر نیست.";
+        numError.children[1].innerText = "شماره سفارش باید حداقل 91326 باشد.";
       } else if (
-        fromNumberVal.num > orderSinceVal &&
-        toNumberVal.num > orderSinceVal &&
-        fromNumberVal.num > toNumberVal.num
+        fromNumberVal.num >= orderSinceVal &&
+        toNumberVal.num >= orderSinceVal &&
+        fromNumberVal.num >= toNumberVal.num
       ) {
         toNumError.classList.add("show-error");
         box.classList.add("error-style");
@@ -245,11 +249,12 @@ function dateInputs(datePicker) {
   const error = datePicker.parentElement.nextElementSibling;
   const val = dateToNum(datePicker.value);
   const dateInputsErrors = document.querySelectorAll(
-    ".calendars-container .numinput-error"
+    ".calendars-container .input-error"
   );
   if (datePicker.value !== "" && val > 10 && val < dateSinceVal) {
     error.classList.add("show-error");
-    error.children[1].innerText = "تاریخ معتبر نیست.";
+    error.children[1].innerText =
+      "تاریخ شروع باید حداقل 1400/10/1 یا 2021/12/22 باشد.";
   } else if (
     (datePickers[0].value.startsWith("20") &&
       datePickers[1].value.startsWith("14")) ||
@@ -259,9 +264,9 @@ function dateInputs(datePicker) {
     error.classList.add("show-error");
     error.children[1].innerText = "فرمت تاریخ شروع و پایان برابر نیست.";
   } else if (
-    dateToNum(datePickers[0].value) > dateSinceVal &&
-    dateToNum(datePickers[1].value) > dateSinceVal &&
-    dateToNum(datePickers[1].value) < dateToNum(datePickers[0].value)
+    dateToNum(datePickers[0].value) >= dateSinceVal &&
+    dateToNum(datePickers[1].value) >= dateSinceVal &&
+    dateToNum(datePickers[1].value) <= dateToNum(datePickers[0].value)
   ) {
     dateInputsErrors[1].classList.add("show-error");
     dateInputsErrors[1].children[1].innerText = "از تاریخ شروع کوچک تر است.";
@@ -290,15 +295,15 @@ function formSubmition(btn, action) {
       !dateRadios[dateRadios.length - 1].checked;
     const customRange = document.getElementById("customRange");
     const isOrders =
-      fromNumberVal.num > orderSinceVal &&
-      toNumberVal.num > orderSinceVal &&
-      fromNumberVal.num < toNumberVal.num;
+      fromNumberVal.num >= orderSinceVal &&
+      toNumberVal.num >= orderSinceVal &&
+      fromNumberVal.num <= toNumberVal.num;
 
     const isDateInput =
       customRange.checked &&
-      dateToNum(datePickers[0].value) > dateSinceVal &&
-      dateToNum(datePickers[1].value) > dateSinceVal &&
-      dateToNum(datePickers[1].value) > dateToNum(datePickers[0].value);
+      dateToNum(datePickers[0].value) >= dateSinceVal &&
+      dateToNum(datePickers[1].value) >= dateSinceVal &&
+      dateToNum(datePickers[1].value) >= dateToNum(datePickers[0].value);
 
     const isRequiredCheckBox = [...paymentInputs].some(
       (checkBox) => checkBox.checked
