@@ -62,7 +62,10 @@
         const grid = new gridjs.Grid({
             columns: [
                 { id: 'id_order', name: 'شناسه سفارش' },
-                { id: 'customer_name', name: 'نام مشتری' },
+                {
+                    id: 'customer_name',
+                    name: 'نام مشتری',
+                },
                 { id: 'payment', name: 'روش پرداخت' },
                 {
                     id: 'total_paid',
@@ -84,7 +87,22 @@
                     name: 'جمع تخفیفات',
                     formatter: (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "ندارد"
                 },
-                { id: 'current_state_name', name: 'وضعیت سفارش' }, { id: 'order_date', name: 'تاریخ سفارش' },
+                { id: 'current_state_name', name: 'وضعیت سفارش' },
+                {
+                    id: 'order_date',
+                    name: 'تاریخ سفارش',
+                    sort: {
+                        compare: (a, b) => {
+                            if (a.split(/[+-/*: ]+/).join("") > b.split(/[+-/*: ]+/).join("")) {
+                                return 1;
+                            } else if (b.split(/[+-/*: ]+/).join("") > a.split(/[+-/*: ]+/).join("")) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    },
+                },
                 {
                     id: 'final_check', name: 'بررسی نهایی',
                     formatter: (cell) => {
@@ -156,7 +174,6 @@
             finalNotOk.forEach(id => {
                 const item = document.createElement('p')
                 item.innerHTML = `${id}`
-                // console.log(item);
                 document.querySelector('.toast-body').appendChild(item)
             });
         }
@@ -171,7 +188,7 @@
         })
 
         // footer details data
-        const infoArray = null || [];
+        const infoArray = "NULL";
         // Append items to DOM lists
         function appendListItem(params) {
             if (params) {
@@ -183,8 +200,7 @@
         const footerDetails = document.querySelector(".bottom-details") // footer details box
 
         // condition of showing footer lists
-        infoArray.length !== 0 ? infoArray.forEach(obj => appendListItem(obj)) : footerDetails.style.display = "none";
-
+        infoArray !== "NULL" ? infoArray.forEach(obj => appendListItem(obj)) : footerDetails.style.display = "none";
     </script>
 </body>
 

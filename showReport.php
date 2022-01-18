@@ -92,7 +92,6 @@
                 finalNotOk.forEach(id => {
                     const item = document.createElement('p')
                     item.innerHTML = `${id}`
-                    // console.log(item);
                     document.querySelector('.toast-body').appendChild(item)
                 });
             }
@@ -107,7 +106,7 @@
             }) 
         */
         // Footer details data
-        const infoArray = <?php echo $gridJsInfoArray ?> || [];
+        const infoArray = <?php echo $gridJsInfoArray ?>;
         
         // Append items to DOM lists
         function appendListItem(params) {
@@ -121,7 +120,8 @@
         const footerDetails = document.querySelector(".bottom-details") 
 
         // Showing footer lists condition
-        infoArray.length !== 0 ? infoArray.forEach(obj => appendListItem(obj)) : footerDetails.style.display = "none";
+        infoArray !== "NULL" ? infoArray.forEach(obj => appendListItem(obj)) : footerDetails.style.display = "none";
+
     </script>
 </body>
 </html>
