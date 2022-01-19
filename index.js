@@ -16,8 +16,6 @@ const extraOptionInputs = document.querySelectorAll(
 );
 const paymentInputs = document.querySelectorAll(".paymentWay-container input");
 const mainForm = document.querySelector(".form");
-const modalBackdrop = document.querySelector(".modal-backdrop");
-const closeModalBtn = document.querySelector(".close");
 const showReportBtn = document.querySelector("#showReport");
 const exportExcelBtn = document.querySelector("#exportExcel");
 const paymentNotice = document.querySelector(
@@ -28,6 +26,9 @@ const salesBtn = document.getElementById("salesReport");
 const aggregateBtn = document.getElementById("aggregatedReport");
 const salesInfSection = document.getElementById("extraOptionContainer");
 const allInputErrors = [...document.querySelectorAll(".input-error")];
+const allOrderInputs = [
+  ...document.querySelectorAll(".order-type .range-type-body input"),
+];
 // Change date with (YYYY-MM-DD HH:mm:ss) to join without any extra characters.
 function dateToNum(val) {
   return val.split(/[+-/*: ]+/).join("");
@@ -55,9 +56,6 @@ function reportStateCheck() {
 // Change styles of report type boxes on click.
 reportTypeRadios.forEach((typeRadio) => {
   typeRadio.addEventListener("click", () => {
-    let disableInputs = [...document.querySelectorAll(".disable input")];
-    let enableInputs = [...document.querySelectorAll(".range-type-body input")];
-
     allInputErrors.forEach((error) => error.classList.remove("show-error")); // Hide all errors
 
     for (let i = 0; i < reportTypeRadios.length; i++) {
@@ -70,20 +68,6 @@ reportTypeRadios.forEach((typeRadio) => {
       reportTypeRadios[
         i
       ].parentElement.parentElement.nextElementSibling.classList.add("disable");
-      enableInputs.forEach((input) => {
-        input.disabled = true;
-        if (input.type !== "radio") {
-          input.value = "";
-        } else {
-          input.checked = false;
-          input.nextElementSibling.classList.remove("date-checked");
-        }
-        if (input.type === "text") {
-          fromNumberVal.num = 1;
-          toNumberVal.num = 2;
-          input.parentElement.parentElement.classList.remove("error-style");
-        }
-      });
       if (reportTypeRadios[i].checked) {
         continue;
       }
@@ -95,22 +79,35 @@ reportTypeRadios.forEach((typeRadio) => {
     typeRadio.parentElement.parentElement.nextElementSibling.classList.remove(
       "disable"
     );
-    disableInputs.forEach((input) => {
-      if (input.id !== "startRange" && input.id !== "endRange") {
-        input.disabled = false;
-      } else {
-        input.disabled = true;
-        input.parentElement.classList.add("disable");
-      }
-      if (input.type === "radio") {
-        dateRadios[0].checked = true;
-        dateRadios[0].nextElementSibling.classList.add("date-checked");
-      }
-    });
+  });
+});
+// Enable and disable inputs on switch between report ranges
+reportTypeRadios[0].addEventListener("click", () => {
+  dateRadios.forEach((input) => {
+    input.disabled = false;
+    const yy = dateRadios.some((radio) => radio.checked);
+    if (!yy) {
+      dateRadios[0].checked = true;
+      dateRadios[0].nextElementSibling.classList.add("date-checked");
+    }
+  });
+  allOrderInputs.forEach((input) => {
+    input.disabled = true;
+    input.value = "";
+  });
+});
+reportTypeRadios[1].addEventListener("click", () => {
+  dateRadios.forEach((input) => {
+    input.disabled = true;
+    input.checked = false;
+    input.nextElementSibling.classList.remove("date-checked");
+  });
+  allOrderInputs.forEach((input) => {
+    input.disabled = false;
   });
 });
 
-// change styles of the Time&date-range-type input radios
+// change styles of the date-range-type radios
 dateRadios.forEach((dateRadio) => {
   dateRadio.addEventListener("click", () => {
     for (let i = 0; i < dateRadios.length; i++) {
@@ -181,7 +178,7 @@ function orderInput(arrey, numError, joinVal, box) {
         }
       }
 
-      // ---- Error handling of order type ----- //
+      // Error handling of order type
       joinInputsVals =
         `${arrey[0].value}` +
         `${arrey[1].value}` +
@@ -201,11 +198,11 @@ function orderInput(arrey, numError, joinVal, box) {
       } else if (
         fromNumberVal.num >= orderSinceVal &&
         toNumberVal.num >= orderSinceVal &&
-        fromNumberVal.num >= toNumberVal.num
+        fromNumberVal.num > toNumberVal.num
       ) {
         toNumError.classList.add("show-error");
         box.classList.add("error-style");
-        toNumError.children[1].innerText = `شماره سفارش باید از  ${fromNumberVal.num}  بیشتر باشد.`;
+        toNumError.children[1].innerText = `باید از شماره شروع بیشتر باشد.`;
       } else {
         numError.classList.remove("show-error");
         box.classList.remove("error-style");
@@ -266,7 +263,7 @@ function dateInputs(datePicker) {
   } else if (
     dateToNum(datePickers[0].value) >= dateSinceVal &&
     dateToNum(datePickers[1].value) >= dateSinceVal &&
-    dateToNum(datePickers[1].value) <= dateToNum(datePickers[0].value)
+    dateToNum(datePickers[1].value) < dateToNum(datePickers[0].value)
   ) {
     dateInputsErrors[1].classList.add("show-error");
     dateInputsErrors[1].children[1].innerText = "از تاریخ شروع کوچک تر است.";

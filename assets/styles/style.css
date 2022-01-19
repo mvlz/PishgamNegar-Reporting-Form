@@ -723,6 +723,7 @@ input[type="checkbox"] {
   }
   .bottom-details {
     grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    grid-gap: 1rem;
   }
 }
 @media screen and (max-width: 567px) {
@@ -757,6 +758,20 @@ input[type="checkbox"] {
   }
   .datepicker-plot-area {
     min-width: 90%;
+  }
+  .top-details .detail-title {
+    padding: 1rem;
+  }
+  .payment-list,
+  .summary-list {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  div.toast {
+    width: 85%;
+    bottom: 3.5rem;
+    right: 0;
+    left: 0;
+    margin: auto;
   }
 }
 
