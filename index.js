@@ -280,55 +280,96 @@ datePickers.forEach((dp) => {
   });
 });
 
-//=-=-=-=-=-  form validation on submit -=-=-=-=-=//
-function formSubmition(btn, action) {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const scrollToTitle = function (title, x, y) {
-      window.scrollTo(x, title.offsetTop - y);
-    };
-    const isDateRadio =
-      dateRadios.some((radio) => radio.checked) &&
-      !dateRadios[dateRadios.length - 1].checked;
-    const customRange = document.getElementById("customRange");
-    const isOrders =
-      fromNumberVal.num >= orderSinceVal &&
-      toNumberVal.num >= orderSinceVal &&
-      fromNumberVal.num <= toNumberVal.num;
+//=-=-=-=-=-  form submission and validation -=-=-=-=-=//
 
-    const isDateInput =
-      customRange.checked &&
-      dateToNum(datePickers[0].value) >= dateSinceVal &&
-      dateToNum(datePickers[1].value) >= dateSinceVal &&
-      dateToNum(datePickers[1].value) >= dateToNum(datePickers[0].value);
+var request;
 
-    const isRequiredCheckBox = [...paymentInputs].some(
-      (checkBox) => checkBox.checked
-    );
+// Bind to the submit event of our form
+$("form").submit(function (event) {
+  // Prevent default posting of form - put here to work in case of errors
+  event.preventDefault();
+  const scrollToTitle = function (title, x, y) {
+    window.scrollTo(x, title.offsetTop - y);
+  };
+  const isDateRadio =
+    dateRadios.some((radio) => radio.checked) &&
+    !dateRadios[dateRadios.length - 1].checked;
+  const customRange = document.getElementById("customRange");
+  const isOrders =
+    fromNumberVal.num >= orderSinceVal &&
+    toNumberVal.num >= orderSinceVal &&
+    fromNumberVal.num <= toNumberVal.num;
 
-    const isRange = isOrders || isDateRadio || isDateInput;
-    if (!isRange && reportTypeRadios[1].checked) {
-      orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
-      orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
-      scrollToTitle(rangeTitle, 0, 50);
-    } else if (!isDateRadio && !isDateInput) {
-      dateErrorHandling(datePickers[0]);
-      dateErrorHandling(datePickers[1]);
-      scrollToTitle(rangeTitle, 0, 50);
-    } else if (reportTypeRadios[0].checked && !isRange) {
-      scrollToTitle(rangeTitle, 0, 50);
-      rangeTitle.classList.add("box-error");
+  const isDateInput =
+    customRange.checked &&
+    dateToNum(datePickers[0].value) >= dateSinceVal &&
+    dateToNum(datePickers[1].value) >= dateSinceVal &&
+    dateToNum(datePickers[1].value) >= dateToNum(datePickers[0].value);
+
+  const isRequiredCheckBox = [...paymentInputs].some(
+    (checkBox) => checkBox.checked
+  );
+
+  const isRange = isOrders || isDateRadio || isDateInput;
+  if (!isRange && reportTypeRadios[1].checked) {
+    orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
+    orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
+    scrollToTitle(rangeTitle, 0, 50);
+  } else if (!isDateRadio && !isDateInput) {
+    dateErrorHandling(datePickers[0]);
+    dateErrorHandling(datePickers[1]);
+    scrollToTitle(rangeTitle, 0, 50);
+  } else if (reportTypeRadios[0].checked && !isRange) {
+    scrollToTitle(rangeTitle, 0, 50);
+    rangeTitle.classList.add("box-error");
+  }
+
+  if (!isRequiredCheckBox) {
+    paymentNotice.classList.add("box-error");
+    scrollToTitle(paymentNotice, 0, 50);
+  } else if (isRequiredCheckBox && isRange) {
+    // Abort any pending request
+    if (request) {
+      request.abort();
     }
+    // setup some local variables
+    var $form = $(this);
+    // Let's select and cache all the fields
+    var $inputs = $form.find("input, select, button, textarea");
 
-    if (!isRequiredCheckBox) {
-      paymentNotice.classList.add("box-error");
-      scrollToTitle(paymentNotice, 0, 50);
-    } else if (isRequiredCheckBox && isRange) {
-      mainForm.action = action;
-      mainForm.submit();
-    }
-  });
-}
+    // Serialize the data in the form
+    var serializedData = $form.serialize();
+    // console.log(JSON.stringify(serializedData));
 
-formSubmition(showReportBtn, "showReport.php"); // Show Report btn submited
-formSubmition(exportExcelBtn, "exportExcel.php"); // Export excel btn submited
+    // Let's disable the inputs for the duration of the Ajax request.
+    // Note: we disable elements AFTER the form data has been serialized.
+    // Disabled form elements will not be serialized.
+    $inputs.prop("disabled", true);
+
+    // Fire off the request to /form.php
+    request = $.ajax({
+      url: "/form.php",
+      type: "post",
+      data: serializedData,
+    });
+
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR) {
+      // Log a message to the console
+      console.log("Response: " + response);
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      // Log the error to the console
+      console.error("The following error occurred: " + textStatus, errorThrown);
+    });
+
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+      // Reenable the inputs
+      $inputs.prop("disabled", false);
+    });
+  }
+});

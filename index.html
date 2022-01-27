@@ -11,7 +11,6 @@
     <script src="js/persian-date.min.js"></script>
     <script src="js/persian-datepicker.min.js"></script>
     <title>Pishgam Negar</title>
-
 </head>
 
 <body>
@@ -20,18 +19,15 @@
         <img src="assets/img/backdrop.png" alt="cosmetic">
     </div>
     <!-- /backdrop -->
-
     <!-- container -->
     <div class="wrapper">
         <!-- logo -->
         <img src="assets/img/pn-logo.png" alt="Pishgam Negar" class="logo">
-
         <!-- title -->
         <h1 class="title">سامانه گزارش گیری فروشگاه آنلاین پیشگام نگار</h1>
-
         <!-- form container -->
         <div class="main-box ">
-            <form class="form" method="post">
+            <form class="form" id="form" method="post">
                 <!-- form descibtion -->
                 <p class="title">
                     امکان گزارش گیری در دو حالت گزارش فروش و تجمیعی وجود دارد. لطفا نوع
@@ -53,18 +49,15 @@
                     </div>
                 </section>
                 <!-- /report state container -->
-
-
                 <!-- form descibtion -->
                 <p class="title range-type-title">خروجی گزارش براساس چه بازه ای تعیین شود؟</p>
-
                 <!-- report type container -->
                 <section class="range-type-container">
                     <!-- date type -->
                     <div class="range-type date-type range-type-checked">
                         <!-- date type header -->
                         <div class="range-type-header">
-                            <label for="orderDate" class="">
+                            <label for="orderDate">
                                 <input type="radio" name="rangeType" id="orderDate" checked value="orderDate">
                                 <span class=" radio-circle radio-checked"></span>زمان و تاریخ
                             </label>
@@ -101,7 +94,6 @@
                                 </label>
                             </div>
                             <!-- /radio buttons of date range -->
-
                             <!-- datepickers inputs of date range -->
                             <div class="calendars-container">
                                 <div class="from-date-row">
@@ -136,7 +128,6 @@
                         <!-- /date type body -->
                     </div>
                     <!-- /date type -->
-
                     <!-- order type -->
                     <div class="range-type order-type ">
                         <!-- order type header -->
@@ -187,7 +178,6 @@
                                 </div>
                             </div>
                             <!-- /Start number -->
-
                             <!-- End number -->
                             <div class="report-number-container">
                                 <p class="text">تا شماره</p>
@@ -232,10 +222,7 @@
                     <!-- /order type -->
                 </section>
                 <!-- /report type container -->
-
                 <hr class="divide-line"><!-- divide line -->
-
-
                 <!-- More informations in sales report form -->
                 <!-- <section class="extra-option-container" id="extraOptionContainer">
                     <p class="title">تمایل دارید چه اطلاعات دیگری در گزارش شما وجود داشته باشد؟</p>
@@ -307,8 +294,6 @@
                     <hr class="divide-line"> divide line 
                 </section> -->
                 <!-- /More information -->
-
-
                 <section class="paymentWay-container">
                     <p class="title">سفارشات با چه نوع روش پرداخت در گزارش شما وجود داشته باشد؟</p>
                     <!-- notice box -->
@@ -316,7 +301,6 @@
                         <span class="icon-Info-Square"></span>
                         حداقل یکی از موارد باید انتخاب شود.
                     </div>
-
                     <!-- information boxes container -->
                     <div class="info-boxes-container">
                         <!-- information boxes row -->
@@ -403,10 +387,8 @@
         <!-- form container -->
     </div>
     <!-- /container -->
-
-
-
     <!-- Footer -->
+    <div id="result"></div>
     <footer class="footer">
         <img src="assets/img/pn-logo.png" alt="Pishgam Negar" class="logo">
     </footer>
@@ -415,7 +397,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var to, from;
-
             to = $(".endRange").persianDatepicker({
                 altFormat: 'LLLL',
                 initialValue: false,
@@ -467,7 +448,6 @@
                 },
             });
         });
-
     </script>
 </body>
 
