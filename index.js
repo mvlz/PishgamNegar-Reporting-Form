@@ -29,6 +29,7 @@ const allInputErrors = [...document.querySelectorAll(".input-error")];
 const allOrderInputs = [
   ...document.querySelectorAll(".order-type .range-type-body input"),
 ];
+let cacheSubmitBtn;
 // Change date with (YYYY-MM-DD HH:mm:ss) to join without any extra characters.
 function dateToNum(val) {
   return val.split(/[+-/*: ]+/).join("");
@@ -283,7 +284,7 @@ datePickers.forEach((dp) => {
 //=-=-=-=-=-  form submission and validation -=-=-=-=-=//
 
 var request;
-
+let resData;
 // Bind to the submit event of our form
 $("form").submit(function (event) {
   // Prevent default posting of form - put here to work in case of errors
@@ -356,7 +357,43 @@ $("form").submit(function (event) {
     // Callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR) {
       // Log a message to the console
+      // resData = response;
+      // console.log(resData);
+      response = [
+        {
+          id_order: 210197,
+          sum_of_products_price: 33745,
+          total_price_of_products: 30959,
+        },
+        {
+          id_order: 701192,
+          sum_of_products_price: 33745,
+          total_price_of_products: 30959,
+        },
+        {
+          id_order: 770018,
+          sum_of_products_price: 33745,
+          total_price_of_products: 30959,
+        },
+        {
+          id_order: 210197,
+          sum_of_products_price: 33745,
+          total_price_of_products: 30959,
+        },
+      ];
       console.log("Response: " + response);
+      if (!response) {
+        console.log("oops");
+        if (cacheSubmitBtn === "showReport") {
+          mainForm.action = "showReport.php";
+        } else if (cacheSubmitBtn === "exportExcel") {
+          mainForm.action = "exportExcel.php";
+        }
+        mainForm.submit();
+      } else {
+        resData = response;
+        showModal();
+      }
     });
 
     // Callback handler that will be called on failure
@@ -373,3 +410,88 @@ $("form").submit(function (event) {
     });
   }
 });
+function showModal() {
+  document.querySelector(".res-modal").classList.add("show-modal");
+  document.querySelector(".modal-backdrop").style.display = "grid";
+}
+
+document.querySelector(".cancel").addEventListener("click", () => {
+  document.querySelector(".res-modal").classList.remove("show-modal");
+  document.querySelector(".modal-backdrop").style.display = "none";
+});
+
+resData &&
+  new gridjs.Grid({
+    columns: [
+      { id: "id_order", name: "شماره سفارش" },
+      {
+        id: "sum_of_products_price",
+        name: "جمع ریز فاکتور",
+        formatter: (cell) =>
+          cell > 0
+            ? ` ${cell
+                .toLocaleString()
+                .replace(/\.0+$/, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
+            : "ندارد",
+      },
+      {
+        id: "total_price_of_products",
+        name: "جمع کل محصولات",
+        formatter: (cell) =>
+          cell > 0
+            ? ` ${cell
+                .toLocaleString()
+                .replace(/\.0+$/, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
+            : "ندارد",
+      },
+    ],
+
+    data: resData,
+    pagination: {
+      enabled: true,
+      limit: 5,
+      summary: true,
+    },
+    sort: true,
+    language: {
+      search: {
+        placeholder: "جستجو...",
+      },
+      sort: {
+        sortAsc: "مرتب سازی بصورت صعودی",
+        sortDesc: "مرتب سازی بصورت نزولی",
+      },
+      pagination: {
+        previous: "قبلی",
+        next: "بعدی",
+        navigate: (page, pages) => `صفحه ${page} از ${pages}`,
+        page: (page) => `صفحه ${page}`,
+        showing: "نمایش",
+        of: "از",
+        to: "تا",
+        results: () => "نتیجه",
+      },
+      loading: "در حال بارگذاری...",
+      noRecordsFound: "چیزی یافت نشد",
+      error: "هنگام دریافت داده ها خطایی رخ داد",
+    },
+  }).render(document.getElementById("res-data"));
+
+document
+  .querySelector(".submit-btns-container")
+  .addEventListener("click", (e) => {
+    // if (e.target.for === "showReport" || e.target.name === "showReport") {
+    //   cacheSubmitBtn = "showReport";
+    //   console.log(cacheSubmitBtn);
+    // } else if (
+    //   e.target.for === "exportExcel" ||
+    //   e.target.name === "exportExcel"
+    // ) {
+    //   cacheSubmitBtn = "exportExcel";
+    //   console.log(cacheSubmitBtn);
+    // }
+    cacheSubmitBtn = e.target.name;
+    console.log(cacheSubmitBtn);
+  });
