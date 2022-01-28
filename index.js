@@ -284,7 +284,7 @@ datePickers.forEach((dp) => {
 //=-=-=-=-=-  form submission and validation -=-=-=-=-=//
 
 var request;
-let resData;
+
 // Bind to the submit event of our form
 $("form").submit(function (event) {
   // Prevent default posting of form - put here to work in case of errors
@@ -357,32 +357,8 @@ $("form").submit(function (event) {
     // Callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR) {
       // Log a message to the console
-      // resData = response;
-      // console.log(resData);
-      response = [
-        {
-          id_order: 210197,
-          sum_of_products_price: 33745,
-          total_price_of_products: 30959,
-        },
-        {
-          id_order: 701192,
-          sum_of_products_price: 33745,
-          total_price_of_products: 30959,
-        },
-        {
-          id_order: 770018,
-          sum_of_products_price: 33745,
-          total_price_of_products: 30959,
-        },
-        {
-          id_order: 210197,
-          sum_of_products_price: 33745,
-          total_price_of_products: 30959,
-        },
-      ];
       console.log("Response: " + response);
-      if (!response) {
+      if (response == "null") {
         console.log("oops");
         if (cacheSubmitBtn === "showReport") {
           mainForm.action = "showReport.php";
@@ -391,8 +367,17 @@ $("form").submit(function (event) {
         }
         mainForm.submit();
       } else {
-        resData = response;
+        addRow(JSON.parse(response))
         showModal();
+        const makeReportBtn = document.querySelector(".make-report");
+        makeReportBtn.addEventListener("click", () => {
+          if (cacheSubmitBtn === "showReport") {
+            mainForm.action = "showReport.php";
+          } else if (cacheSubmitBtn === "exportExcel") {
+            mainForm.action = "exportExcel.php";
+          }
+          mainForm.submit();
+        });
       }
     });
 
@@ -420,7 +405,8 @@ document.querySelector(".cancel").addEventListener("click", () => {
   document.querySelector(".modal-backdrop").style.display = "none";
 });
 
-resData &&
+function addRow(res) {
+  document.getElementById("res-data").innerHTML = ""
   new gridjs.Grid({
     columns: [
       { id: "id_order", name: "شماره سفارش" },
@@ -430,9 +416,9 @@ resData &&
         formatter: (cell) =>
           cell > 0
             ? ` ${cell
-                .toLocaleString()
-                .replace(/\.0+$/, "")
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
+              .toLocaleString()
+              .replace(/\.0+$/, "")
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
             : "ندارد",
       },
       {
@@ -441,14 +427,16 @@ resData &&
         formatter: (cell) =>
           cell > 0
             ? ` ${cell
-                .toLocaleString()
-                .replace(/\.0+$/, "")
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
+              .toLocaleString()
+              .replace(/\.0+$/, "")
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
             : "ندارد",
       },
+      { id: "date_add", name: "شماره سفارش" },
     ],
 
-    data: resData,
+    data: res,
+
     pagination: {
       enabled: true,
       limit: 5,
@@ -478,20 +466,7 @@ resData &&
       error: "هنگام دریافت داده ها خطایی رخ داد",
     },
   }).render(document.getElementById("res-data"));
-
+}
 document
   .querySelector(".submit-btns-container")
-  .addEventListener("click", (e) => {
-    // if (e.target.for === "showReport" || e.target.name === "showReport") {
-    //   cacheSubmitBtn = "showReport";
-    //   console.log(cacheSubmitBtn);
-    // } else if (
-    //   e.target.for === "exportExcel" ||
-    //   e.target.name === "exportExcel"
-    // ) {
-    //   cacheSubmitBtn = "exportExcel";
-    //   console.log(cacheSubmitBtn);
-    // }
-    cacheSubmitBtn = e.target.name;
-    console.log(cacheSubmitBtn);
-  });
+  .addEventListener("click", (e) => cacheSubmitBtn = e.target.name);
