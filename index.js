@@ -386,11 +386,7 @@ $("form").submit(function (event) {
     request.done(function (response, textStatus, jqXHR) {
       if (response == "null") {
         // Submission form based on cache submit button
-        if (cacheSubmitBtn === "showReport") {
-          mainForm.action = "showReport.php";
-        } else if (cacheSubmitBtn === "exportExcel") {
-          mainForm.action = "exportExcel.php";
-        }
+        mainForm.action = `${cacheSubmitBtn}.php`;
         mainForm.submit();
       } else {
         // Show Modal when response is not null
@@ -398,11 +394,7 @@ $("form").submit(function (event) {
         showModal();
         makeReportBtn.addEventListener("click", () => {
           // Submission form based on cache submit button
-          if (cacheSubmitBtn === "showReport") {
-            mainForm.action = "showReport.php";
-          } else if (cacheSubmitBtn === "exportExcel") {
-            mainForm.action = "exportExcel.php";
-          }
+          mainForm.action = `${cacheSubmitBtn}.php`;
           mainForm.submit();
         });
       }
