@@ -1,7 +1,8 @@
-// =-=-=-=-=-=- Selectors -=-=-=-=-=-=-=- //
+// ***** Selectors ***** //
 const datePickers = [...document.querySelectorAll(".date-input-box input")];
 const infoBoxes = [...document.querySelectorAll(".info-box input")];
-const reportTypeRadios = [
+const reportTypeRadios = [...document.querySelectorAll(".report-type")];
+const rangeTypeRadios = [
   ...document.querySelectorAll(".range-type-header input"),
 ];
 const dateRadios = [...document.querySelectorAll(".date-radios input")];
@@ -29,12 +30,16 @@ const allInputErrors = [...document.querySelectorAll(".input-error")];
 const allOrderInputs = [
   ...document.querySelectorAll(".order-type .range-type-body input"),
 ];
-let cacheSubmitBtn;
-// Change date with (YYYY-MM-DD HH:mm:ss) to join without any extra characters.
+const customRange = document.getElementById("customRange");
+const makeReportBtn = document.querySelector(".make-report");
+
+// Change date with (YYYY-MM-DD HH:mm:ss) format to convert to a number without any extra characters.
 function dateToNum(val) {
   return val.split(/[+-/*: ]+/).join("");
 }
-// Change style on click each elements and show the More information container when Sales one clicked.
+
+// *** Change styles of report type buttons and display the salesInfSection when Sales one clicked */
+reportTypeRadios.forEach(radio => radio.addEventListener("click", reportStateCheck))
 function reportStateCheck() {
   if (salesBtn.checked == true) {
     // salesInfSection.style.display = "flex";
@@ -54,22 +59,25 @@ function reportStateCheck() {
   }
 }
 
-// Change styles of report type boxes on click.
-reportTypeRadios.forEach((typeRadio) => {
+// *** Change styles of range type boxes on click */
+rangeTypeRadios.forEach((typeRadio) => {
   typeRadio.addEventListener("click", () => {
     allInputErrors.forEach((error) => error.classList.remove("show-error")); // Hide all errors
+    // Hide error styles
+    fromNumBoxes.classList.remove("error-style");
+    toNumBoxes.classList.remove("error-style");
 
-    for (let i = 0; i < reportTypeRadios.length; i++) {
-      reportTypeRadios[i].nextElementSibling.classList.remove("radio-checked");
-      reportTypeRadios[
+    for (let i = 0; i < rangeTypeRadios.length; i++) {
+      rangeTypeRadios[i].nextElementSibling.classList.remove("radio-checked");
+      rangeTypeRadios[
         i
       ].parentElement.parentElement.parentElement.classList.remove(
         "range-type-checked"
       );
-      reportTypeRadios[
+      rangeTypeRadios[
         i
       ].parentElement.parentElement.nextElementSibling.classList.add("disable");
-      if (reportTypeRadios[i].checked) {
+      if (rangeTypeRadios[i].checked) {
         continue;
       }
     }
@@ -82,8 +90,10 @@ reportTypeRadios.forEach((typeRadio) => {
     );
   });
 });
-// Enable and disable inputs on switch between report ranges
-reportTypeRadios[0].addEventListener("click", () => {
+
+// *** Enable and disable inputs on switch between range types */
+rangeTypeRadios[0].addEventListener("click", () => {
+  // when orderDate of rangeType is checked.
   dateRadios.forEach((input) => {
     input.disabled = false;
     const yy = dateRadios.some((radio) => radio.checked);
@@ -97,7 +107,13 @@ reportTypeRadios[0].addEventListener("click", () => {
     input.value = "";
   });
 });
-reportTypeRadios[1].addEventListener("click", () => {
+rangeTypeRadios[1].addEventListener("click", () => {
+  // when orderID of rangeType is checked.
+  datePickers.forEach((dp) => {
+    dp.value = "";
+    dp.disabled = true;
+    dp.parentElement.classList.add("disable");
+  });
   dateRadios.forEach((input) => {
     input.disabled = true;
     input.checked = false;
@@ -108,9 +124,10 @@ reportTypeRadios[1].addEventListener("click", () => {
   });
 });
 
-// change styles of the date-range-type radios
+// *** change styles and Disabling/Enabling of radio buttons of date range
 dateRadios.forEach((dateRadio) => {
   dateRadio.addEventListener("click", () => {
+    allInputErrors.forEach((error) => error.classList.remove("show-error")); // Hide all errors
     for (let i = 0; i < dateRadios.length; i++) {
       dateRadios[i].nextElementSibling.classList.remove("date-checked");
       if (dateRadios[i].id === "customRange" && dateRadios[i].checked) {
@@ -130,7 +147,7 @@ dateRadios.forEach((dateRadio) => {
   });
 });
 
-// change styles of checkboxes of payment ways and More information in Sales state
+// *** change styles of checkboxes
 infoBoxes.forEach((box) => {
   box.addEventListener("click", () => {
     box.parentElement.parentElement.classList.toggle("info-box-checked");
@@ -138,15 +155,20 @@ infoBoxes.forEach((box) => {
   });
 });
 
-// order type variables.
+// **** validation of order id inputs *****//
+
 let fromNumberVal = {
   num: 1,
 };
 let toNumberVal = {
   num: 2,
 };
-const orderSinceVal = 91326;
-// order-type inputs execute and error handling.
+const orderSinceVal = 91326; // Minimum valid order id
+
+// Function of order IDs inputs
+orderInput(fromNumInputs, fromNumError, fromNumberVal, fromNumBoxes);
+orderInput(toNumInputs, toNumError, toNumberVal, toNumBoxes);
+
 function orderInput(arrey, numError, joinVal, box) {
   let joinInputsVals;
   for (let i = 0; i < arrey.length; i++) {
@@ -179,7 +201,6 @@ function orderInput(arrey, numError, joinVal, box) {
         }
       }
 
-      // Error handling of order type
       joinInputsVals =
         `${arrey[0].value}` +
         `${arrey[1].value}` +
@@ -188,59 +209,52 @@ function orderInput(arrey, numError, joinVal, box) {
         `${arrey[4].value}`;
 
       joinVal.num = parseInt(joinInputsVals);
-      if (joinInputsVals.length < 5) {
-        numError.classList.add("show-error");
-        numError.children[1].innerText = "شماره سفارش باید 5 رقمی باشد.";
-        box.classList.add("error-style");
-      } else if (joinInputsVals.length === 5 && joinVal.num < orderSinceVal) {
-        numError.classList.add("show-error");
-        box.classList.add("error-style");
-        numError.children[1].innerText = "شماره سفارش باید حداقل 91326 باشد.";
-      } else if (
-        fromNumberVal.num >= orderSinceVal &&
-        toNumberVal.num >= orderSinceVal &&
-        fromNumberVal.num > toNumberVal.num
-      ) {
-        toNumError.classList.add("show-error");
-        box.classList.add("error-style");
-        toNumError.children[1].innerText = `باید از شماره شروع بیشتر باشد.`;
-      } else {
-        numError.classList.remove("show-error");
-        box.classList.remove("error-style");
-      }
+      // Order IDs validations before form submission
+      orderInputsValidation(joinVal, numError, box)
     });
   }
 }
 
-// Calling function to execute for From Order one and To Order
-orderInput(fromNumInputs, fromNumError, fromNumberVal, fromNumBoxes);
-orderInput(toNumInputs, toNumError, toNumberVal, toNumBoxes);
 
-// validation of order-type inputs use in submit validation.
+// Validation of order IDs
+function orderInputsValidation(numVal, numError, box) {
+  if (numVal.num.toString().length < 5) {
+    numError.classList.add("show-error");
+    numError.children[1].innerText = "شماره سفارش باید 5 رقمی باشد.";
+    box.classList.add("error-style");
+  } else if (numVal.num.toString().length === 5 && numVal.num < orderSinceVal) {
+    numError.classList.add("show-error");
+    box.classList.add("error-style");
+    numError.children[1].innerText = "شماره سفارش باید حداقل 91326 باشد.";
+  } else if (
+    fromNumberVal.num >= orderSinceVal &&
+    toNumberVal.num >= orderSinceVal &&
+    fromNumberVal.num > toNumberVal.num
+  ) {
+    toNumError.classList.add("show-error");
+    toNumBoxes.classList.add("error-style");
+    toNumError.children[1].innerText = `باید از شماره شروع بیشتر باشد.`;
+  } else {
+    numError.classList.remove("show-error");
+    box.classList.remove("error-style");
+  }
+}
+
+
+// validation of order IDs inputs check on form submission
 function orderErrorHandling(numVal, numError, box) {
   if (numVal.num < 10) {
     numError.classList.add("show-error");
     numError.children[1].innerText = "پر کردن این فیلد الزامی است.";
     box.classList.add("error-style");
   } else {
-    numError.classList.remove("show-error");
-    box.classList.remove("error-style");
+    orderInputsValidation(numVal, numError, box)
   }
 }
-// validation of date-type inputs use in submit validation.
-function dateErrorHandling(datePicker) {
-  const error = datePicker.parentElement.nextElementSibling;
-  if (!datePicker.value) {
-    error.classList.add("show-error");
-    error.children[1].innerText = "پر کردن این فیلد الزامی است.";
-  } else {
-    dateInputs(datePicker);
-  }
-}
-// date type variables
-let dateSinceVal = 14001001000000;
-// validation of datepickers
-function dateInputs(datePicker) {
+// **** Validation of datepickers *****//
+
+let dateSinceVal = 14001001000000; // Minimum valid date
+function dateInputsValidation(datePicker) {
   if (datePicker.value.startsWith("20")) {
     dateSinceVal = 20211222000000;
   }
@@ -273,35 +287,50 @@ function dateInputs(datePicker) {
     error.classList.remove("show-error");
   }
 }
-// ---- Call datepickers validation
+// Datepickers validations before form submission
 datePickers.forEach((dp) => {
   dp.addEventListener("click", () => {
-    dateInputs(datePickers[0]);
-    dateInputs(datePickers[1]);
+    dateInputsValidation(datePickers[0]);
+    dateInputsValidation(datePickers[1]);
   });
 });
 
-//=-=-=-=-=-  form submission and validation -=-=-=-=-=//
-
-var request;
+// validation of datepickers check on form submission
+function dateErrorHandling(datePicker) {
+  const error = datePicker.parentElement.nextElementSibling;
+  if (!datePicker.value) {
+    error.classList.add("show-error");
+    error.children[1].innerText = "پر کردن این فیلد الزامی است.";
+  } else {
+    dateInputsValidation(datePicker);
+  }
+}
+// ****** Form submission and validation *******//
+let cacheSubmitBtn;
+let request;
 
 // Bind to the submit event of our form
 $("form").submit(function (event) {
   // Prevent default posting of form - put here to work in case of errors
   event.preventDefault();
+  // Scrolling to the errors
   const scrollToTitle = function (title, x, y) {
     window.scrollTo(x, title.offsetTop - y);
   };
+
   const isDateRadio =
+    // Range is selected by radio buttons of date range ?
     dateRadios.some((radio) => radio.checked) &&
     !dateRadios[dateRadios.length - 1].checked;
-  const customRange = document.getElementById("customRange");
+
   const isOrders =
+    // Range is selected by order id ?
     fromNumberVal.num >= orderSinceVal &&
     toNumberVal.num >= orderSinceVal &&
     fromNumberVal.num <= toNumberVal.num;
 
   const isDateInput =
+    // Range is selected by datepickers of date range  ?
     customRange.checked &&
     dateToNum(datePickers[0].value) >= dateSinceVal &&
     dateToNum(datePickers[1].value) >= dateSinceVal &&
@@ -312,20 +341,22 @@ $("form").submit(function (event) {
   );
 
   const isRange = isOrders || isDateRadio || isDateInput;
-  if (!isRange && reportTypeRadios[1].checked) {
+  if (!isRange && rangeTypeRadios[1].checked) {
+    // Handle errors when orderId radio button is checked
     orderErrorHandling(fromNumberVal, fromNumError, fromNumBoxes);
     orderErrorHandling(toNumberVal, toNumError, toNumBoxes);
     scrollToTitle(rangeTitle, 0, 50);
-  } else if (!isDateRadio && !isDateInput) {
+  } else if (rangeTypeRadios[0].checked && !isDateRadio && !isDateInput) {
+    // Handle errors
+    // 1. when customRange radio button is checked
+    // 2. when any range is not selected
     dateErrorHandling(datePickers[0]);
     dateErrorHandling(datePickers[1]);
     scrollToTitle(rangeTitle, 0, 50);
-  } else if (reportTypeRadios[0].checked && !isRange) {
-    scrollToTitle(rangeTitle, 0, 50);
-    rangeTitle.classList.add("box-error");
   }
 
   if (!isRequiredCheckBox) {
+    // Handle error when paymentType checkboxes are not checked
     paymentNotice.classList.add("box-error");
     scrollToTitle(paymentNotice, 0, 50);
   } else if (isRequiredCheckBox && isRange) {
@@ -340,10 +371,7 @@ $("form").submit(function (event) {
 
     // Serialize the data in the form
     var serializedData = $form.serialize();
-    // console.log(JSON.stringify(serializedData));
 
-    // Let's disable the inputs for the duration of the Ajax request.
-    // Note: we disable elements AFTER the form data has been serialized.
     // Disabled form elements will not be serialized.
     $inputs.prop("disabled", true);
 
@@ -356,10 +384,8 @@ $("form").submit(function (event) {
 
     // Callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR) {
-      // Log a message to the console
-      console.log("Response: " + response);
       if (response == "null") {
-        console.log("oops");
+        // Submission form based on cache submit button
         if (cacheSubmitBtn === "showReport") {
           mainForm.action = "showReport.php";
         } else if (cacheSubmitBtn === "exportExcel") {
@@ -367,10 +393,11 @@ $("form").submit(function (event) {
         }
         mainForm.submit();
       } else {
-        addRow(JSON.parse(response))
+        // Show Modal when response is not null
+        addGridJs(JSON.parse(response))
         showModal();
-        const makeReportBtn = document.querySelector(".make-report");
         makeReportBtn.addEventListener("click", () => {
+          // Submission form based on cache submit button
           if (cacheSubmitBtn === "showReport") {
             mainForm.action = "showReport.php";
           } else if (cacheSubmitBtn === "exportExcel") {
@@ -395,42 +422,39 @@ $("form").submit(function (event) {
     });
   }
 });
+
+// Show Modal function
 function showModal() {
   document.querySelector(".res-modal").classList.add("show-modal");
+  document.querySelector(".wrapper").classList.add("blur");
   document.querySelector(".modal-backdrop").style.display = "grid";
 }
-
+// Hide Modal onclick
 document.querySelector(".cancel").addEventListener("click", () => {
   document.querySelector(".res-modal").classList.remove("show-modal");
   document.querySelector(".modal-backdrop").style.display = "none";
-});
+  document.querySelector(".wrapper").classList.remove("blur");
 
-function addRow(res) {
-  document.getElementById("res-data").innerHTML = ""
+});
+// Make Grid function
+function addGridJs(res) {
+  // res-data division must be empty to make or remake grid js
+  document.getElementById("res-data").innerHTML = "";
+
+  const cellFormatter = (cell) => cell > 0 ? ` ${cell.toLocaleString().replace(/\.0+$/, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان` : "ندارد";
+
   new gridjs.Grid({
     columns: [
       { id: "id_order", name: "شماره سفارش" },
       {
         id: "sum_of_products_price",
         name: "جمع ریز فاکتور",
-        formatter: (cell) =>
-          cell > 0
-            ? ` ${cell
-              .toLocaleString()
-              .replace(/\.0+$/, "")
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
-            : "ندارد",
+        formatter: cellFormatter,
       },
       {
         id: "total_price_of_products",
         name: "جمع کل محصولات",
-        formatter: (cell) =>
-          cell > 0
-            ? ` ${cell
-              .toLocaleString()
-              .replace(/\.0+$/, "")
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان`
-            : "ندارد",
+        formatter: cellFormatter,
       },
       { id: "date_add", name: "شماره سفارش" },
     ],
@@ -444,9 +468,6 @@ function addRow(res) {
     },
     sort: true,
     language: {
-      search: {
-        placeholder: "جستجو...",
-      },
       sort: {
         sortAsc: "مرتب سازی بصورت صعودی",
         sortDesc: "مرتب سازی بصورت نزولی",
@@ -461,12 +482,10 @@ function addRow(res) {
         to: "تا",
         results: () => "نتیجه",
       },
-      loading: "در حال بارگذاری...",
-      noRecordsFound: "چیزی یافت نشد",
-      error: "هنگام دریافت داده ها خطایی رخ داد",
     },
   }).render(document.getElementById("res-data"));
 }
+// Chache the clicked btn for form submission
 document
   .querySelector(".submit-btns-container")
   .addEventListener("click", (e) => cacheSubmitBtn = e.target.name);

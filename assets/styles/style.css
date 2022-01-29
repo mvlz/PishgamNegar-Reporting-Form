@@ -229,7 +229,7 @@ input[type="checkbox"] {
   position: absolute;
   z-index: -1;
 }
-.report-input {
+.report-type {
   visibility: hidden;
 }
 .range-type-header label,
@@ -581,7 +581,7 @@ input[type="checkbox"] {
   opacity: 0;
   transform: translateY(-30px);
   height: 0;
-  z-index: -1;
+  z-index: -2;
 }
 .input-error .icon-Danger {
   font-size: 1.5rem;
@@ -766,10 +766,12 @@ input[type="checkbox"] {
     left: 0;
     margin: auto;
   }
+  div.modal-container {
+    width: 90%;
+  }
 }
 
 .show-error {
-  /* display: flex; */
   opacity: 1;
   transform: translateY(0);
   height: unset;
@@ -787,7 +789,6 @@ input[type="checkbox"] {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  /* border: 1px solid var(--primary); */
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
@@ -997,8 +998,8 @@ td.gridjs-td[data-column-id="date_add"] {
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   place-content: center;
-  background: repeating-linear-gradient(45deg, black, transparent 100px);
-  filter: blur(28px);
+  background: repeating-linear-gradient(45deg, #606060a3, transparent 100px);
+  filter: blur(29px);
 }
 .res-modal {
   position: fixed;
@@ -1011,16 +1012,17 @@ td.gridjs-td[data-column-id="date_add"] {
   transform: translateY(-200px);
   opacity: 0;
   z-index: -1;
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .modal-container {
-  width: 30rem;
+  width: 34rem;
   min-height: 10rem;
   max-height: 40rem;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 0px 3px gray;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 12px 3px #b4b4b4;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -1057,4 +1059,7 @@ td.gridjs-td[data-column-id="date_add"] {
 .make-report {
   background-color: var(--primary);
   color: #fff;
+}
+.blur {
+  filter: blur(3px);
 }
