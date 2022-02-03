@@ -306,7 +306,7 @@ function dateErrorHandling(datePicker) {
   }
 }
 // ****** Form submission and validation *******//
-let cacheSubmitBtn;
+let cachedSubmitBtn;
 let request;
 
 // Bind to the submit event of our form
@@ -377,24 +377,26 @@ $("form").submit(function (event) {
 
     // Fire off the request to /form.php
     request = $.ajax({
-      url: "/form.php",
+      url: "/report/form.php",
       type: "post",
       data: serializedData,
     });
 
     // Callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR) {
-      if (response == "null") {
-        // Submission form based on cache submit button
-        mainForm.action = `${cacheSubmitBtn}.php`;
-        mainForm.submit();
+      if (response === "null") {
+        // Submission form based on cached submit button
+        setTimeout(() => {
+          mainForm.action = `${cachedSubmitBtn}.php`;
+          mainForm.submit();
+        }, 1);
       } else {
         // Show Modal when response is not null
         addGridJs(JSON.parse(response))
         showModal();
         makeReportBtn.addEventListener("click", () => {
-          // Submission form based on cache submit button
-          mainForm.action = `${cacheSubmitBtn}.php`;
+          // Submission form based on cached submit button
+          mainForm.action = `${cachedSubmitBtn}.php`;
           mainForm.submit();
         });
       }
@@ -480,4 +482,4 @@ function addGridJs(res) {
 // Chache the clicked btn for form submission
 document
   .querySelector(".submit-btns-container")
-  .addEventListener("click", (e) => cacheSubmitBtn = e.target.name);
+  .addEventListener("click", (e) => cachedSubmitBtn = e.target.name);

@@ -718,6 +718,9 @@ input[type="checkbox"] {
     grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
     grid-gap: 1rem;
   }
+  div.modal-container {
+    min-width: 37rem;
+  }
 }
 @media screen and (max-width: 567px) {
   .extra-option-container,
@@ -768,6 +771,7 @@ input[type="checkbox"] {
   }
   div.modal-container {
     width: 90%;
+    min-width: unset;
   }
 }
 
@@ -1017,7 +1021,6 @@ td.gridjs-td[data-column-id="date_add"] {
   align-items: center;
 }
 .modal-container {
-  width: 34rem;
   min-height: 10rem;
   max-height: 40rem;
   background-color: #fff;
